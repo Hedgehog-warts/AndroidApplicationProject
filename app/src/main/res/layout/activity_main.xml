@@ -7,12 +7,54 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.238" />
+
+    <Button
+        android:id="@+id/doyoungButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:text="Doyoung"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/nickButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.463"
+        app:layout_constraintStart_toEndOf="@+id/doyoungButton"
+        app:layout_constraintTop_toTopOf="@+id/doyoungButton" />
+
+    <Button
+        android:id="@+id/rongButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="64dp"
+        android:text="Rong"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/doyoungButton" />
+
+    <Button
+        android:id="@+id/xingyunButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Xingyun"
+        app:layout_constraintBottom_toBottomOf="@+id/rongButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toEndOf="@+id/rongButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
