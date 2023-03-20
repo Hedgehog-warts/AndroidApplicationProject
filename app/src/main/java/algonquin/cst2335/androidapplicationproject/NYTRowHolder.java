@@ -17,6 +17,7 @@ public class NYTRowHolder extends RecyclerView.ViewHolder {
 
     public NYTRowHolder(@NonNull View itemView, Context context) {
         super(itemView);
+        this.context = context;
 
         itemView.setOnClickListener(clk -> {
             // itemView Click Event Goes Here
