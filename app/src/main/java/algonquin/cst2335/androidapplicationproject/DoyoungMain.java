@@ -1,22 +1,41 @@
 package algonquin.cst2335.androidapplicationproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityDoyoungMainBinding;
+import algonquin.cst2335.androidapplicationproject.databinding.DoyoungPhotoItemBinding;
 
 public class DoyoungMain extends AppCompatActivity {
 
     ActivityDoyoungMainBinding binding;
     DoyoungViewModel dataModel;
+    private RecyclerView.Adapter photoAdapter;
+
+    private ArrayList<String> photos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,27 +46,80 @@ public class DoyoungMain extends AppCompatActivity {
         binding = ActivityDoyoungMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        SharedPreferences sharedDate = getSharedPreferences("date",MODE_PRIVATE);
+        SharedPreferences sharedDate = getSharedPreferences("Date",MODE_PRIVATE);
         SharedPreferences.Editor editDate = sharedDate.edit();
 
-//        myEdit.putString("name", name.getText().toString());
-//        myEdit.putInt("age", Integer.parseInt(age.getText().toString()));
-//        myEdit.commit();
+        binding.date.setText(sharedDate.getString("solDate","0"));
 
-        //retrieve
-//        SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_APPEND);
-//        String s1 = sh.getString("name", "");
-//        int a = sh.getInt("age", 0);
-//        name.setText(s1);
-//        age.setText(String.valueOf(a));
+        binding.date.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                editDate.putString("solDate",editable.toString());
+                editDate.apply();
+            }
+        });
 
         binding.searchBtn.setOnClickListener(clk -> {
-            Context context = getApplicationContext();
-            CharSequence text = "We found photos";
-            int duration = Toast.LENGTH_SHORT;
+            String date = binding.date.getText().toString();
+            String apiKey = "buaI6tozzO0yekYiJB1lOjDlurYXRHfxpeXodJni";
+            String url = String.format(
+                    "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?" +
+                    "sol=%s&" +
+                    "api_key=%s",date, apiKey);
 
-            Toast.makeText(context, text, duration).show();
+            photos.add("data 1");
+            photos.add("data 2");
+            photos.add("data 3");
+            photos.add("data 4");
+
+
+            RecyclerView rv = binding.photoRecycler;
+            Snackbar.make(rv, "We found 000 photos", Snackbar.LENGTH_LONG)
+                    .setAction("Undo", undoclk ->{
+                        Context context = getApplicationContext();
+                        CharSequence text = "Cancelled";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast.makeText(context, text, duration).show();
+                    }).show();
         });
+
+        binding.photoRecycler.setAdapter(photoAdapter = new RecyclerView.Adapter<photoHolder>() {
+            @NonNull
+            @Override
+            public photoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                DoyoungPhotoItemBinding binding
+                        = DoyoungPhotoItemBinding.inflate(getLayoutInflater(),
+                        parent, false);
+                return new photoHolder(binding.getRoot());
+
+            }
+
+            @Override
+            public void onBindViewHolder(@NonNull photoHolder holder, int position) {
+                String obj = photos.get(position);
+                Log.w("MainActivity",obj);
+                holder.photoTextView.setText(obj);
+            }
+
+            @Override
+            public int getItemCount() {
+                return 0;
+            }
+        });
+    }
+
+    class photoHolder extends RecyclerView.ViewHolder {
+        TextView photoTextView;
+        public photoHolder(View itemView) {
+            super(itemView);
+            photoTextView = itemView.findViewById(R.id.photoData);
+        }
     }
 
     @Override
