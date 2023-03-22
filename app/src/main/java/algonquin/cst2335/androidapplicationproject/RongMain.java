@@ -28,7 +28,7 @@ public class RongMain extends AppCompatActivity {
 
     private ActivityRongMainBinding binding;
 
-    //m1
+    //m2
     @Override // This starts the application , is the main function in Android
     protected void onCreate(Bundle savedInstanceState) {
 
