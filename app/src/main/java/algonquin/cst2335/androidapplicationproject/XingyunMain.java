@@ -13,7 +13,7 @@ import algonquin.cst2335.androidapplicationproject.databinding.ActivityXingyunMa
 
 
 public class XingyunMain extends AppCompatActivity {
-    // m1
+    // m2
 
     ActivityXingyunMainBinding binding;
     private RecyclerView.Adapter myAdapter;
