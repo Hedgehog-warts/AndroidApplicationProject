@@ -46,9 +46,6 @@ public class RongMain extends AppCompatActivity {
         binding.myEditText.setText(userName);
         SharedPreferences.Editor editor = prefs.edit();
 
-//        binding.loginButton.setOnClickListener(clk -> {
-//
-//        });
 
         TextView tv = findViewById(R.id.textShow);
 
@@ -64,30 +61,22 @@ public class RongMain extends AppCompatActivity {
                 builder.setMessage("Do you want to login as " + binding.myEditText.getText())
                         .setTitle("Question:")
                         .setNegativeButton("No", (dialog, cl) -> {
+
                         })
                         .setPositiveButton("Yes", (dialog, cl) -> {
 
                             Snackbar.make(binding.textShow, "You login in as " + binding.myEditText, Snackbar.LENGTH_LONG)
 
                                     .show();
-
+                            Intent nextPage = new Intent(RongMain.this, RongSecond.class);
+                            //pass some data:
+                            nextPage.putExtra("userName", binding.myEditText.getText().toString());
+                            // actually make the transition, send the table to the secondActivity
+                            editor.putString("LoginName", binding.myEditText.getText().toString()); //emailAddress =""
+                            editor.apply();
+                            startActivity(nextPage);
                         })
                         .create().show();
-
-                // no longer visible
-                super.onStop();
-
-                Log.w(TAG, "onStop() - The application is no longer visible");
-
-                //1) Where you are, 2) Which activity do you want next
-
-                Intent nextPage = new Intent(RongMain.this, RongSecond.class);
-                //pass some data:
-                nextPage.putExtra("userName", binding.myEditText.getText().toString());
-                // actually make the transition, send the table to the secondActivity
-                editor.putString("LoginName", binding.myEditText.getText().toString()); //emailAddress =""
-                editor.apply();
-                startActivity(nextPage);
 
             } else {
                 tv.setText("You shall not pass!");
@@ -98,7 +87,6 @@ public class RongMain extends AppCompatActivity {
         Log.w(TAG, "In onCreate() - Loading Widgets");
 
     }
-
 
     /**
      * This function is to check if the password is complex enough.
