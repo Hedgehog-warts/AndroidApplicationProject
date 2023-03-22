@@ -12,7 +12,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityDoyoungMainBinding;
-
+// m2
 public class DoyoungMain extends AppCompatActivity {
 
     ActivityDoyoungMainBinding binding;
