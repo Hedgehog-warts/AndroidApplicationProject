@@ -27,6 +27,14 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".RongSecond"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
             android:name=".NickMain"
             android:exported="false">
             <meta-data
