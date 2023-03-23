@@ -1,18 +1,23 @@
 package algonquin.cst2335.androidapplicationproject;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -36,6 +41,62 @@ public class DoyoungMain extends AppCompatActivity {
     private RecyclerView.Adapter photoAdapter;
 
     private ArrayList<String> photos = new ArrayList<>();
+
+    @Override
+    public void setSupportActionBar(@Nullable Toolbar toolbar) {
+        super.setSupportActionBar(toolbar);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.doyoung_toolbar, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent nextPage;
+        Class pageClass;
+
+        switch (item.getItemId()) {
+            case R.id.nickApp:
+                pageClass= NickMain.class;
+                nextPage = new Intent(this, pageClass);
+                startActivity(nextPage);
+                break;
+            case R.id.rongApp:
+                pageClass= RongMain.class;
+                nextPage = new Intent(this, pageClass);
+                startActivity(nextPage);
+                break;
+            case R.id.xingyunApp:
+                pageClass= XingyunMain.class;
+                nextPage = new Intent(this, pageClass);
+                startActivity(nextPage);
+                break;
+            case R.id.help:
+                AlertDialog.Builder exitApp = new AlertDialog.Builder(DoyoungMain.this);
+
+                exitApp.setMessage(
+                        "1. Enter a number" + "\n" +
+                        "2. Click the Search button" + "\n" +
+                        "3.Click an item in the list to see details " + "\n" +
+                        "(If you can't see the list, choose the lower number.)")
+                        .setTitle("User Guide")
+                        .setCancelable(false)
+                        .setPositiveButton("Close",
+                            (DialogInterface.OnClickListener) (dialog, which) -> {
+                                dialog.cancel();
+                            })
+                        .create()
+                        .show();
+                break;
+        }
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
