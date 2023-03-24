@@ -24,7 +24,7 @@ public class NYTRowHolder extends RecyclerView.ViewHolder {
         });
 
         /*
-        Requirement 9 part 3/3: Each activity must have at least 1 AlertDialog.
+        Requirement 4 part 3/3: Each activity must have at least 1 AlertDialog (2/2).
         */
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
@@ -34,7 +34,7 @@ public class NYTRowHolder extends RecyclerView.ViewHolder {
             .setPositiveButton("Yes", (dialog, cl) -> {
 
             /*
-            Requirement 9 part 2/3: Each activity must have at least 1 Snackbar.
+            Requirement 4 part 2/3: Each activity must have at least 1 Snackbar (2/2).
             */
             Snackbar.make(titleText, "Snackbar message.", Snackbar.LENGTH_LONG)
                 .setAction("Action", click -> {

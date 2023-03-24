@@ -25,6 +25,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonSearchArticles" />
 
+    <!--    Requirement 5: Each activity must have at least 1 edit text with appropriate text input method and 1 button.-->
     <EditText
         android:id="@+id/editTextSearchArticles"
         android:layout_width="0dp"
