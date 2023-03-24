@@ -54,5 +54,14 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextSearchArticles"
         app:layout_constraintVertical_bias="0.0" />
 
+    <Button
+        android:id="@+id/btn_help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="Help"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSearchArticles"
+        app:layout_constraintTop_toTopOf="@+id/buttonSearchArticles" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,6 +29,14 @@ public class XingyunMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setup_recycleView();
+        toast_onCreate();
+        snackbar_SearchBtn();
+        alertDialog_helpBtn();
+    }
+
+    void setup_recycleView() {
+
         /*
         Requirement 1: Each person’s project must have a RecyclerView somewhere to present items in a list.
         */
@@ -52,7 +60,9 @@ public class XingyunMain extends AppCompatActivity {
                 return 0;
             }
         });
+    }
 
+    void toast_onCreate() {
         /*
         Requirement 4 part 1/3: Each activity must have at least 1 Toast.
         */
@@ -61,11 +71,12 @@ public class XingyunMain extends AppCompatActivity {
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+    }
 
+    void snackbar_SearchBtn() {
         /*
         Requirement 4 part 2/3: Each activity must have at least 1 Snackbar (1/2).
         */
-
         Button buttonSearchArticles = findViewById(R.id.buttonSearchArticles);
         buttonSearchArticles.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +84,34 @@ public class XingyunMain extends AppCompatActivity {
                 Snackbar.make(v, "The database is offline!", Snackbar.LENGTH_SHORT).show();
             }
         });
+
+    }
+
+    void alertDialog_helpBtn() {
+        /*
+        Requirement 8: Each activity must have at least a help menu item
+        that displays an AlertDialog with instructions for how to use the interface.
+        */
+
+
+        Button btn_help = findViewById(R.id.btn_help);
+        btn_help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                show_help();
+            }
+        });
+    }
+
+    void show_help() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage("1.Input the article tile in the search bar. \n" +
+                        "2.Press the \'SEARCH\' button.\n\n" +
+                        "Press the \'HELP\' button to show this instruction again.")
+                .setTitle("Instruction")
+                .setPositiveButton("Understand", (dialog, cl) -> {})
+                .create().show();
     }
 
     /*
