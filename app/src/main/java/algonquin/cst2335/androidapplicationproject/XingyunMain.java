@@ -18,7 +18,9 @@ import com.google.android.material.snackbar.Snackbar;
 
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityXingyunMainBinding;
 
-
+/*
+Requirement 9: This activity supports another language: French(fr) in Canada(CA)
+*/
 public class XingyunMain extends AppCompatActivity {
     // m2
 
@@ -67,7 +69,7 @@ public class XingyunMain extends AppCompatActivity {
         Requirement 4 part 1/3: Each activity must have at least 1 Toast.
         */
         Context context = getApplicationContext();
-        CharSequence text = "Finished creating the NewYorkTimes Activity.";
+        CharSequence text = getString(R.string.toast_onCreate);
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
@@ -121,8 +123,8 @@ public class XingyunMain extends AppCompatActivity {
     public void onBackPressed() {
         AlertDialog.Builder exitApp = new AlertDialog.Builder(XingyunMain.this);
 
-        exitApp.setMessage("Are you sure?")
-                .setTitle("Exiting to MainMenu")
+        exitApp.setMessage(getString(R.string.msg_confirm))
+                .setTitle(getString(R.string.msg_exit))
                 .setCancelable(false)
                 .setPositiveButton("Confirm",
                         (DialogInterface.OnClickListener) (dialog, which) -> {

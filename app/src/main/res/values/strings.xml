@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">AndroidApplicationProject</string>
+    <string name="placeholder_search_articles_text">Search Articles</string>
+    <string name="btn_search">Search</string>
+    <string name="btn_help">Help</string>
+    <string name="toast_onCreate">Finished creating the NewYorkTimes Activity.</string>
+    <string name="msg_confirm">Are you sure?</string>
+    <string name="msg_exit">Exiting to MainMenu</string>
 </resources>
