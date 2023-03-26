@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -23,7 +24,10 @@ import android.util.Log;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityXingyunMainBinding;
 
@@ -130,7 +134,15 @@ public class XingyunMain extends AppCompatActivity {
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=news&api-key=uaRvwTEu6MJlscYrLYCUu245jQAsWfip ";
+//        String url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=news&api-key=uaRvwTEu6MJlscYrLYCUu245jQAsWfip ";
+
+        // Set up the API URL and parameters
+        String baseUrl = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+        String query = "education";
+        String apiKey = "uaRvwTEu6MJlscYrLYCUu245jQAsWfip";
+
+        // Construct the full URL with the parameters
+        String url = String.format("%s?q=%s&api-key=%s&page=0&sort=newest&fl=web_url,headline,pub_date,snippet", baseUrl, query, apiKey);
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -139,6 +151,18 @@ public class XingyunMain extends AppCompatActivity {
                 public void onResponse(String response) {
                     // Display the response string.
                     Log.d("Volley Response", "Response is: " + response);
+                    try {
+                        JSONObject responseJson = new JSONObject(response);
+                        JSONArray docs = responseJson.getJSONObject("response").getJSONArray("docs");
+
+                        for (int i = 0; i < docs.length(); i++) {
+                            JSONObject article = docs.getJSONObject(i);
+                            String headline = article.getJSONObject("headline").getString("main");
+                            System.out.println(headline);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }, new Response.ErrorListener() {
             @Override
