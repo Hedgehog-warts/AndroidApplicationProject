@@ -130,7 +130,7 @@ public class XingyunMain extends AppCompatActivity {
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://www.example.com";
+        String url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=news&api-key=uaRvwTEu6MJlscYrLYCUu245jQAsWfip ";
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
