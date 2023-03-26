@@ -3,11 +3,14 @@ package algonquin.cst2335.androidapplicationproject;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -29,6 +32,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityXingyunMainBinding;
 
 /*
@@ -44,36 +52,39 @@ public class XingyunMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setup_recycleView();
         toast_onCreate();
         snackbar_SearchBtn();
         alertDialog_helpBtn();
         useVolley();
     }
 
-    void setup_recycleView() {
+    void setup_recycleView(List<String> myData) {
 
         /*
         Requirement 1: Each person’s project must have a RecyclerView somewhere to present items in a list.
         */
         binding = ActivityXingyunMainBinding.inflate(getLayoutInflater());
-        setContentView(R.layout.activity_xingyun_main);
+        setContentView(binding.getRoot());
 
+        binding.recycleView.setLayoutManager(new LinearLayoutManager(this));
         binding.recycleView.setAdapter(myAdapter = new RecyclerView.Adapter<NYTRowHolder>() {
-            @NonNull
+
             @Override
-            public NYTRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return  null;
+            public NYTRowHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.detail_article_xyz, parent, false);
+                return new NYTRowHolder(view, XingyunMain.this);
             }
 
             @Override
-            public void onBindViewHolder(@NonNull NYTRowHolder holder, int position) {
-
+            public void onBindViewHolder(NYTRowHolder holder, int position) {
+                String data = myData.get(position);
+                holder.headlineView.setText(data);
             }
 
             @Override
             public int getItemCount() {
-                return 0;
+                return myData.size();
             }
         });
     }
@@ -93,8 +104,9 @@ public class XingyunMain extends AppCompatActivity {
         /*
         Requirement 4 part 2/3: Each activity must have at least 1 Snackbar (1/2).
         */
-        Button buttonSearchArticles = findViewById(R.id.buttonSearchArticles);
-        buttonSearchArticles.setOnClickListener(new View.OnClickListener() {
+        Button btn_search = findViewById(R.id.buttonSearchArticles);
+        if (btn_search == null)  return;
+        btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Snackbar.make(v, "The database is offline!", Snackbar.LENGTH_SHORT).show();
@@ -111,6 +123,7 @@ public class XingyunMain extends AppCompatActivity {
 
 
         Button btn_help = findViewById(R.id.btn_help);
+        if (btn_help == null)  return;
         btn_help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,10 +144,12 @@ public class XingyunMain extends AppCompatActivity {
     }
 
     void useVolley() {
+        
+        // Instantiate data lists
+        List<String> headlines = new ArrayList<>();
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-//        String url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=news&api-key=uaRvwTEu6MJlscYrLYCUu245jQAsWfip ";
 
         // Set up the API URL and parameters
         String baseUrl = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
@@ -159,7 +174,13 @@ public class XingyunMain extends AppCompatActivity {
                             JSONObject article = docs.getJSONObject(i);
                             String headline = article.getJSONObject("headline").getString("main");
                             System.out.println(headline);
+                            headlines.add(headline);
+
                         }
+
+                        // pass the data to the recycle view
+                        setup_recycleView(headlines);
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -174,8 +195,8 @@ public class XingyunMain extends AppCompatActivity {
 
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
-
     }
+
 
     /*
     Requirement 4 part 3/3: Each activity must have at least 1 AlertDialog (1/2).

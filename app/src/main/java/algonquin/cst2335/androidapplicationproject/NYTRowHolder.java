@@ -12,36 +12,38 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class NYTRowHolder extends RecyclerView.ViewHolder {
 
-    TextView titleText;
+    TextView headlineView;
     Context context;
 
     public NYTRowHolder(@NonNull View itemView, Context context) {
         super(itemView);
         this.context = context;
 
+        headlineView = itemView.findViewById(R.id.headline);
+
         itemView.setOnClickListener(clk -> {
             // itemView Click Event Goes Here
         });
 
-        /*
-        Requirement 4 part 3/3: Each activity must have at least 1 AlertDialog (2/2).
-        */
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-
-        builder.setMessage("Do you want to perform this action with: " + titleText.getText())
-            .setTitle("Question")
-            .setNegativeButton("No", (dialog, cl) -> {})
-            .setPositiveButton("Yes", (dialog, cl) -> {
-
-            /*
-            Requirement 4 part 2/3: Each activity must have at least 1 Snackbar (2/2).
-            */
-            Snackbar.make(titleText, "Snackbar message.", Snackbar.LENGTH_LONG)
-                .setAction("Action", click -> {
-                    // Snackbar Action Goes Here
-                }).show();
-
-        })
-        .create().show();
+//        /*
+//        Requirement 4 part 3/3: Each activity must have at least 1 AlertDialog (2/2).
+//        */
+//        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//
+//        builder.setMessage("Do you want to perform this action with: " + headlineView.getText())
+//            .setTitle("Question")
+//            .setNegativeButton("No", (dialog, cl) -> {})
+//            .setPositiveButton("Yes", (dialog, cl) -> {
+//
+//            /*
+//            Requirement 4 part 2/3: Each activity must have at least 1 Snackbar (2/2).
+//            */
+//            Snackbar.make(headlineView, "Snackbar message.", Snackbar.LENGTH_LONG)
+//                .setAction("Action", click -> {
+//                    // Snackbar Action Goes Here
+//                }).show();
+//
+//        })
+//        .create().show();
     }
 }
