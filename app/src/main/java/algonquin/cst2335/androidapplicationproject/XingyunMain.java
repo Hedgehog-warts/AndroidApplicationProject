@@ -55,11 +55,10 @@ public class XingyunMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        toast_onCreate();
-        snackbar_SearchBtn();
-        alertDialog_helpBtn();
         setup_recycleView();
-        useVolley();
+        toast_onCreate();
+        setup_searchBtn();
+        alertDialog_helpBtn();
     }
 
     void setup_recycleView() {
@@ -107,18 +106,27 @@ public class XingyunMain extends AppCompatActivity {
         toast.show();
     }
 
-    void snackbar_SearchBtn() {
-        /*
-        Requirement 4 part 2/3: Each activity must have at least 1 Snackbar (1/2).
-        */
+    void setup_searchBtn() {
+
         Button btn_search = findViewById(R.id.buttonSearchArticles);
         if (btn_search == null)  return;
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "The database is offline!", Snackbar.LENGTH_SHORT).show();
+                useVolley();
             }
         });
+
+        // if search file is empty
+        snackbar_SearchBtn();
+    }
+
+    void snackbar_SearchBtn() {
+        /*
+        Requirement 4 part 2/3: Each activity must have at least 1 Snackbar (1/2).
+        */
+        Button btn_search = findViewById(R.id.buttonSearchArticles);
+        Snackbar.make(btn_search, "The database is offline!", Snackbar.LENGTH_SHORT).show();
 
     }
 
@@ -127,7 +135,6 @@ public class XingyunMain extends AppCompatActivity {
         Requirement 8: Each activity must have at least a help menu item
         that displays an AlertDialog with instructions for how to use the interface.
         */
-
 
         Button btn_help = findViewById(R.id.btn_help);
         if (btn_help == null)  return;
