@@ -48,6 +48,9 @@ public class XingyunMain extends AppCompatActivity {
     ActivityXingyunMainBinding binding;
     private RecyclerView.Adapter myAdapter;
 
+    // Instantiate data lists
+    List<String> headlines = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,10 +58,11 @@ public class XingyunMain extends AppCompatActivity {
         toast_onCreate();
         snackbar_SearchBtn();
         alertDialog_helpBtn();
+        setup_recycleView();
         useVolley();
     }
 
-    void setup_recycleView(List<String> myData) {
+    void setup_recycleView() {
 
         /*
         Requirement 1: Each person’s project must have a RecyclerView somewhere to present items in a list.
@@ -78,16 +82,19 @@ public class XingyunMain extends AppCompatActivity {
 
             @Override
             public void onBindViewHolder(NYTRowHolder holder, int position) {
-                String data = myData.get(position);
+                String data = headlines.get(position);
+                System.out.println("onBindViewHolder position is " + position);
                 holder.headlineView.setText(data);
             }
 
             @Override
             public int getItemCount() {
-                return myData.size();
+                return headlines.size();
             }
         });
     }
+
+
 
     void toast_onCreate() {
         /*
@@ -144,9 +151,7 @@ public class XingyunMain extends AppCompatActivity {
     }
 
     void useVolley() {
-        
-        // Instantiate data lists
-        List<String> headlines = new ArrayList<>();
+
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -173,13 +178,14 @@ public class XingyunMain extends AppCompatActivity {
                         for (int i = 0; i < docs.length(); i++) {
                             JSONObject article = docs.getJSONObject(i);
                             String headline = article.getJSONObject("headline").getString("main");
-                            System.out.println(headline);
+                            System.out.println("Adding headline#" + headlines.size() + ": " + headline);
                             headlines.add(headline);
 
                         }
 
-                        // pass the data to the recycle view
-                        setup_recycleView(headlines);
+                        // Notify the adapter that data has been updated
+                        myAdapter.notifyDataSetChanged();
+                        showSearchResult();
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -195,6 +201,19 @@ public class XingyunMain extends AppCompatActivity {
 
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
+    }
+
+    void showSearchResult() {
+//        System.out.println("headlines.size() = " + headlines.size());
+//        for (int i = 0; i < headlines.size(); i++) {
+//            System.out.println("This is the NO." + i + " article.");
+//        }
+
+        int count = headlines.size();
+        String message = String.format("Number of headlines: %d", count);
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        int rowCount = myAdapter.getItemCount();
+        System.out.println("rowCount = " + rowCount);
     }
 
 
