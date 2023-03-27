@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -113,12 +114,26 @@ public class XingyunMain extends AppCompatActivity {
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                useVolley();
+                click_searchBtn(v);
             }
         });
 
-        // if search file is empty
-        snackbar_SearchBtn();
+        EditText ets = findViewById(R.id.editTextSearchArticles);
+        ets.setHint(getResources().getString(R.string.placeholder_search_articles_text));
+    }
+
+    void click_searchBtn(View v) {
+
+        String inputText = binding.editTextSearchArticles.getText().toString();
+
+        // if search file is empty, prompt an error
+        if(inputText.equals("")) {
+            System.out.println("search file is empty");
+            snackbar_SearchBtn();
+        } else {
+            System.out.println("inputText: " + inputText);
+            useVolley(inputText);
+        }
     }
 
     void snackbar_SearchBtn() {
@@ -126,7 +141,7 @@ public class XingyunMain extends AppCompatActivity {
         Requirement 4 part 2/3: Each activity must have at least 1 Snackbar (1/2).
         */
         Button btn_search = findViewById(R.id.buttonSearchArticles);
-        Snackbar.make(btn_search, "The database is offline!", Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(btn_search, "Search field is empty.", Snackbar.LENGTH_LONG).show();
 
     }
 
@@ -157,7 +172,7 @@ public class XingyunMain extends AppCompatActivity {
                 .create().show();
     }
 
-    void useVolley() {
+    void useVolley(String searchInput) {
 
 
         // Instantiate the RequestQueue.
@@ -165,7 +180,7 @@ public class XingyunMain extends AppCompatActivity {
 
         // Set up the API URL and parameters
         String baseUrl = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-        String query = "education";
+        String query = searchInput;
         String apiKey = "uaRvwTEu6MJlscYrLYCUu245jQAsWfip";
 
         // Construct the full URL with the parameters
