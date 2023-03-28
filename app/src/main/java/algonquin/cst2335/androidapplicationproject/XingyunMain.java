@@ -101,7 +101,7 @@ public class XingyunMain extends AppCompatActivity {
         Requirement 4 part 1/3: Each activity must have at least 1 Toast.
         */
         Context context = getApplicationContext();
-        CharSequence text = getString(R.string.toast_onCreate);
+        CharSequence text = getString(R.string.toast_onCreate_xyz);
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
@@ -246,8 +246,8 @@ public class XingyunMain extends AppCompatActivity {
     public void onBackPressed() {
         AlertDialog.Builder exitApp = new AlertDialog.Builder(XingyunMain.this);
 
-        exitApp.setMessage(getString(R.string.msg_confirm))
-                .setTitle(getString(R.string.msg_exit))
+        exitApp.setMessage(getString(R.string.msg_confirm_xyz))
+                .setTitle(getString(R.string.msg_exit_xyz))
                 .setCancelable(false)
                 .setPositiveButton("Confirm",
                         (DialogInterface.OnClickListener) (dialog, which) -> {

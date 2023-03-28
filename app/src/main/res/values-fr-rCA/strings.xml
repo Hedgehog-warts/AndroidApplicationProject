@@ -2,9 +2,9 @@
 <resources>
     <string name="app_name">AndroidApplicationProject</string>
     <string name="placeholder_search_articles_text">Rechercher des articles</string>
-    <string name="btn_search">Rechercher</string>
-    <string name="btn_help">Aider</string>
-    <string name="toast_onCreate">Création de l\'activité NewYorkTimes terminée.</string>
-    <string name="msg_confirm">Es-tu sûr?</string>
-    <string name="msg_exit">Sortie vers MainMenu</string>
+    <string name="btn_search_xyz">Rechercher</string>
+    <string name="btn_help_xyz">Aider</string>
+    <string name="toast_onCreate_xyz">Création de l\'activité NewYorkTimes terminée.</string>
+    <string name="msg_confirm_xyz">Es-tu sûr?</string>
+    <string name="msg_exit_xyz">Sortie vers MainMenu</string>
 </resources>
