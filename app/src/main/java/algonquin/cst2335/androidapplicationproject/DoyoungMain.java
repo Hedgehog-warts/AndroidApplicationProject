@@ -106,6 +106,7 @@ public class DoyoungMain extends AppCompatActivity {
         dataModel = new ViewModelProvider(this).get(DoyoungViewModel.class);
         binding = ActivityDoyoungMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setSupportActionBar(binding.myToolbar);
 
         SharedPreferences sharedDate = getSharedPreferences("Date",MODE_PRIVATE);
         SharedPreferences.Editor editDate = sharedDate.edit();

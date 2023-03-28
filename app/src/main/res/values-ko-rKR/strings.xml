@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">최종 어플리케이션</string>
+    <string name="app_name">최종 프로젝트 앱</string>
+
     <string name="enterDate">날짜를 입력하세요(0~)</string>
     <string name="searchButton">검색</string>
 </resources>

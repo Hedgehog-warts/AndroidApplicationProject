@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/doyoungApp"
+        android:icon="@drawable/doyoung_nasa_icon"
+        android:title="Doyoung's App"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/nickApp"
+        android:icon="@drawable/doyoung_kitten_icon"
+        android:title="Nick's App"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/rongApp"
+        android:icon="@drawable/rong_weather"
+        android:title="Rong's App"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/xingyunApp"
+        android:icon="@drawable/doyoung_new_york_times"
+        android:title="Xingyun's App"
+        app:showAsAction="always" />
+
+</menu>
