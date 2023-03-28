@@ -81,13 +81,11 @@ public class DoyoungMain extends AppCompatActivity {
                 AlertDialog.Builder exitApp = new AlertDialog.Builder(DoyoungMain.this);
 
                 exitApp.setMessage(
-                        "1. Enter a number" + "\n" +
-                        "2. Click the Search button" + "\n" +
-                        "3.Click an item in the list to see details " + "\n" +
-                        "(If you can't see the list, choose the lower number.)")
-                        .setTitle("User Guide")
+                        getString(R.string.kdy_firstStep) + "\n" + getString(R.string.kdy_secondStep) + "\n" +
+                        getString(R.string.kdy_thirdStep) + "\n" + getString(R.string.kdy_additionalStep))
+                        .setTitle(getString(R.string.kdy_userGuide))
                         .setCancelable(false)
-                        .setPositiveButton("Close",
+                        .setPositiveButton(getString(R.string.kdy_close),
                             (DialogInterface.OnClickListener) (dialog, which) -> {
                                 dialog.cancel();
                             })
@@ -142,10 +140,10 @@ public class DoyoungMain extends AppCompatActivity {
 
 
             RecyclerView rv = binding.photoRecycler;
-            Snackbar.make(rv, "We found 000 photos", Snackbar.LENGTH_LONG)
-                    .setAction("Undo", undoclk ->{
+            Snackbar.make(rv, getString(R.string.kdy_foundPhoto), Snackbar.LENGTH_LONG)
+                    .setAction(getString(R.string.kdy_undo), undoclk ->{
                         Context context = getApplicationContext();
-                        CharSequence text = "Cancelled";
+                        CharSequence text = getString(R.string.kdy_cancelled);
                         int duration = Toast.LENGTH_SHORT;
                         Toast.makeText(context, text, duration).show();
                     }).show();
@@ -184,22 +182,22 @@ public class DoyoungMain extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        AlertDialog.Builder exitApp = new AlertDialog.Builder(DoyoungMain.this);
-
-        exitApp.setMessage("Do you want to exit ?")
-                .setTitle("Thank You!")
-                .setCancelable(false)
-                .setPositiveButton("Yes",
-                        (DialogInterface.OnClickListener) (dialog, which) -> {
-                            finish();
-                        })
-                .setNegativeButton("No",
-                        (DialogInterface.OnClickListener) (dialog, which) -> {
-                            dialog.cancel();
-                        })
-                .create()
-                .show();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        AlertDialog.Builder exitApp = new AlertDialog.Builder(DoyoungMain.this);
+//
+//        exitApp.setMessage("Do you want to exit ?")
+//                .setTitle("Thank You!")
+//                .setCancelable(false)
+//                .setPositiveButton("Yes",
+//                        (DialogInterface.OnClickListener) (dialog, which) -> {
+//                            finish();
+//                        })
+//                .setNegativeButton("No",
+//                        (DialogInterface.OnClickListener) (dialog, which) -> {
+//                            dialog.cancel();
+//                        })
+//                .create()
+//                .show();
+//    }
 }

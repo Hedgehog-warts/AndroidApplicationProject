@@ -2,8 +2,20 @@
 <resources>
     <string name="app_name">Final Project App</string>
 
-    <string name="enterDate">Enter a date(0~)</string>
-    <string name="searchButton">Search</string>
+    <string name="kdy_help">Help</string>
+
+    <string name="kdy_enterDate">Enter a date(0~)</string>
+    <string name="kdy_searchButton">Search</string>
+    <string name="kdy_userGuide">User Guide</string>
+    <string name="kdy_firstStep">1.Enter a number</string>
+    <string name="kdy_secondStep">2.Click the Search button</string>
+    <string name="kdy_thirdStep">3.Click an item in the list to see details</string>
+    <string name="kdy_additionalStep">(If you can\'t see the list, choose the lower number)</string>
+    <string name="kdy_close">(If you can\'t see the list, choose the lower number)</string>
+
+    <string name="kdy_foundPhoto">We found photos</string>
+    <string name="kdy_cancelled">Cancelled</string>
+    <string name="kdy_undo">Undo</string>
 
     <string name="weatherApp">Welcome to use WeatherStack App</string>
     <string name="enterUserName">Enter your user name: </string>
