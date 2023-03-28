@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.Button;
 
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityMainBinding;
-
+// m2
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     ActivityMainBinding binding;
