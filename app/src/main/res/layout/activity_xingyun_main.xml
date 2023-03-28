@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".XingyunMain">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Xingyun"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleView"
         android:layout_width="0dp"
@@ -25,6 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonSearchArticles" />
 
+    <!--    Requirement 5: Each activity must have at least 1 edit text with appropriate text input method and 1 button.-->
     <EditText
         android:id="@+id/editTextSearchArticles"
         android:layout_width="0dp"
@@ -32,7 +23,6 @@
         android:layout_marginTop="5dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Search Articles"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -45,13 +35,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="Search"
+        android:text="@string/btn_search_xyz"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextSearchArticles"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btn_help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="@string/btn_help_xyz"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSearchArticles"
+        app:layout_constraintTop_toTopOf="@+id/buttonSearchArticles" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
