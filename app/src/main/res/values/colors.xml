@@ -9,4 +9,8 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="nasa_blue">#2A2F96</color>
+
+    <color name="darkPurple">#5A0671</color>
+    <color name="babyBlue">#6FD7E4</color>
+
 </resources>
