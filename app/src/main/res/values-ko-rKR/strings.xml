@@ -2,6 +2,18 @@
 <resources>
     <string name="app_name">최종 프로젝트 앱</string>
 
-    <string name="enterDate">날짜를 입력하세요(0~)</string>
-    <string name="searchButton">검색</string>
+    <string name="kdy_help">도움말</string>
+
+    <string name="kdy_enterDate">날짜를 입력하세요(0~)</string>
+    <string name="kdy_searchButton">검색</string>
+    <string name="kdy_userGuide">사용자 가이드</string>
+    <string name="kdy_firstStep">1.숫자를 입력하세요</string>
+    <string name="kdy_secondStep">2.검색 버튼을 누르세요</string>
+    <string name="kdy_thirdStep">3.자세한 내용을 보려면 목록 안 항목을 선택하세요</string>
+    <string name="kdy_additionalStep">(목록 안에 아무 것도 보이지 않는 다면 낮은 숫자를 입력하세요)</string>
+    <string name="kdy_close">닫기</string>
+
+    <string name="kdy_foundPhoto">사진을 찾았습니다</string>
+    <string name="kdy_cancelled">취소</string>
+    <string name="kdy_undo">되돌리기</string>
 </resources>
