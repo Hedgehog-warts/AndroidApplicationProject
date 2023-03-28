@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <item
+        android:id="@+id/doyoung"
+        android:icon="@drawable/doyoung"
+        app:showAsAction="always"
+        android:title="doyoung" />
+    <item
+        android:id="@+id/nick"
+        app:showAsAction="always"
+        android:icon="@drawable/nick"
+        android:title="nick" />
+    <item
+        android:id="@+id/xingyun"
+        android:icon="@drawable/xingyun"
+        app:showAsAction="always"
+        android:title="xingyun" />
+    <item
+        android:id="@+id/help"
+        app:showAsAction="never"
+        android:title="@string/help" />
+
+</menu>

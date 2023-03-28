@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">终期项目应用界面</string>
+    <string name="textShow">欢迎使用WeatherStack App</string>
+    <string name="textView4">输入密码</string>
+    <string name="loginButton">登录</string>
+    <string name="searchButton">查询</string>
+    <string name="textCheckBox">你喜欢这个城市吗?</string>
+    <string name="checkBox">复选框</string>
+    <string name="help">帮助</string>
+    <string name="editCity">输入城市</string>
+    <string name="rongButton">冉_蓉</string>
+    <string name="weatherApp">欢迎使用WeatherStack App</string>
+    <string name="userName">用户名</string>
+    <string name="enterUserName">输入用户名</string>
+    <string name="typeUserName">键入用户名</string>
+    <string name="typePassword">输入密码</string>
+</resources>
