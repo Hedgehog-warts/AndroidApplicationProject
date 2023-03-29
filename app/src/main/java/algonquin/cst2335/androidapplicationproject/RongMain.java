@@ -19,7 +19,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityRongMainBinding;
 
-
+// m3
 public class RongMain extends AppCompatActivity {
 
     private static String TAG = "RongMain";
