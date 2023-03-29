@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Final Project App</string>
 
+    /// Doyoung's place for strings
     <string name="kdy_help">Help</string>
 
     <string name="kdy_enterDate">Enter a date(0~)</string>
@@ -16,6 +17,9 @@
     <string name="kdy_cancelled">Cancelled</string>
     <string name="kdy_undo">Undo</string>
 
+    /// Nick's place for strings
+
+    /// Rong's place for strings
     <string name="weatherApp">Welcome to use WeatherStack App</string>
     <string name="enterUserName">Enter your user name: </string>
     <string name="typePassword">Type your password:</string>
@@ -48,8 +52,7 @@
     <string name ="likeCity">You do like this city:  </string>
     <string name ="weather">Do you want to check weather for  </string>
 
-
-    <string name="app_name">AndroidApplicationProject</string>
+    /// Xingyun's place for strings
     <string name="placeholder_search_articles_text">Search Articles</string>
     <string name="btn_search_xyz">Search</string>
     <string name="btn_help_xyz">Help</string>
