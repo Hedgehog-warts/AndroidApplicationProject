@@ -137,8 +137,13 @@ public class RongSecond extends AppCompatActivity {
 
         variableBinding.checkBox.setOnCheckedChangeListener((cb, isChecked) -> {
 //                          model.isChecked.postValue(isChecked);
-
-            Toast.makeText(this, getString(R.string.likeCity) + " " + isChecked, Toast.LENGTH_SHORT).show();
+            String checkedString = "";
+            if (isChecked) {
+                checkedString = getString(R.string.yes);
+            } else {
+                checkedString = getString(R.string.no);
+            }
+            Toast.makeText(this, getString(R.string.likeCity) + " " + checkedString, Toast.LENGTH_SHORT).show();
             // makeText returns a text, and show() to show this.
         });
 
