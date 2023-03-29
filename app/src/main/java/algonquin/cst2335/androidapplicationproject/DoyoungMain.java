@@ -33,7 +33,7 @@ import java.util.List;
 
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityDoyoungMainBinding;
 import algonquin.cst2335.androidapplicationproject.databinding.DoyoungPhotoItemBinding;
-
+// m3
 public class DoyoungMain extends AppCompatActivity {
 
     ActivityDoyoungMainBinding binding;
