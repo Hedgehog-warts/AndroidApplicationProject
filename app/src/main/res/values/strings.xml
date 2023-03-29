@@ -11,7 +11,7 @@
     <string name="kdy_secondStep">2.Click the Search button</string>
     <string name="kdy_thirdStep">3.Click an item in the list to see details</string>
     <string name="kdy_additionalStep">(If you can\'t see the list, choose the lower number)</string>
-    <string name="kdy_close">(If you can\'t see the list, choose the lower number)</string>
+    <string name="kdy_close">Close</string>
 
     <string name="kdy_foundPhoto">We found photos</string>
     <string name="kdy_cancelled">Cancelled</string>
