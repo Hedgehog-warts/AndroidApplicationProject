@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">终期项目应用界面</string>
-    <string name="textShow">欢迎使用WeatherStack App</string>
-    <string name="textView4">输入密码</string>
+
     <string name="loginButton">登录</string>
     <string name="searchButton">查询</string>
     <string name="textCheckBox">你喜欢这个城市吗?</string>
@@ -15,4 +14,23 @@
     <string name="enterUserName">输入用户名</string>
     <string name="typeUserName">键入用户名</string>
     <string name="typePassword">输入密码</string>
+    <string name ="helpText1">1\. 输入正确用户名</string>
+    <string name="helpText2">2\. 输入正确密码 </string>
+    <string name="helpText3">3\. 点击\"登录\"键 </string>
+    <string name="helpText4">4\. 确认登录信息 </string>
+    <string name="helpText5">5\. 输入城市名字 </string>
+    <string name="helpText6">6\. 点击\"查询\"键 </string>
+    <string name="helpText7">7\. 确认城市信息 </string>
+    <string name="helpText8">8\. 点击城市名字获取天气信息 </string>
+    <string name ="helpTitle">用户手册 </string>
+    <string name ="close">关闭</string>
+    <string name ="notPass">密码不对</string>
+    <string name ="leave">您要离开Weather Stack APP吗?</string>
+    <string name ="thanks">欢迎下次光临!</string>
+    <string name ="yes">是</string>
+    <string name ="no">否</string>
+    <string name ="login">登录名:  </string>
+    <string name ="welcome">欢迎回来 </string>
+    <string name ="likeCity">您喜欢这个城市吗?  </string>
+    <string name ="weather">您想要查看该城市</string>
 </resources>

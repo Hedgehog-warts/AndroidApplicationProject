@@ -57,13 +57,7 @@ public class RongSecond extends AppCompatActivity {
             case R.id.doyoung:
 
                 pageClass = DoyoungMain.class;
-//                } else if (v.getId() == binding.nickButton.getId()) {
-//                    pageClass= NickMain.class;
-//                } else if (v.getId() == binding.rongButton.getId()) {
-//                    pageClass= RongMain.class;
-//                } else {
-//                    pageClass= XingyunMain.class;
-//                }
+
                 nextPage = new Intent(RongSecond.this, pageClass);
                 startActivity(nextPage);
 
@@ -83,17 +77,17 @@ public class RongSecond extends AppCompatActivity {
             case R.id.help:
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(RongSecond.this);
-                builder.setMessage("1. Input a correct user name \n" +
-                                "2. Input a correct password \n" +
-                                "3. Click 'Login' button \n" +
-                                "4. Confirm Login info \n" +
-                                "5. Type in your desired city name \n" +
-                                "6. Click 'Search' button \n" +
-                                "7. Confirm city info \n" +
-                                "8. Get weather info by click city name \n")
-                        .setTitle("User Manual: ")
+                builder.setMessage(getString(R.string.helpText1) +"\n" +
+                                getString(R.string.helpText2) + "\n" +
+                                getString(R.string.helpText3) + "\n"
+                                + getString(R.string.helpText4)+ "\n" +
+                                getString(R.string.helpText5) + "\n" +
+                                getString(R.string.helpText6) + "\n" +
+                                getString(R.string.helpText7) + "\n" +
+                                getString(R.string.helpText8) +"\n")
+                        .setTitle(getString(R.string.helpTitle) +"\n")
 
-                        .setPositiveButton("Close", (dialog, cl) -> {
+                        .setPositiveButton( getString(R.string.close), (dialog, cl) -> {
                             dialog.cancel();
                         })
                         .create()
@@ -122,7 +116,7 @@ public class RongSecond extends AppCompatActivity {
         //send data to first page: "datatable" should be the same as "nextPage"
         Intent rongMainPage = getIntent();
         String userName = rongMainPage.getStringExtra("userName");
-        variableBinding.userName.setText("Welcome back " + userName);
+        variableBinding.userName.setText(getString(R.string.welcome) + " " + userName);
 
         //cityname saved using SharedPreferences
         SharedPreferences prefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
@@ -144,7 +138,7 @@ public class RongSecond extends AppCompatActivity {
         variableBinding.checkBox.setOnCheckedChangeListener((cb, isChecked) -> {
 //                          model.isChecked.postValue(isChecked);
 
-            Toast.makeText(this, "You do like this city: " + isChecked , Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.likeCity) + " " + isChecked, Toast.LENGTH_SHORT).show();
             // makeText returns a text, and show() to show this.
         });
 
@@ -176,8 +170,8 @@ public class RongSecond extends AppCompatActivity {
 //                    })
 //                    .setPositiveButton("Yes", (dialog, cl) -> {
 
-                        Snackbar.make(cityname, "Do you want to check weather for " + cityname.getText() + " ?", +  Snackbar.LENGTH_LONG)
-                                .setAction("Yes", clk -> {
+                        Snackbar.make(cityname, getString(R.string.weather) + cityname.getText() + " ?", +  Snackbar.LENGTH_LONG)
+                                .setAction(getString(R.string.yes), clk -> {
                                     String msg = variableBinding.editCity.getText().toString();
                                     SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh:mm:ss a");
                                     String currentDateandTime = sdf.format(new Date());
@@ -246,15 +240,15 @@ public class RongSecond extends AppCompatActivity {
     public void onBackPressed() {
         AlertDialog.Builder exitApp = new AlertDialog.Builder(RongSecond.this);
 
-        exitApp.setMessage("Do you want to Logout?")
-                .setTitle("See You!")
+        exitApp.setMessage(getString(R.string.leave))
+                .setTitle(getString(R.string.thanks))
                 .setCancelable(false)
-                .setPositiveButton("Yes",
+                .setPositiveButton(getString(R.string.yes),
                         (DialogInterface.OnClickListener) (dialog, which) -> {
 
                             finish();
                         })
-                .setNegativeButton("No",
+                .setNegativeButton(getString(R.string.no),
                         (DialogInterface.OnClickListener) (dialog, which) -> {
                             dialog.cancel();
                         })

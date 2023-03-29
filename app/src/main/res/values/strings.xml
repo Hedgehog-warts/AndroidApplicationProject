@@ -1,11 +1,10 @@
-
 <resources>
     <string name="app_name">Final Project App</string>
     <string name="weatherApp">Welcome to use WeatherStack App</string>
     <string name="enterUserName">Enter your user name: </string>
     <string name="typePassword">Type your password:</string>
     <string name="loginButton">Login</string>
-    <string name="searchButton">Search"</string>
+    <string name="searchButton">Search</string>
     <string name="textCheckBox">Do you like this city?</string>
     <string name="checkBox">CheckBox</string>
     <string name="help">Help</string>
@@ -13,5 +12,24 @@
     <string name="userName">User name</string>
     <string name="editCity">Type city here</string>
     <string name="rongButton">Rong</string>
+    <string name="helpText1">1\. Input a correct user name</string>
+    <string name="helpText2">2\. Input a correct password </string>
+    <string name="helpText3">3\. Click \"Login\" button </string>
+    <string name="helpText4">4\. Confirm Login info </string>
+    <string name="helpText5">5\. Type in your desired city name </string>
+    <string name="helpText6">6\. Click \"Search\" button </string>
+    <string name="helpText7">7\. Confirm city info </string>
+    <string name="helpText8">8\. Get weather info by clicking city name </string>
+    <string name ="helpTitle">User Manual: </string>
+    <string name ="close">Close</string>
+    <string name ="notPass">Incorrect password!</string>
+    <string name ="leave">Do you want to leave Weather Stack APP?</string>
+    <string name ="thanks">See you!</string>
+    <string name ="yes">Yes</string>
+    <string name ="no">No</string>
+    <string name ="login">Do you want to login in as: </string>
+    <string name ="welcome">Welcome back  </string>
+    <string name ="likeCity">You do like this city:  </string>
+    <string name ="weather">Do you want to check weather for  </string>
 
 </resources>
