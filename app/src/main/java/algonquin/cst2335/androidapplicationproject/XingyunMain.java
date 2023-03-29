@@ -1,16 +1,21 @@
 package algonquin.cst2335.androidapplicationproject;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -53,10 +58,51 @@ public class XingyunMain extends AppCompatActivity {
     List<String> headlines = new ArrayList<>();
 
     @Override
+    public void setSupportActionBar(@Nullable Toolbar toolbar) {
+        super.setSupportActionBar(toolbar);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.xingyun_toolbar, menu);
+
+        return true;
+    }
+
+    // this onOptionsItemSelected() is copied from Doyoung's code
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent nextPage;
+        Class pageClass;
+
+        switch (item.getItemId()) {
+            case R.id.nickApp:
+                pageClass= NickMain.class;
+                nextPage = new Intent(this, pageClass);
+                startActivity(nextPage);
+                break;
+            case R.id.rongApp:
+                pageClass= RongMain.class;
+                nextPage = new Intent(this, pageClass);
+                startActivity(nextPage);
+                break;
+            case R.id.doyoungApp:
+                pageClass= DoyoungMain.class;
+                nextPage = new Intent(this, pageClass);
+                startActivity(nextPage);
+                break;
+
+        }
+        return true;
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setup_recycleView();
+        setContentView(binding.getRoot());
+        setSupportActionBar(binding.myToolbar);
         toast_onCreate();
         setup_searchBtn();
         alertDialog_helpBtn();

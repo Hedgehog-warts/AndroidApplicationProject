@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nickApp"
+        android:icon="@drawable/doyoung_kitten_icon"
+        android:title="Nick's App"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/rongApp"
+        android:icon="@drawable/rong_weather"
+        android:title="Rong's App"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/doyoungApp"
+        android:icon="@drawable/nick"
+        android:title="Xingyun's App"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/help"
+        android:icon="@android:drawable/ic_menu_help"
+        android:title="@string/kdy_help"
+        app:showAsAction="never" />
+
+
+</menu>
