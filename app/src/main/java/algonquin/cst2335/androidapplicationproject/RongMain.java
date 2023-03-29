@@ -63,17 +63,17 @@ public class RongMain extends AppCompatActivity {
             case R.id.help:
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(RongMain.this);
-                builder.setMessage("1. Input a correct user name \n" +
-                                "2. Input a correct password \n" +
-                                "3. Click 'Login' button \n" +
-                                "4. Confirm Login info \n" +
-                                "5. Type in your desired city name \n" +
-                                "6. Click 'Search' button \n" +
-                                "7. Confirm city info \n" +
-                                "8. Get weather info by click city name \n")
-                        .setTitle("User Manual: ")
+                builder.setMessage(getString(R.string.helpText1) +"\n" +
+                                getString(R.string.helpText2) + "\n" +
+                                        getString(R.string.helpText3) + "\n"
+                                + getString(R.string.helpText4)+ "\n" +
+                                        getString(R.string.helpText5) + "\n" +
+                                getString(R.string.helpText6) + "\n" +
+                                        getString(R.string.helpText7) + "\n" +
+                        getString(R.string.helpText8) +"\n")
+                        .setTitle(getString(R.string.helpTitle) +"\n")
 
-                        .setPositiveButton("Close", (dialog, cl) -> {
+                        .setPositiveButton( getString(R.string.close), (dialog, cl) -> {
                             dialog.cancel();
                         })
                         .create()
@@ -111,8 +111,8 @@ public class RongMain extends AppCompatActivity {
             TextView username = findViewById(R.id.typeUserName);
             // looking for UpperCase, LowerCase, Number and Special character,
             if (checkPasswordComplexity(password)) {
-                Snackbar.make(username, "Do you want to login in as " + username.getText() + " ?", Snackbar.LENGTH_LONG)
-                        .setAction("Yes", click -> {
+                Snackbar.make(username, getString(R.string.login) +" "+ username.getText() + " ?", Snackbar.LENGTH_LONG)
+                        .setAction(getString(R.string.yes), click -> {
                             Intent nextPage = new Intent(RongMain.this, RongSecond.class);
                             //pass some data:
                             nextPage.putExtra("userName", binding.typeUserName.getText().toString());
@@ -127,7 +127,7 @@ public class RongMain extends AppCompatActivity {
 
             } else {
 
-                Toast.makeText(this, "You shall not pass!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.notPass), Toast.LENGTH_SHORT).show();
             }
         });
         Log.w(TAG, "In onCreate() - Loading Widgets");
@@ -138,15 +138,15 @@ public class RongMain extends AppCompatActivity {
     public void onBackPressed() {
         AlertDialog.Builder exitApp = new AlertDialog.Builder(RongMain.this);
 
-        exitApp.setMessage("Do you want to leave Weather Stack APP?")
-                .setTitle("Thanks!")
+        exitApp.setMessage(getString(R.string.leave))
+                .setTitle(getString(R.string.thanks))
                 .setCancelable(false)
-                .setPositiveButton("Yes",
+                .setPositiveButton(getString(R.string.yes),
                         (DialogInterface.OnClickListener) (dialog, which) -> {
 
                             finish();
                         })
-                .setNegativeButton("No",
+                .setNegativeButton(getString(R.string.no),
                         (DialogInterface.OnClickListener) (dialog, which) -> {
                             dialog.cancel();
                         })
