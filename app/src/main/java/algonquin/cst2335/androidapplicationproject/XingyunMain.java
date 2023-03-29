@@ -49,7 +49,7 @@ import algonquin.cst2335.androidapplicationproject.databinding.ActivityXingyunMa
 Requirement 9: This activity supports another language: French(fr) in Canada(CA)
 */
 public class XingyunMain extends AppCompatActivity {
-    // m2
+    // m3
 
     ActivityXingyunMainBinding binding;
     private RecyclerView.Adapter myAdapter;
