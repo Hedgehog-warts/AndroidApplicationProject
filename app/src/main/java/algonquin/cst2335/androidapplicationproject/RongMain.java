@@ -63,17 +63,17 @@ public class RongMain extends AppCompatActivity {
             case R.id.help:
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(RongMain.this);
-                builder.setMessage(getString(R.string.helpText1) +"\n" +
+                builder.setMessage(getString(R.string.helpText1) + "\n" +
                                 getString(R.string.helpText2) + "\n" +
-                                        getString(R.string.helpText3) + "\n"
-                                + getString(R.string.helpText4)+ "\n" +
-                                        getString(R.string.helpText5) + "\n" +
+                                getString(R.string.helpText3) + "\n"
+                                + getString(R.string.helpText4) + "\n" +
+                                getString(R.string.helpText5) + "\n" +
                                 getString(R.string.helpText6) + "\n" +
-                                        getString(R.string.helpText7) + "\n" +
-                        getString(R.string.helpText8) +"\n")
-                        .setTitle(getString(R.string.helpTitle) +"\n")
+                                getString(R.string.helpText7) + "\n" +
+                                getString(R.string.helpText8) + "\n")
+                        .setTitle(getString(R.string.helpTitle) + "\n")
 
-                        .setPositiveButton( getString(R.string.close), (dialog, cl) -> {
+                        .setPositiveButton(getString(R.string.close), (dialog, cl) -> {
                             dialog.cancel();
                         })
                         .create()
@@ -111,7 +111,7 @@ public class RongMain extends AppCompatActivity {
             TextView username = findViewById(R.id.typeUserName);
             // looking for UpperCase, LowerCase, Number and Special character,
             if (checkPasswordComplexity(password)) {
-                Snackbar.make(username, getString(R.string.login) +" "+ username.getText() + " ?", Snackbar.LENGTH_LONG)
+                Snackbar.make(username, getString(R.string.login) + " " + username.getText() + " ?", Snackbar.LENGTH_LONG)
                         .setAction(getString(R.string.yes), click -> {
                             Intent nextPage = new Intent(RongMain.this, RongSecond.class);
                             //pass some data:

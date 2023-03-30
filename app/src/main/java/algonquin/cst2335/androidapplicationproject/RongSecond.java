@@ -77,17 +77,17 @@ public class RongSecond extends AppCompatActivity {
             case R.id.help:
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(RongSecond.this);
-                builder.setMessage(getString(R.string.helpText1) +"\n" +
+                builder.setMessage(getString(R.string.helpText1) + "\n" +
                                 getString(R.string.helpText2) + "\n" +
                                 getString(R.string.helpText3) + "\n"
-                                + getString(R.string.helpText4)+ "\n" +
+                                + getString(R.string.helpText4) + "\n" +
                                 getString(R.string.helpText5) + "\n" +
                                 getString(R.string.helpText6) + "\n" +
                                 getString(R.string.helpText7) + "\n" +
-                                getString(R.string.helpText8) +"\n")
-                        .setTitle(getString(R.string.helpTitle) +"\n")
+                                getString(R.string.helpText8) + "\n")
+                        .setTitle(getString(R.string.helpTitle) + "\n")
 
-                        .setPositiveButton( getString(R.string.close), (dialog, cl) -> {
+                        .setPositiveButton(getString(R.string.close), (dialog, cl) -> {
                             dialog.cancel();
                         })
                         .create()
@@ -97,6 +97,7 @@ public class RongSecond extends AppCompatActivity {
         }
         return true;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.w(TAG, "second create");
@@ -175,22 +176,22 @@ public class RongSecond extends AppCompatActivity {
 //                    })
 //                    .setPositiveButton("Yes", (dialog, cl) -> {
 
-                        Snackbar.make(cityname, getString(R.string.weather) + cityname.getText() + " ?", +  Snackbar.LENGTH_LONG)
-                                .setAction(getString(R.string.yes), clk -> {
-                                    String msg = variableBinding.editCity.getText().toString();
-                                    SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh:mm:ss a");
-                                    String currentDateandTime = sdf.format(new Date());
-                                    RongCityInfo rongCityInfo = new RongCityInfo(msg, currentDateandTime, true);
-                                    messageList.add(rongCityInfo);
-                                    // redraw the whole list , if item is 1, the position should be 0; good amination, less work to compute.
-                                    myAdapter.notifyItemInserted(messageList.size() - 1);
-                                    myAdapter.notifyDataSetChanged();
-                                    // clear the previous text:
-                                    variableBinding.editCity.setText("");
+            Snackbar.make(cityname, getString(R.string.weather) + cityname.getText() + " ?", +Snackbar.LENGTH_LONG)
+                    .setAction(getString(R.string.yes), clk -> {
+                        String msg = variableBinding.editCity.getText().toString();
+                        SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh:mm:ss a");
+                        String currentDateandTime = sdf.format(new Date());
+                        RongCityInfo rongCityInfo = new RongCityInfo(msg, currentDateandTime, true);
+                        messageList.add(rongCityInfo);
+                        // redraw the whole list , if item is 1, the position should be 0; good amination, less work to compute.
+                        myAdapter.notifyItemInserted(messageList.size() - 1);
+                        myAdapter.notifyDataSetChanged();
+                        // clear the previous text:
+                        variableBinding.editCity.setText("");
 
 //                                    dialog.cancel(); // some code need to add here to link database URL
-                                })
-                                .show();
+                    })
+                    .show();
 
 //                    })
 //                    .create().show();
@@ -260,6 +261,7 @@ public class RongSecond extends AppCompatActivity {
                 .create()
                 .show();
     }
+
     @Override
     protected void onPause() {
         super.onPause();
