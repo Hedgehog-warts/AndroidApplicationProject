@@ -186,13 +186,19 @@ public class RongSecond extends AppCompatActivity {
 
 
         class MyRowHolder extends RecyclerView.ViewHolder {
-            TextView messageText;
+            TextView cityText;
             TextView timeText;
+            TextView tempText;
+            TextView despText;
 
             public MyRowHolder(@NonNull View itemView) { //itewView will be the root of the layout, constraintLayouyt;
                 super(itemView);
-                messageText = itemView.findViewById(R.id.messageText);
+                cityText = itemView.findViewById(R.id.cityText);
+                tempText = itemView.findViewById(R.id.tempText);
+                despText =  itemView.findViewById(R.id.despText);
                 timeText = itemView.findViewById(R.id.timeText);
+
+
 
             }
         }
@@ -332,8 +338,11 @@ public class RongSecond extends AppCompatActivity {
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
 
                 RongCityInfo rongCityInfo = messageList.get(position);// which String goes in this row
-//                holder.messageText.setText(rongCityInfo.getCity());
+                holder.cityText.setText(rongCityInfo.getCity());
+                holder.tempText.setText(rongCityInfo.getTemperature());
+                holder.despText.setText(rongCityInfo.getDescription());
                 holder.timeText.setText(rongCityInfo.getTimeSent());
+
 
             }
 

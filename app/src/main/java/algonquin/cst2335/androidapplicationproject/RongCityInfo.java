@@ -13,7 +13,7 @@ public class RongCityInfo {
         timeSent = ts;
     }
 
-    public String getCIty() {
+    public String getCity() {
         return city;
     }
 
