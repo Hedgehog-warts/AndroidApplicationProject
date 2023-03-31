@@ -1,15 +1,19 @@
 package algonquin.cst2335.androidapplicationproject;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,8 +24,21 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,6 +55,12 @@ public class RongSecond extends AppCompatActivity {
     private RongSecondViewModel model;
     ArrayList<RongCityInfo> messageList;
     private RecyclerView.Adapter myAdapter;
+
+    String cityName;
+    protected RequestQueue queue = null;
+   Bitmap image;
+
+    private String iconName;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -97,6 +120,24 @@ public class RongSecond extends AppCompatActivity {
         }
         return true;
     }
+
+    // This method gets the searched city from the SharedPreferences.
+    private void saveLastSearchedCity(String cityName) {
+        SharedPreferences sharedPreferences = getSharedPreferences("MyData", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("city", cityName);
+        editor.apply();
+    }
+
+    /**
+     * This method loads the last searched city from the SharedPreferences.
+     *
+     * @return Returns the last searched city's name or an empty string if not found.
+     */
+    private String loadLastSearchedCity() {
+        SharedPreferences sharedPreferences = getSharedPreferences("MyData", MODE_PRIVATE);
+        return sharedPreferences.getString("city", "");
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.w(TAG, "second create");
@@ -117,27 +158,19 @@ public class RongSecond extends AppCompatActivity {
         Intent rongMainPage = getIntent();
         String userName = rongMainPage.getStringExtra("userName");
         variableBinding.userName.setText(getString(R.string.welcome) + " " + userName);
-
-        //cityname saved using SharedPreferences
-        SharedPreferences prefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
-        String cityName = prefs.getString("City Name", ""); //cityName =""
-        variableBinding.editCity.setText(cityName);
-        SharedPreferences.Editor editor = prefs.edit();
-
-        variableBinding.searchButton.setOnClickListener(btn -> {
-            //use apps on the webpage?
-//            Intent search = new Intent(Intent.ACTION_DIAL);
-//            String a = variableBinding.editCity.getText().toString();
-//            search.setData(Uri.parse("City:" + a));
-//            editor.putString("City Name", variableBinding.editCity.getText().toString()); //cityName =""
-//            editor.apply();
 //
-//            startActivity(search);
-        });
+//        //cityname saved using SharedPreferences
+//        SharedPreferences prefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
+//        String cityName = prefs.getString("City Name", ""); //cityName =""
+//        variableBinding.editCity.setText(cityName);
+//        SharedPreferences.Editor editor = prefs.edit();
 
-        variableBinding.checkBox.setOnCheckedChangeListener((cb, isChecked) -> {
+
+        variableBinding.saveCity.setOnClickListener(cb -> {
 //                          model.isChecked.postValue(isChecked);
             String checkedString = "";
+
+            boolean isChecked = true;
             if (isChecked) {
                 checkedString = getString(R.string.yes);
             } else {
@@ -163,38 +196,119 @@ public class RongSecond extends AppCompatActivity {
 
             }
         }
-
+        queue = Volley.newRequestQueue(this);
         variableBinding.searchButton.setOnClickListener(click -> {
 
-            TextView cityname = findViewById(R.id.editCity);
-//            AlertDialog.Builder builder = new AlertDialog.Builder(RongSecond.this);
-//            builder.setMessage("Do you want to check weather for it?")
-//                    .setTitle("Question:")
-//                    .setNegativeButton("No", (dialog, cl) -> {
-//
-//                    })
-//                    .setPositiveButton("Yes", (dialog, cl) -> {
-
-                        Snackbar.make(cityname, getString(R.string.weather) + cityname.getText() + " ?", +  Snackbar.LENGTH_LONG)
-                                .setAction(getString(R.string.yes), clk -> {
-                                    String msg = variableBinding.editCity.getText().toString();
-                                    SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh:mm:ss a");
-                                    String currentDateandTime = sdf.format(new Date());
-                                    RongCityInfo rongCityInfo = new RongCityInfo(msg, currentDateandTime, true);
-                                    messageList.add(rongCityInfo);
-                                    // redraw the whole list , if item is 1, the position should be 0; good amination, less work to compute.
-                                    myAdapter.notifyItemInserted(messageList.size() - 1);
-                                    myAdapter.notifyDataSetChanged();
-                                    // clear the previous text:
-                                    variableBinding.editCity.setText("");
-
-//                                    dialog.cancel(); // some code need to add here to link database URL
-                                })
-                                .show();
-
-//                    })
+//            TextView cityname = findViewById(R.id.editCity);
+//////
+//////                        Snackbar.make(cityname, getString(R.string.weather) + cityname.getText() + " ?", +  Snackbar.LENGTH_LONG)
+//////                                .setAction(getString(R.string.yes), clk -> {
+////                                    String msg = variableBinding.editCity.getText().toString();
+////                                    SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh:mm:ss a");
+////                                    String currentDateandTime = sdf.format(new Date());
+////                                    RongCityInfo rongCityInfo = new RongCityInfo(msg, currentDateandTime, true);
+////                                    messageList.add(rongCityInfo);
+////                                    // redraw the whole list , if item is 1, the position should be 0; good amination, less work to compute.
+////                                    myAdapter.notifyItemInserted(messageList.size() - 1);
+////                                    myAdapter.notifyDataSetChanged();
+////                                    // clear the previous text:
+////                                    variableBinding.editCity.setText("");
+////
+//////                                    dialog.cancel(); // some code need to add here to link database URL
+//////                                })
+//////                                .show();
+////
+//////                    })
 //                    .create().show();
+           // save the data by clicking the save city button
+            cityName = variableBinding.editCity.getText().toString();
+            String stringURL = null;
+            try {
+//                stringURL = "https://api.openweathermap.org/data/2.5/weather?q="
+//                        + URLEncoder.encode(cityName, "UTF-8")
+//                        + "&appid=7e943c97096a9784391a981c4d878b22&units=metric";
+                stringURL = new StringBuilder()
+                        .append("https://api.openweathermap.org/data/2.5/weather?q=")
+                        .append(URLEncoder.encode(cityName, "UTF-8"))
+                        .append("&appid=7e943c97096a9784391a981c4d878b22&units=metric").toString();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+//
+//            this goes in the button click handler:
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, stringURL,
+                    null, (response) -> {
+                try {
+                    JSONObject coord = response.getJSONObject("coord");
+                    JSONArray weatherArray = response.getJSONArray("weather");
+                    JSONObject position0 = weatherArray.getJSONObject(0);
+                    String description = position0.getString("description");
+                    iconName = position0.getString("icon");
+                    JSONObject mainObject = response.getJSONObject("main");
+                    double current = mainObject.getDouble("temp");
+                    double min = mainObject.getDouble("temp_min");
+                    double max = mainObject.getDouble("temp_max");
+                    int humidity = mainObject.getInt("humidity");
+                    runOnUiThread(() -> {
+                        variableBinding.temp.setText(cityName + " current temp: " + current + "°C");
+                        variableBinding.temp.setVisibility(View.VISIBLE);
+//                        variableBinding.minTemp.setText("The current min temperature is " + min);
+//                        variableBinding.minTemp.setVisibility(View.VISIBLE);
+//                        variableBinding.maxTemp.setText("The current max temperature is " + max);
+//                        variableBinding.maxTemp.setVisibility(View.VISIBLE);
+//                        variableBinding.humitidy.setText("The current humidity is " + humidity + "%");
+//                        variableBinding.humitidy.setVisibility(View.VISIBLE);
+                        variableBinding.icon.setImageBitmap(image);
+                        variableBinding.icon.setVisibility(View.VISIBLE);
+                        variableBinding.description.setText(description);
+                        variableBinding.description.setVisibility(View.VISIBLE);
+                    });
 
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    String pathname = getFilesDir() + "/" + iconName + ".png";
+                    Log.w("MainActivity", pathname);
+                    File file = new File(pathname);
+                    Log.w("MainActivity", file.toString());
+                    if (file.exists()) {
+                        image = BitmapFactory.decodeFile(pathname);
+
+                    } else {
+                        String imageUrl = "https://openweathermap.org/img/w/" + iconName + ".png";
+                        Log.w("MainActivity", imageUrl.toString());
+                        ImageRequest imgReq = new ImageRequest(imageUrl, new Response.Listener<Bitmap>() {
+                            @Override
+                            public void onResponse(Bitmap bitmap) {
+                                // Do something with loaded bitmap...
+//
+                                try {
+                                    image = bitmap;
+                                    image.compress(Bitmap.CompressFormat.PNG, 100,
+                                            RongSecond.this.openFileOutput(iconName + ".png", Activity.MODE_PRIVATE));
+                                    variableBinding.icon.setImageBitmap(image);
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }// end of onResponse
+                        }, 1024, 1024, ImageView.ScaleType.CENTER, null, (error) -> {
+                            Toast.makeText(RongSecond.this, "" + error, Toast.LENGTH_SHORT).show();
+                        });
+                        queue.add(imgReq);
+                    }// end of else
+                }// end of try
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            },
+                    (error) -> {
+                    });
+            queue.add(request);
+            // this to save the last searched city
+            saveLastSearchedCity(variableBinding.editCity.getText().toString());
 
         });
 
@@ -218,8 +332,9 @@ public class RongSecond extends AppCompatActivity {
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
 
                 RongCityInfo rongCityInfo = messageList.get(position);// which String goes in this row
-                holder.messageText.setText(rongCityInfo.getMessage());
+//                holder.messageText.setText(rongCityInfo.getCity());
                 holder.timeText.setText(rongCityInfo.getTimeSent());
+
             }
 
             @Override
@@ -239,6 +354,11 @@ public class RongSecond extends AppCompatActivity {
             }
 
         });
+        // this function showing the loaded city on the screen
+        String loadSearchedCity = loadLastSearchedCity();
+        if (!loadSearchedCity.isEmpty()) {
+            variableBinding.editCity.setText(loadSearchedCity);
+        }
     }
 
     @Override

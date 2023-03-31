@@ -1,25 +1,30 @@
 package algonquin.cst2335.androidapplicationproject;
 
 public class RongCityInfo {
-    private String message;
+    private String city;
+    private String temperature;
+
+    private String description;
     private String timeSent;
-    private boolean isSentButton;
-
-    public RongCityInfo(String m, String t, boolean sent) {
-        message = m;
-        timeSent = t;
-        isSentButton = sent;
+    public RongCityInfo(String m, String temp, String desp,String ts) {
+        city = m;
+        temperature = temp;
+        description = desp;
+        timeSent = ts;
     }
 
-    public String getMessage() {
-        return message;
+    public String getCIty() {
+        return city;
     }
 
+    public String getTemperature() {
+        return temperature;
+    }
+
+    public String getDescription() {
+        return description;
+    }
     public String getTimeSent() {
         return timeSent;
-    }
-
-    public boolean isSentButton() {
-        return isSentButton;
     }
 }

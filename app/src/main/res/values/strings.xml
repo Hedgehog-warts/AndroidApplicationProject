@@ -26,7 +26,7 @@
     <string name="loginButton">Login</string>
     <string name="searchButton">Search</string>
     <string name="textCheckBox">Do you like this city?</string>
-    <string name="checkBox">CheckBox</string>
+    <string name="saveCity">Save City</string>
     <string name="help">Help</string>
     <string name="typeUserName">Type user name</string>
     <string name="userName">User name</string>

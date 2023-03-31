@@ -5,7 +5,7 @@
     <string name="loginButton">登录</string>
     <string name="searchButton">查询</string>
     <string name="textCheckBox">你喜欢这个城市吗?</string>
-    <string name="checkBox">复选框</string>
+    <string name="saveCity">保存城市</string>
     <string name="help">帮助</string>
     <string name="editCity">输入城市</string>
     <string name="rongButton">冉_蓉</string>
