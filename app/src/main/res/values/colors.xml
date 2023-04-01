@@ -10,7 +10,10 @@
     <color name="white">#FFFFFFFF</color>
 
     /// Doyoung's place for colors
-    <color name="nasa_blue">#2A2F96</color>
+    <color name="nasa_blue">#1F59A5</color>
+    <color name="nasa_blue_trans40">#661F59A5</color>
+    <color name="nasa_red">#E0013C</color>
+    <color name="nasa_red_trans40">#66E0013C</color>
 
     /// Nick's place for colors
 

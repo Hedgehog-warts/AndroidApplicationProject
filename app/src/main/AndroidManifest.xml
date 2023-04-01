@@ -45,7 +45,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".DoyoungMain"
+            android:name=".DoyoungApp.DoyoungMain"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

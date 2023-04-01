@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import algonquin.cst2335.androidapplicationproject.DoyoungApp.DoyoungMain;
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityRongSecondBinding;
 
 import algonquin.cst2335.androidapplicationproject.databinding.RongcityinfoSearchBinding;
