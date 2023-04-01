@@ -8,6 +8,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -40,6 +42,7 @@ import algonquin.cst2335.androidapplicationproject.R;
 import algonquin.cst2335.androidapplicationproject.RongMain;
 import algonquin.cst2335.androidapplicationproject.XingyunMain;
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityDoyoungMainBinding;
+import algonquin.cst2335.androidapplicationproject.databinding.DoyoungDetailFragmentBinding;
 import algonquin.cst2335.androidapplicationproject.databinding.DoyoungPhotoEvenBinding;
 import algonquin.cst2335.androidapplicationproject.databinding.DoyoungPhotoOddBinding;
 
@@ -55,6 +58,7 @@ public class DoyoungMain extends AppCompatActivity {
     Bitmap imgSr;
 
     private ArrayList<DoyoungThumbnail> thumbnails = new ArrayList<>();
+    private ArrayList<DoyoungImgDetail> infoDetails = new ArrayList<>();
 
     @Override
     public void setSupportActionBar(@Nullable Toolbar toolbar) {
@@ -114,6 +118,10 @@ public class DoyoungMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ImageDatabase db = Room.databaseBuilder(getApplicationContext(),
+                ImageDatabase.class, "imageDatabase").allowMainThreadQueries().build();
+        DoyoungImgDetailDao imgDAO = db.imgDAO();
+
         dataModel = new ViewModelProvider(this).get(DoyoungViewModel.class);
         binding = ActivityDoyoungMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -141,16 +149,15 @@ public class DoyoungMain extends AppCompatActivity {
 
         super.setSupportActionBar(binding.kdyToolbar);
 
-        dataModel.selectedThumbnail.observe(this, thumbnailValue -> {
-            photoFragment = new DoyoungPhotoFragment(thumbnailValue);
+        dataModel.selectedThumbnail.observe(this, infoDetails -> {
+            photoFragment = new DoyoungPhotoFragment(infoDetails);
             getSupportFragmentManager().beginTransaction().addToBackStack("")
                     .replace(R.id.doyoungFragment, photoFragment)
                     .commit();
         });
 
         binding.searchBtn.setOnClickListener(clk -> {
-            photoAdapter.notifyItemRangeRemoved(0,photoAdapter.getItemCount());
-            thumbnails.clear();
+            clearData();
             String date = binding.date.getText().toString();
             String apiKey = "buaI6tozzO0yekYiJB1lOjDlurYXRHfxpeXodJni";
             String url = String.format(
@@ -163,47 +170,33 @@ public class DoyoungMain extends AppCompatActivity {
                 (response)-> {
                     try {
                         JSONArray photoArray = response.getJSONArray("photos");
-                        Log.w("MainAct","start");
-                        ArrayList<ImageRequest> imageRequests = new ArrayList<ImageRequest>();
-
-//                        for (int i=0; i<photoArray.length(); i ++) {
-//                            JSONObject photoItem = photoArray.getJSONObject(i);
-//                            String replaceURL = photoItem.getString("img_src")
-//                                            .replace("mars.jpl.nasa.gov","mars.nasa.gov");
-//                            imageRequests.add(new ImageRequest(replaceURL, new Response.Listener<Bitmap>() {
-//                                @Override
-//                                public void onResponse(Bitmap bitmap) {
-//                                    try {
-//                                        Log.w("MainAct",replaceURL);
-//                                        imgSr = bitmap;
-//                                        DoyoungThumbnail thumbnail = new DoyoungThumbnail(0,imgSr);
-//                                        thumbnails.add(thumbnail);
-//                                        photoAdapter.notifyItemInserted(thumbnails.size()-1);
-//                                    } catch(Exception e) {
-//                                        e.printStackTrace();
-//                                    }
-//                                }
-//                            }, 512, 512, ImageView.ScaleType.CENTER, null, (error) -> { }));
-//                        }
-
-//                        for (int i=0; i<imageRequests.size(); i++) {
-//                            queue.add(imageRequests.get(i));
-//                        }
+                        ArrayList<ImageRequest> imageRequests = new ArrayList<>();
 
                         for (int i=0; i<photoArray.length(); i ++) {
                             JSONObject photoItem = photoArray.getJSONObject(i);
                             String replaceURL = photoItem.getString("img_src")
                                     .replace("mars.jpl.nasa.gov","mars.nasa.gov");
+
+                            JSONObject roverJSON = photoItem.getJSONObject("rover");
+                            String roverName = roverJSON.getString("name");
+
+                            JSONObject cameraJSON = photoItem.getJSONObject("camera");
+                            String cameraName = cameraJSON.getString("name");
+
                             ImageRequest imageRequest = new ImageRequest(replaceURL, new Response.Listener<Bitmap>() {
                                 @Override
                                 public void onResponse(Bitmap bitmap) {
                                     try {
-//                                        Log.w("MainAct",replaceURL);
+
                                         imgSr = bitmap;
                                         String imgNum = String.valueOf(photoAdapter.getItemCount()+1);
-                                        DoyoungThumbnail thumbnail = new DoyoungThumbnail(imgNum,imgSr);
+                                        DoyoungThumbnail thumbnail = new DoyoungThumbnail(imgNum,roverName,imgSr);
                                         thumbnails.add(thumbnail);
                                         photoAdapter.notifyItemInserted(thumbnails.size()-1);
+
+                                        DoyoungImgDetail test = new DoyoungImgDetail(imgSr, cameraName, replaceURL);
+                                        infoDetails.add(test);
+
                                     } catch(Exception e) {
                                         e.printStackTrace();
                                     }
@@ -211,19 +204,16 @@ public class DoyoungMain extends AppCompatActivity {
                             }, 512, 512, ImageView.ScaleType.CENTER, null, (error) -> { });
                             queue.add(imageRequest);
                         }
-
                         String snackString = getString(R.string.kdy_foundPhoto) +
                                 ", " + String.valueOf(photoArray.length()) + getString(R.string.kdy_units);
                         Snackbar.make(binding.photoRecycler, snackString, Snackbar.LENGTH_LONG)
                                 .setAction(getString(R.string.kdy_undo), undoclk ->{
+                                    clearData();
                                     Context context = getApplicationContext();
                                     CharSequence text = getString(R.string.kdy_cancelled);
                                     int duration = Toast.LENGTH_SHORT;
                                     Toast.makeText(context, text, duration).show();
                                 }).show();
-
-                        runOnUiThread( (  )  -> {
-                        });
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -251,8 +241,11 @@ public class DoyoungMain extends AppCompatActivity {
             @Override
             public void onBindViewHolder(@NonNull photoHolder holder, int position) {
                 Bitmap obj = thumbnails.get(position).thumbnail;
-                String thumbnailNumber = "00"+thumbnails.get(position).imgNumber;
+                String thumbnailNumber = thumbnails.get(position).imgNumber;
+                String roverName = thumbnails.get(position).roverName;
+
                 holder.itemNumber.setText(thumbnailNumber);
+                holder.roverName.setText(roverName);
                 holder.thumbnail.setImageBitmap(obj);
             }
 
@@ -270,23 +263,58 @@ public class DoyoungMain extends AppCompatActivity {
                 }
             }
         });
+
+
+    }
+
+    public void clearData() {
+        photoAdapter.notifyItemRangeRemoved(0,photoAdapter.getItemCount());
+        thumbnails.clear();
+        infoDetails.clear();
     }
 
     class photoHolder extends RecyclerView.ViewHolder {
-        ImageView thumbnail;
+
         TextView itemNumber;
+        TextView roverName;
+        ImageView thumbnail;
 
         public photoHolder(View itemView) {
             super(itemView);
 
             itemView.setOnClickListener(clk -> {
                 int position = getAbsoluteAdapterPosition();
-                DoyoungThumbnail selected = thumbnails.get(position);
+                DoyoungImgDetail selected = infoDetails.get(position);
                 dataModel.selectedThumbnail.postValue(selected);
             });
 
-            thumbnail = itemView.findViewById(R.id.thumbnail);
             itemNumber = itemView.findViewById(R.id.itemNumber);
+            thumbnail = itemView.findViewById(R.id.thumbnail);
+            roverName = itemView.findViewById(R.id.roverName);
         }
     }
 }
+
+//                        for (int i=0; i<photoArray.length(); i ++) {
+//                            JSONObject photoItem = photoArray.getJSONObject(i);
+//                            String replaceURL = photoItem.getString("img_src")
+//                                            .replace("mars.jpl.nasa.gov","mars.nasa.gov");
+//                            imageRequests.add(new ImageRequest(replaceURL, new Response.Listener<Bitmap>() {
+//                                @Override
+//                                public void onResponse(Bitmap bitmap) {
+//                                    try {
+//                                        Log.w("MainAct",replaceURL);
+//                                        imgSr = bitmap;
+//                                        DoyoungThumbnail thumbnail = new DoyoungThumbnail(0,imgSr);
+//                                        thumbnails.add(thumbnail);
+//                                        photoAdapter.notifyItemInserted(thumbnails.size()-1);
+//                                    } catch(Exception e) {
+//                                        e.printStackTrace();
+//                                    }
+//                                }
+//                            }, 512, 512, ImageView.ScaleType.CENTER, null, (error) -> { }));
+//                        }
+
+//                        for (int i=0; i<imageRequests.size(); i++) {
+//                            queue.add(imageRequests.get(i));
+//                        }

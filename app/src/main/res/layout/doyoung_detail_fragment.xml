@@ -17,63 +17,96 @@
         app:titleTextColor="@color/white" />
 
     <ImageView
-        android:id="@+id/originPicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:id="@+id/originImage"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/kdyToolbar"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@drawable/doyoung_nasa_icon" />
 
     <TextView
-        android:id="@+id/pictureName"
+        android:id="@+id/cameraName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="picture name goes here"
+        android:layout_marginTop="10dp"
+        android:text="Camera goes here"
+        android:textSize="10pt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/originPicture" />
+        app:layout_constraintTop_toBottomOf="@+id/originImage" />
 
     <TextView
-        android:id="@+id/pictureURL"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="33dp"
+        android:id="@+id/imageURL"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:textSize="8pt"
+        android:autoLink="web"
+        android:maxLines="2"
         android:text="URL goes here"
+        android:breakStrategy="simple"
+        android:hyphenationFrequency="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pictureName" />
+        app:layout_constraintTop_toBottomOf="@+id/cameraName" />
 
     <Button
-        android:id="@+id/savePicture"
+        android:id="@+id/saveImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="Save this picture"
+        android:layout_marginTop="10dp"
+        android:text="Save this image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pictureURL" />
+        app:layout_constraintTop_toBottomOf="@+id/imageURL" />
+
+    <TextView
+        android:id="@+id/storedImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Saved Images"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saveImage" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="143dp"
-        android:layout_height="189dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/savePicture" />
+        app:layout_constraintTop_toBottomOf="@+id/storedImage" />
 
     <Button
-        android:id="@+id/deletePicture"
+        android:id="@+id/deleteImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete"
         app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.55"
         app:layout_constraintStart_toEndOf="@+id/recyclerView"
-        app:layout_constraintTop_toTopOf="@+id/recyclerView" />
+        app:layout_constraintTop_toTopOf="@+id/recyclerView"
+        app:layout_constraintVertical_bias="0.794" />
+
+    <Button
+        android:id="@+id/viewImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.541"
+        app:layout_constraintStart_toEndOf="@+id/recyclerView"
+        app:layout_constraintTop_toTopOf="@+id/recyclerView"
+        app:layout_constraintVertical_bias="0.198" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

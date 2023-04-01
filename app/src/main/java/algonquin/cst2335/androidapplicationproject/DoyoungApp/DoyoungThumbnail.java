@@ -5,10 +5,12 @@ import android.graphics.Bitmap;
 public class DoyoungThumbnail {
 
     String imgNumber;
+    String roverName;
     Bitmap thumbnail;
 
-    public DoyoungThumbnail(String i, Bitmap t) {
+    public DoyoungThumbnail(String i, String r, Bitmap t) {
         imgNumber = i;
+        roverName = r;
         thumbnail = t;
     }
 }
