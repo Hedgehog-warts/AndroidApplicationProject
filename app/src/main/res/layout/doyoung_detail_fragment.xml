@@ -77,24 +77,25 @@
         app:layout_constraintTop_toBottomOf="@+id/saveImage" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/databaseView"
         android:layout_width="150dp"
         android:layout_height="200dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/storedImage" />
+        app:layout_constraintTop_toBottomOf="@+id/storedImage"
+        tools:listitem="@layout/doyoung_database_view"/>
 
     <Button
         android:id="@+id/deleteImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete"
-        app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
+        app:layout_constraintBottom_toBottomOf="@+id/databaseView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.55"
-        app:layout_constraintStart_toEndOf="@+id/recyclerView"
-        app:layout_constraintTop_toTopOf="@+id/recyclerView"
+        app:layout_constraintStart_toEndOf="@+id/databaseView"
+        app:layout_constraintTop_toTopOf="@+id/databaseView"
         app:layout_constraintVertical_bias="0.794" />
 
     <Button
@@ -102,11 +103,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="View"
-        app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
+        app:layout_constraintBottom_toBottomOf="@+id/databaseView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.541"
-        app:layout_constraintStart_toEndOf="@+id/recyclerView"
-        app:layout_constraintTop_toTopOf="@+id/recyclerView"
+        app:layout_constraintStart_toEndOf="@+id/databaseView"
+        app:layout_constraintTop_toTopOf="@+id/databaseView"
         app:layout_constraintVertical_bias="0.198" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

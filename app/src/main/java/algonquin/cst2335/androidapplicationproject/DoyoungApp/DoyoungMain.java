@@ -263,8 +263,6 @@ public class DoyoungMain extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     public void clearData() {
@@ -294,27 +292,3 @@ public class DoyoungMain extends AppCompatActivity {
         }
     }
 }
-
-//                        for (int i=0; i<photoArray.length(); i ++) {
-//                            JSONObject photoItem = photoArray.getJSONObject(i);
-//                            String replaceURL = photoItem.getString("img_src")
-//                                            .replace("mars.jpl.nasa.gov","mars.nasa.gov");
-//                            imageRequests.add(new ImageRequest(replaceURL, new Response.Listener<Bitmap>() {
-//                                @Override
-//                                public void onResponse(Bitmap bitmap) {
-//                                    try {
-//                                        Log.w("MainAct",replaceURL);
-//                                        imgSr = bitmap;
-//                                        DoyoungThumbnail thumbnail = new DoyoungThumbnail(0,imgSr);
-//                                        thumbnails.add(thumbnail);
-//                                        photoAdapter.notifyItemInserted(thumbnails.size()-1);
-//                                    } catch(Exception e) {
-//                                        e.printStackTrace();
-//                                    }
-//                                }
-//                            }, 512, 512, ImageView.ScaleType.CENTER, null, (error) -> { }));
-//                        }
-
-//                        for (int i=0; i<imageRequests.size(); i++) {
-//                            queue.add(imageRequests.get(i));
-//                        }
