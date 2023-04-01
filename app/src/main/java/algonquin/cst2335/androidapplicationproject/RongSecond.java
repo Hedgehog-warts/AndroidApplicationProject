@@ -30,6 +30,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,6 +65,8 @@ public class RongSecond extends AppCompatActivity {
     private String iconName;
 
     RongCityInfoDAO mDAO;
+
+    private int position = 0;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -100,10 +103,51 @@ public class RongSecond extends AppCompatActivity {
                 nextPage = new Intent(RongSecond.this, pageClass);
                 startActivity(nextPage);
                 break;
+
+            case R.id.deleteWeather:
+                //put your ChatMessage deletion code here. If you select this item, you should show the alert dialog
+                //asking if the user wants to delete this message.
+
+                AlertDialog.Builder deletedBuilder = new AlertDialog.Builder(RongSecond.this);
+                deletedBuilder.setTitle(getString(R.string.question))
+                        .setMessage(getString(R.string.delete))
+                        .setNegativeButton(getString(R.string.no), (dialog, cl) -> {
+
+                        })
+                        .setPositiveButton(getString(R.string.yes), (dialog, cl) -> {
+                            Executor thread = Executors.newSingleThreadExecutor();
+                            RongCityInfo m = messageList.get(position);
+                            thread.execute(() ->
+                            {
+                                mDAO.deleteMessage(m);
+                                messageList.remove(position);
+//                                myAdapter.notifyItemRemoved(position);
+                            });
+
+                            runOnUiThread(() -> {
+                                    myAdapter.notifyItemRemoved(position);
+                                Snackbar.make(variableBinding.editCity, getString(R.string.deleteConfirm) + " " +variableBinding.editCity.getText().toString(), Snackbar.LENGTH_LONG)
+                                        .setAction("Undo", click -> {
+                                            Executor thread_2 = Executors.newSingleThreadExecutor();
+                                            thread_2.execute(() -> {
+                                                mDAO.insertMessage(m); //  insert back to database
+                                                messageList.add(position, m); // add back to ArrayList
+                                                runOnUiThread(() ->
+                                                        myAdapter.notifyItemInserted(position));
+                                            });
+
+                                        })
+                                        .show();
+                            });
+                                model.selectedMessage.setValue(null);
+                        })
+
+                        .create().show();
+                break;
             case R.id.help:
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(RongSecond.this);
-                builder.setMessage(getString(R.string.helpText1) + "\n" +
+                AlertDialog.Builder helpBuilder = new AlertDialog.Builder(RongSecond.this);
+                helpBuilder.setMessage(getString(R.string.helpText1) + "\n" +
                                 getString(R.string.helpText2) + "\n" +
                                 getString(R.string.helpText3) + "\n"
                                 + getString(R.string.helpText4) + "\n" +
@@ -183,7 +227,7 @@ public class RongSecond extends AppCompatActivity {
         variableBinding.saveCity.setOnClickListener(cb -> {
 
             if (variableBinding.editCity.getText().toString().equals("")) {
-                Toast.makeText(getApplicationContext(), "Please search a city name first!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.cityCheck), Toast.LENGTH_LONG).show();
             } else {
 
                 String city = variableBinding.editCity.getText().toString();
@@ -209,7 +253,7 @@ public class RongSecond extends AppCompatActivity {
                 myAdapter.notifyDataSetChanged();
                 // clear the previous text:
                 variableBinding.editCity.setText("");
-                Toast.makeText(getApplicationContext(), "Weather info saved", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.weatherSave), Toast.LENGTH_LONG).show();
 
             }
         });
@@ -243,7 +287,7 @@ public class RongSecond extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
         variableBinding.searchButton.setOnClickListener(click -> {
             if (variableBinding.editCity.getText().toString().equals("")) {
-                Toast.makeText(getApplicationContext(), "Please search a city name first!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.cityCheck), Toast.LENGTH_LONG).show();
             }
             // save the data by clicking the save city button
             else {
@@ -274,7 +318,7 @@ public class RongSecond extends AppCompatActivity {
                         double max = mainObject.getDouble("temp_max");
                         int humidity = mainObject.getInt("humidity");
                         runOnUiThread(() -> {
-                            variableBinding.temp.setText(cityName + " temp: " + current + "°C");
+                            variableBinding.temp.setText(getString(R.string.temp) + current + "°C");
                             variableBinding.temp.setVisibility(View.VISIBLE);
                             variableBinding.icon.setImageBitmap(image);
                             variableBinding.icon.setVisibility(View.VISIBLE);
@@ -332,8 +376,14 @@ public class RongSecond extends AppCompatActivity {
         });
 
         model.selectedMessage.observe(this, (newMessageValue) -> {
-            MessageDetailsFragment weatherFragment = new MessageDetailsFragment(newMessageValue);
-            getSupportFragmentManager().beginTransaction().addToBackStack("").replace(R.id.fragmentLocation, weatherFragment).commit();
+
+            if (newMessageValue != null) {
+                MessageDetailsFragment weatherFragment = new MessageDetailsFragment(newMessageValue);
+                getSupportFragmentManager().beginTransaction().addToBackStack("").replace(R.id.fragmentLocation, weatherFragment).commit();
+            } else {
+                getSupportFragmentManager().popBackStack();
+
+            }
         });
 
         variableBinding.recycleView.setLayoutManager(new LinearLayoutManager(this));
@@ -386,25 +436,25 @@ public class RongSecond extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        AlertDialog.Builder exitApp = new AlertDialog.Builder(RongSecond.this);
-
-        exitApp.setMessage(getString(R.string.leave))
-                .setTitle(getString(R.string.thanks))
-                .setCancelable(false)
-                .setPositiveButton(getString(R.string.yes),
-                        (DialogInterface.OnClickListener) (dialog, which) -> {
-
-                            finish();
-                        })
-                .setNegativeButton(getString(R.string.no),
-                        (DialogInterface.OnClickListener) (dialog, which) -> {
-                            dialog.cancel();
-                        })
-                .create()
-                .show();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        AlertDialog.Builder exitApp = new AlertDialog.Builder(RongSecond.this);
+//
+//        exitApp.setMessage(getString(R.string.leave))
+//                .setTitle(getString(R.string.thanks))
+//                .setCancelable(false)
+//                .setPositiveButton(getString(R.string.yes),
+//                        (DialogInterface.OnClickListener) (dialog, which) -> {
+//
+//                            finish();
+//                        })
+//                .setNegativeButton(getString(R.string.no),
+//                        (DialogInterface.OnClickListener) (dialog, which) -> {
+//                            dialog.cancel();
+//                        })
+//                .create()
+//                .show();
+//    }
 
     @Override
     protected void onPause() {

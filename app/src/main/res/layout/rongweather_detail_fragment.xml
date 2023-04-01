@@ -8,13 +8,14 @@
 
 
     <TextView
-        android:id="@+id/cityDetail"
+        android:id="@+id/editCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:textSize="25sp"
-        android:text="@string/cityDetail"
+        android:textColor="@color/darkGreen"
+        android:text="@string/editCity"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,27 +25,31 @@
         android:layout_height="33dp"
         android:layout_marginTop="32dp"
         android:text="@string/timeDetail"
+        android:textColor="@color/darkGreen"
         android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="@+id/cityDetail"
-        app:layout_constraintTop_toBottomOf="@+id/cityDetail" />
+        app:layout_constraintStart_toStartOf="@+id/editCity"
+        app:layout_constraintTop_toBottomOf="@+id/editCity" />
 
     <TextView
         android:id="@+id/TemperatureDetail"
-        android:layout_width="254dp"
-        android:layout_height="29dp"
+        android:layout_width="379dp"
+        android:layout_height="50dp"
         android:layout_marginTop="32dp"
         android:text="@string/TemperatureDetail"
+        android:textColor="@color/darkGreen"
         android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/timeDetail"
         app:layout_constraintTop_toBottomOf="@+id/timeDetail" />
 
     <TextView
-        android:id="@+id/databaseText"
+        android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:textColor="@color/darkGreen"
         android:textSize="25sp"
-        android:text="@string/databaseText"
+        android:text="@string/description"
         app:layout_constraintStart_toStartOf="@+id/TemperatureDetail"
         app:layout_constraintTop_toBottomOf="@+id/TemperatureDetail" />
 </androidx.constraintlayout.widget.ConstraintLayout>

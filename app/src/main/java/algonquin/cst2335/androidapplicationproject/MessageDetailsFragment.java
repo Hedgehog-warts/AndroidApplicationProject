@@ -23,10 +23,10 @@ public class MessageDetailsFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         RongweatherDetailFragmentBinding binding = RongweatherDetailFragmentBinding.inflate(inflater);
 
-        binding.cityDetail.setText(selected.getCity());
+        binding.editCity.setText(selected.getCity());
         binding.timeDetail.setText(selected.timeSent);
         binding.TemperatureDetail.setText(selected.getTemperature());
-        binding.databaseText.setText("Id = " + selected.id);
+        binding.description.setText(selected.getDescription());
 
         return binding.getRoot();
     }

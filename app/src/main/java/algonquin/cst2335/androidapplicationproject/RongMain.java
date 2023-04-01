@@ -63,17 +63,17 @@ public class RongMain extends AppCompatActivity {
             case R.id.help:
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(RongMain.this);
-                builder.setMessage(getString(R.string.helpText1) +"\n" +
+                builder.setMessage(getString(R.string.helpText1) + "\n" +
                                 getString(R.string.helpText2) + "\n" +
-                                        getString(R.string.helpText3) + "\n"
-                                + getString(R.string.helpText4)+ "\n" +
-                                        getString(R.string.helpText5) + "\n" +
+                                getString(R.string.helpText3) + "\n"
+                                + getString(R.string.helpText4) + "\n" +
+                                getString(R.string.helpText5) + "\n" +
                                 getString(R.string.helpText6) + "\n" +
-                                        getString(R.string.helpText7) + "\n" +
-                        getString(R.string.helpText8) +"\n")
-                        .setTitle(getString(R.string.helpTitle) +"\n")
+                                getString(R.string.helpText7) + "\n" +
+                                getString(R.string.helpText8) + "\n")
+                        .setTitle(getString(R.string.helpTitle) + "\n")
 
-                        .setPositiveButton( getString(R.string.close), (dialog, cl) -> {
+                        .setPositiveButton(getString(R.string.close), (dialog, cl) -> {
                             dialog.cancel();
                         })
                         .create()
@@ -106,28 +106,29 @@ public class RongMain extends AppCompatActivity {
 //        TextView tv = findViewById(R.id.textShow);
 
         binding.loginButton.setOnClickListener(clk -> {
-
-            String password = binding.password.getText().toString();
-            TextView username = findViewById(R.id.typeUserName);
-            // looking for UpperCase, LowerCase, Number and Special character,
-            if (checkPasswordComplexity(password)) {
-                Snackbar.make(username, getString(R.string.login) +" "+ username.getText() + " ?", Snackbar.LENGTH_LONG)
-                        .setAction(getString(R.string.yes), click -> {
-                            Intent nextPage = new Intent(RongMain.this, RongSecond.class);
-                            //pass some data:
-                            nextPage.putExtra("userName", binding.typeUserName.getText().toString());
-                            // actually make the transition, send the table to the secondActivity
-                            editor.putString("LoginName", binding.typeUserName.getText().toString()); //emailAddress =""
-                            editor.apply();
-                            startActivity(nextPage);
-
-                        })
-                        .show();
-
-
+            if (binding.typeUserName.getText().toString().equals("") || binding.password.getText().toString().equals("")) {
+                Toast.makeText(getApplicationContext(), getString(R.string.notNull), Toast.LENGTH_LONG).show();
             } else {
+                String password = binding.password.getText().toString();
+                TextView username = findViewById(R.id.typeUserName);
+                // looking for UpperCase, LowerCase, Number and Special character,
+                if (checkPasswordComplexity(password)) {
+                    Snackbar.make(username, getString(R.string.login) + " " + username.getText() + " ?", Snackbar.LENGTH_LONG)
+                            .setAction(getString(R.string.yes), click -> {
+                                Intent nextPage = new Intent(RongMain.this, RongSecond.class);
+                                //pass some data:
+                                nextPage.putExtra("userName", binding.typeUserName.getText().toString());
+                                // actually make the transition, send the table to the secondActivity
+                                editor.putString("LoginName", binding.typeUserName.getText().toString()); //emailAddress =""
+                                editor.apply();
+                                startActivity(nextPage);
 
-                Toast.makeText(this, getString(R.string.notPass), Toast.LENGTH_SHORT).show();
+                            })
+                            .show();
+                } else {
+
+                    Toast.makeText(this, getString(R.string.notPass), Toast.LENGTH_SHORT).show();
+                }
             }
         });
         Log.w(TAG, "In onCreate() - Loading Widgets");
