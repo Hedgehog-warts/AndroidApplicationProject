@@ -20,10 +20,12 @@
         android:id="@+id/timeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="description goes here"
+        android:layout_marginTop="10dp"
+        android:text="Time goes here"
         android:textSize="15dp"
-        app:layout_constraintStart_toStartOf="@+id/tempText"
-        app:layout_constraintTop_toBottomOf="@+id/tempText" />
+        app:layout_constraintEnd_toEndOf="@+id/cityText"
+        app:layout_constraintStart_toStartOf="@+id/cityText"
+        app:layout_constraintTop_toBottomOf="@+id/despText" />
 
     <TextView
         android:id="@+id/tempText"
@@ -40,12 +42,11 @@
         android:id="@+id/despText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Times goes here"
+        android:text="Description goes here"
         android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/cityText"
-        app:layout_constraintTop_toBottomOf="@+id/cityText" />
+        app:layout_constraintEnd_toEndOf="@+id/tempText"
+        app:layout_constraintStart_toStartOf="@+id/tempText"
+        app:layout_constraintTop_toBottomOf="@+id/tempText" />
 
     <ImageView
         android:id="@+id/imageView1"

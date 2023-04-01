@@ -1,7 +1,6 @@
 package algonquin.cst2335.androidapplicationproject;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,7 +30,6 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,6 +41,8 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityRongSecondBinding;
 
@@ -61,6 +62,8 @@ public class RongSecond extends AppCompatActivity {
     Bitmap image;
 
     private String iconName;
+
+    RongCityInfoDAO mDAO;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -148,8 +151,24 @@ public class RongSecond extends AppCompatActivity {
 
         //ActivitySecondBinding
         model = new ViewModelProvider(this).get(RongSecondViewModel.class);
+        messageList = model.messages.getValue();// empty ArrayList
+        // get information from a database;
+        RongCityInfoDatabase db = Room.databaseBuilder(getApplicationContext(), RongCityInfoDatabase.class, "RongCityInfoDatabase").build();
+        mDAO = db.cmDAO();
+        if (messageList == null) {
+            model.messages.setValue(messageList = new ArrayList<>());
+            Executor thread = Executors.newSingleThreadExecutor();
+            thread.execute(() ->
+            {
+                // on a second thread
+                messageList.addAll(mDAO.getAllMessages()); //add data list from database
+
+                runOnUiThread(() ->
+                        // going back on the main thread after loading info from database;
+                        variableBinding.recycleView.setAdapter(myAdapter));
+            });
+        }
         variableBinding = ActivityRongSecondBinding.inflate(getLayoutInflater());
-        messageList = model.messages.getValue();
         setContentView(variableBinding.getRoot()); //+Binding
         setSupportActionBar(variableBinding.myToolbar2);
 
@@ -162,35 +181,42 @@ public class RongSecond extends AppCompatActivity {
 
 
         variableBinding.saveCity.setOnClickListener(cb -> {
-//                          model.isChecked.postValue(isChecked);
-            String checkedString = "";
 
-            boolean isChecked = true;
-            if (isChecked) {
-                checkedString = getString(R.string.yes);
+            if (variableBinding.editCity.getText().toString().equals("")) {
+                Toast.makeText(getApplicationContext(), "Please search a city name first!", Toast.LENGTH_LONG).show();
             } else {
-                checkedString = getString(R.string.no);
-            }
-            // makeText returns a text, and show() to show this.
-            Toast.makeText(this, getString(R.string.likeCity) + " " + checkedString, Toast.LENGTH_SHORT).show();
-            String city = variableBinding.editCity.getText().toString();
 
-            SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh:mm:ss a");
-            String currentDateandTime = sdf.format(new Date());
-            String temperatureText = variableBinding.temp.getText().toString();
-            String desp = variableBinding.description.getText().toString();
-            RongCityInfo rongCityInfo = new RongCityInfo(city, temperatureText, currentDateandTime, desp);
-            messageList.add(rongCityInfo);
-            // redraw the whole list , if item is 1, the position should be 0; good amination, less work to compute.
-            myAdapter.notifyItemInserted(messageList.size() - 1);
-            myAdapter.notifyDataSetChanged();
-            // clear the previous text:
-            variableBinding.editCity.setText("");
+                String city = variableBinding.editCity.getText().toString();
+
+                SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh:mm:ss a");
+                String currentDateandTime = sdf.format(new Date());
+                String temperatureText = variableBinding.temp.getText().toString();
+                String desp = variableBinding.description.getText().toString();
+                RongCityInfo rongCityInfo = new RongCityInfo(city, temperatureText, desp, currentDateandTime);
+                messageList.add(rongCityInfo);
+
+                Executor thread = Executors.newSingleThreadExecutor();
+                thread.execute(() ->
+                {
+                    long id = mDAO.insertMessage(rongCityInfo); // add it to database
+                    rongCityInfo.id = id; // database is saying what the new id is;
+                               });
+                Log.w("database", String.valueOf(rongCityInfo));
+                // redraw
+                // the whole list , if item is 1, the position should be 0; good amination, less work to compute.
+                myAdapter.notifyItemInserted(messageList.size() - 1);
+                //messageList.add(msg);
+                myAdapter.notifyDataSetChanged();
+                // clear the previous text:
+                variableBinding.editCity.setText("");
+                Toast.makeText(getApplicationContext(), "Weather info saved", Toast.LENGTH_LONG).show();
+
+            }
         });
 
-        if (messageList == null) {
-            model.messages.setValue(messageList = new ArrayList<>());
-        }
+//        if (messageList == null) {
+//            model.messages.setValue(messageList = new ArrayList<>());
+//        }
 
 
         class MyRowHolder extends RecyclerView.ViewHolder {
@@ -205,7 +231,6 @@ public class RongSecond extends AppCompatActivity {
                 tempText = itemView.findViewById(R.id.tempText);
                 timeText = itemView.findViewById(R.id.timeText);
                 despText = itemView.findViewById(R.id.despText);
-
 
 
             }

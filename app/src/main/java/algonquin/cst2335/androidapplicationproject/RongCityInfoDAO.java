@@ -11,9 +11,8 @@ public interface RongCityInfoDAO {
 
     // @Entity, @ColumnInfo,and @PrimaryKey
     @Insert
-    public default long insertMessage(RongCityInfo m) {
-        return 0;
-    }
+
+    public long insertMessage(RongCityInfo m);
 
     @Query("Select * from RongCityInfo")
     public List<RongCityInfo> getAllMessages();
