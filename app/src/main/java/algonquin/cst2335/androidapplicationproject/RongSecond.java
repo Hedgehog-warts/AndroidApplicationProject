@@ -58,7 +58,7 @@ public class RongSecond extends AppCompatActivity {
 
     String cityName;
     protected RequestQueue queue = null;
-   Bitmap image;
+    Bitmap image;
 
     private String iconName;
 
@@ -100,17 +100,17 @@ public class RongSecond extends AppCompatActivity {
             case R.id.help:
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(RongSecond.this);
-                builder.setMessage(getString(R.string.helpText1) +"\n" +
+                builder.setMessage(getString(R.string.helpText1) + "\n" +
                                 getString(R.string.helpText2) + "\n" +
                                 getString(R.string.helpText3) + "\n"
-                                + getString(R.string.helpText4)+ "\n" +
+                                + getString(R.string.helpText4) + "\n" +
                                 getString(R.string.helpText5) + "\n" +
                                 getString(R.string.helpText6) + "\n" +
                                 getString(R.string.helpText7) + "\n" +
-                                getString(R.string.helpText8) +"\n")
-                        .setTitle(getString(R.string.helpTitle) +"\n")
+                                getString(R.string.helpText8) + "\n")
+                        .setTitle(getString(R.string.helpTitle) + "\n")
 
-                        .setPositiveButton( getString(R.string.close), (dialog, cl) -> {
+                        .setPositiveButton(getString(R.string.close), (dialog, cl) -> {
                             dialog.cancel();
                         })
                         .create()
@@ -138,6 +138,7 @@ public class RongSecond extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("MyData", MODE_PRIVATE);
         return sharedPreferences.getString("city", "");
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.w(TAG, "second create");
@@ -176,8 +177,9 @@ public class RongSecond extends AppCompatActivity {
             } else {
                 checkedString = getString(R.string.no);
             }
-            Toast.makeText(this, getString(R.string.likeCity) + " " + checkedString, Toast.LENGTH_SHORT).show();
             // makeText returns a text, and show() to show this.
+            Toast.makeText(this, getString(R.string.likeCity) + " " + checkedString, Toast.LENGTH_SHORT).show();
+
         });
 
         if (messageList == null) {
@@ -195,9 +197,8 @@ public class RongSecond extends AppCompatActivity {
                 super(itemView);
                 cityText = itemView.findViewById(R.id.cityText);
                 tempText = itemView.findViewById(R.id.tempText);
-                despText =  itemView.findViewById(R.id.despText);
+                despText = itemView.findViewById(R.id.despText);
                 timeText = itemView.findViewById(R.id.timeText);
-
 
 
             }
@@ -205,7 +206,7 @@ public class RongSecond extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
         variableBinding.searchButton.setOnClickListener(click -> {
 
-           // save the data by clicking the save city button
+            // save the data by clicking the save city button
             cityName = variableBinding.editCity.getText().toString();
             String stringURL = null;
             try {
@@ -233,7 +234,7 @@ public class RongSecond extends AppCompatActivity {
                     double max = mainObject.getDouble("temp_max");
                     int humidity = mainObject.getInt("humidity");
                     runOnUiThread(() -> {
-                        variableBinding.temp.setText(cityName + " current temp: " + current + "°C");
+                        variableBinding.temp.setText(cityName + " temp: " + current + "°C");
                         variableBinding.temp.setVisibility(View.VISIBLE);
                         variableBinding.icon.setImageBitmap(image);
                         variableBinding.icon.setVisibility(View.VISIBLE);
@@ -359,6 +360,7 @@ public class RongSecond extends AppCompatActivity {
                 .create()
                 .show();
     }
+
     @Override
     protected void onPause() {
         super.onPause();
