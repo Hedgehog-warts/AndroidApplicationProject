@@ -1,12 +1,41 @@
 package algonquin.cst2335.androidapplicationproject;
 
-public class RongCityInfo {
-    private String city;
-    private String temperature;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-    private String description;
-    private String timeSent;
-    public RongCityInfo(String m, String temp, String desp,String ts) {
+@Entity
+
+public class RongCityInfo {
+
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id") // database will automatically increment this;
+    public long id;
+    @ColumnInfo(name = "city")
+    String city;
+    @ColumnInfo(name = "temperature")
+    String temperature;
+    @ColumnInfo(name = "description")
+    String description;
+    @ColumnInfo(name = "timeSent")
+    String timeSent;
+
+    /**
+     * ChatMessage(): default constructor
+     */
+    public RongCityInfo() {
+    }
+
+    /**
+     * Creates an instance of ChatMessage with specified values.
+     *
+     * @param m    The city name.
+     * @param temp The timestamp when the message was sent.
+     * @param desp A String value of weather description.
+     * @param ts   A String value of timeSent.
+     */
+    public RongCityInfo(String m, String temp, String desp, String ts) {
         city = m;
         temperature = temp;
         description = desp;
@@ -24,6 +53,7 @@ public class RongCityInfo {
     public String getDescription() {
         return description;
     }
+
     public String getTimeSent() {
         return timeSent;
     }
