@@ -4,7 +4,7 @@
     /// Doyoung's place for strings
     <string name="kdy_help">Help</string>
 
-    <string name="kdy_enterDate">Enter a date(0~)</string>
+    <string name="kdy_enterDate">Enter a date (0~)</string>
     <string name="kdy_searchButton">Search</string>
     <string name="kdy_userGuide">User Guide</string>
     <string name="kdy_firstStep">1.Enter a number</string>
@@ -14,6 +14,7 @@
     <string name="kdy_close">Close</string>
 
     <string name="kdy_foundPhoto">We found photos</string>
+    <string name="kdy_units">item(s)</string>
     <string name="kdy_cancelled">Cancelled</string>
     <string name="kdy_undo">Undo</string>
 
