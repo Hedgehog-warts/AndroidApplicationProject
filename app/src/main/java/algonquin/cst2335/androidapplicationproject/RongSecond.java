@@ -200,7 +200,7 @@ public class RongSecond extends AppCompatActivity {
                 {
                     long id = mDAO.insertMessage(rongCityInfo); // add it to database
                     rongCityInfo.id = id; // database is saying what the new id is;
-                               });
+                });
                 Log.w("database", String.valueOf(rongCityInfo));
                 // redraw
                 // the whole list , if item is 1, the position should be 0; good amination, less work to compute.
@@ -227,101 +227,114 @@ public class RongSecond extends AppCompatActivity {
 
             public MyRowHolder(@NonNull View itemView) { //itewView will be the root of the layout, constraintLayouyt;
                 super(itemView);
+                itemView.setOnClickListener(clk -> {
+                    int position = getAbsoluteAdapterPosition();
+                    RongCityInfo selected = messageList.get(position);
+                    model.selectedMessage.postValue(selected);
+                });
+
                 cityText = itemView.findViewById(R.id.cityText);
                 tempText = itemView.findViewById(R.id.tempText);
                 timeText = itemView.findViewById(R.id.timeText);
                 despText = itemView.findViewById(R.id.despText);
 
-
             }
         }
         queue = Volley.newRequestQueue(this);
         variableBinding.searchButton.setOnClickListener(click -> {
-
-            // save the data by clicking the save city button
-            cityName = variableBinding.editCity.getText().toString();
-            String stringURL = null;
-            try {
-//
-                stringURL = new StringBuilder()
-                        .append("https://api.openweathermap.org/data/2.5/weather?q=")
-                        .append(URLEncoder.encode(cityName, "UTF-8"))
-                        .append("&appid=7e943c97096a9784391a981c4d878b22&units=metric").toString();
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+            if (variableBinding.editCity.getText().toString().equals("")) {
+                Toast.makeText(getApplicationContext(), "Please search a city name first!", Toast.LENGTH_LONG).show();
             }
+            // save the data by clicking the save city button
+            else {
+                cityName = variableBinding.editCity.getText().toString();
+                String stringURL = null;
+                try {
+//
+                    stringURL = new StringBuilder()
+                            .append("https://api.openweathermap.org/data/2.5/weather?q=")
+                            .append(URLEncoder.encode(cityName, "UTF-8"))
+                            .append("&appid=7e943c97096a9784391a981c4d878b22&units=metric").toString();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
 //
 //            this goes in the button click handler:
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, stringURL,
-                    null, (response) -> {
-                try {
-                    JSONObject coord = response.getJSONObject("coord");
-                    JSONArray weatherArray = response.getJSONArray("weather");
-                    JSONObject position0 = weatherArray.getJSONObject(0);
-                    String description = position0.getString("description");
-                    iconName = position0.getString("icon");
-                    JSONObject mainObject = response.getJSONObject("main");
-                    double current = mainObject.getDouble("temp");
-                    double min = mainObject.getDouble("temp_min");
-                    double max = mainObject.getDouble("temp_max");
-                    int humidity = mainObject.getInt("humidity");
-                    runOnUiThread(() -> {
-                        variableBinding.temp.setText(cityName + " temp: " + current + "°C");
-                        variableBinding.temp.setVisibility(View.VISIBLE);
-                        variableBinding.icon.setImageBitmap(image);
-                        variableBinding.icon.setVisibility(View.VISIBLE);
-                        variableBinding.description.setText(description);
-                        variableBinding.description.setVisibility(View.VISIBLE);
-                    });
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    String pathname = getFilesDir() + "/" + iconName + ".png";
-                    Log.w("MainActivity", pathname);
-                    File file = new File(pathname);
-                    Log.w("MainActivity", file.toString());
-                    if (file.exists()) {
-                        image = BitmapFactory.decodeFile(pathname);
-
-                    } else {
-                        String imageUrl = "https://openweathermap.org/img/w/" + iconName + ".png";
-                        Log.w("MainActivity", imageUrl.toString());
-                        ImageRequest imgReq = new ImageRequest(imageUrl, new Response.Listener<Bitmap>() {
-                            @Override
-                            public void onResponse(Bitmap bitmap) {
-                                // Do something with loaded bitmap...
-//
-                                try {
-                                    image = bitmap;
-                                    image.compress(Bitmap.CompressFormat.PNG, 100,
-                                            RongSecond.this.openFileOutput(iconName + ".png", Activity.MODE_PRIVATE));
-                                    variableBinding.icon.setImageBitmap(image);
-
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }// end of onResponse
-                        }, 1024, 1024, ImageView.ScaleType.CENTER, null, (error) -> {
-                            Toast.makeText(RongSecond.this, "" + error, Toast.LENGTH_SHORT).show();
+                JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, stringURL,
+                        null, (response) -> {
+                    try {
+                        JSONObject coord = response.getJSONObject("coord");
+                        JSONArray weatherArray = response.getJSONArray("weather");
+                        JSONObject position0 = weatherArray.getJSONObject(0);
+                        String description = position0.getString("description");
+                        iconName = position0.getString("icon");
+                        JSONObject mainObject = response.getJSONObject("main");
+                        double current = mainObject.getDouble("temp");
+                        double min = mainObject.getDouble("temp_min");
+                        double max = mainObject.getDouble("temp_max");
+                        int humidity = mainObject.getInt("humidity");
+                        runOnUiThread(() -> {
+                            variableBinding.temp.setText(cityName + " temp: " + current + "°C");
+                            variableBinding.temp.setVisibility(View.VISIBLE);
+                            variableBinding.icon.setImageBitmap(image);
+                            variableBinding.icon.setVisibility(View.VISIBLE);
+                            variableBinding.description.setText(description);
+                            variableBinding.description.setVisibility(View.VISIBLE);
                         });
-                        queue.add(imgReq);
-                    }// end of else
-                }// end of try
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-            },
-                    (error) -> {
-                    });
-            queue.add(request);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        String pathname = getFilesDir() + "/" + iconName + ".png";
+                        Log.w("MainActivity", pathname);
+                        File file = new File(pathname);
+                        Log.w("MainActivity", file.toString());
+                        if (file.exists()) {
+                            image = BitmapFactory.decodeFile(pathname);
+
+                        } else {
+                            String imageUrl = "https://openweathermap.org/img/w/" + iconName + ".png";
+                            Log.w("MainActivity", imageUrl.toString());
+                            ImageRequest imgReq = new ImageRequest(imageUrl, new Response.Listener<Bitmap>() {
+                                @Override
+                                public void onResponse(Bitmap bitmap) {
+                                    // Do something with loaded bitmap...
+//
+                                    try {
+                                        image = bitmap;
+                                        image.compress(Bitmap.CompressFormat.PNG, 100,
+                                                RongSecond.this.openFileOutput(iconName + ".png", Activity.MODE_PRIVATE));
+                                        variableBinding.icon.setImageBitmap(image);
+
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }// end of onResponse
+                            }, 1024, 1024, ImageView.ScaleType.CENTER, null, (error) -> {
+                                Toast.makeText(RongSecond.this, "" + error, Toast.LENGTH_SHORT).show();
+                            });
+                            queue.add(imgReq);
+                        }// end of else
+                    }// end of try
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                },
+                        (error) -> {
+                        });
+                queue.add(request);
+            }
             // this to save the last searched city
             saveLastSearchedCity(variableBinding.editCity.getText().toString());
 
         });
 
+        model.selectedMessage.observe(this, (newMessageValue) -> {
+            MessageDetailsFragment weatherFragment = new MessageDetailsFragment(newMessageValue);
+            getSupportFragmentManager().beginTransaction().addToBackStack("").replace(R.id.fragmentLocation, weatherFragment).commit();
+        });
 
         variableBinding.recycleView.setLayoutManager(new LinearLayoutManager(this));
         variableBinding.recycleView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {

@@ -33,4 +33,8 @@
     <string name ="welcome">欢迎回来 </string>
     <string name ="likeCity">您喜欢这个城市吗?  </string>
     <string name ="weather">您想要查看该城市</string>
+    <string name="cityDetail">城市细节</string>
+    <string name="timeDetail">时间细节</string>
+    <string name="TemperatureDetail">温度细节</string>
+    <string name="databaseText">数据编号</string>
 </resources>

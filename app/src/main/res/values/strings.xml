@@ -51,6 +51,10 @@
     <string name ="welcome">Welcome back  </string>
     <string name ="likeCity">You do like this city:  </string>
     <string name ="weather">Do you want to check weather for  </string>
+    <string name = "cityDetail">city goes here</string>
+    <string name = "timeDetail">time goes here</string>
+    <string name = "TemperatureDetail">Temperature goes here</string>
+    <string name = "databaseText">data id goes here</string>
 
     /// Xingyun's place for strings
     <string name="placeholder_search_articles_text">Search Articles</string>

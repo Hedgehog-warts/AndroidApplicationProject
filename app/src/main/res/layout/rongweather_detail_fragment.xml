@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+
+
+    <TextView
+        android:id="@+id/cityDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:textSize="25sp"
+        android:text="@string/cityDetail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/timeDetail"
+        android:layout_width="221dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/timeDetail"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@+id/cityDetail"
+        app:layout_constraintTop_toBottomOf="@+id/cityDetail" />
+
+    <TextView
+        android:id="@+id/TemperatureDetail"
+        android:layout_width="254dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/TemperatureDetail"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@+id/timeDetail"
+        app:layout_constraintTop_toBottomOf="@+id/timeDetail" />
+
+    <TextView
+        android:id="@+id/databaseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textSize="25sp"
+        android:text="@string/databaseText"
+        app:layout_constraintStart_toStartOf="@+id/TemperatureDetail"
+        app:layout_constraintTop_toBottomOf="@+id/TemperatureDetail" />
+</androidx.constraintlayout.widget.ConstraintLayout>
