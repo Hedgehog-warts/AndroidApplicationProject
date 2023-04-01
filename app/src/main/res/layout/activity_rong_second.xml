@@ -45,7 +45,7 @@
                 android:id="@+id/editCity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="30dp"
                 android:hint="@string/editCity"
                 android:inputType="textAutoCorrect"
                 android:textSize="20dp"
@@ -60,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="48dp"
                 android:text="@string/searchButton"
+                app:layout_constraintBottom_toBottomOf="@+id/editCity"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/editCity" />
 
@@ -67,7 +68,7 @@
                 android:id="@+id/textCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="30dp"
                 android:text="@string/textCheckBox"
                 android:textSize="20dp"
                 app:layout_constraintEnd_toStartOf="@+id/searchButton"
@@ -79,24 +80,21 @@
                 android:id="@+id/saveCity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
                 android:text="@string/saveCity"
+                app:layout_constraintBottom_toBottomOf="@+id/textCheckBox"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textCheckBox"
-                app:layout_constraintTop_toBottomOf="@+id/searchButton" />
+                app:layout_constraintTop_toTopOf="@+id/textCheckBox" />
 
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycleView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/temp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textCheckBox"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/temp"
@@ -106,28 +104,28 @@
                 android:textSize="20dp"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/recycleView" />
+                app:layout_constraintStart_toEndOf="@+id/icon"
+                app:layout_constraintTop_toTopOf="@+id/icon" />
 
             <ImageView
                 android:id="@+id/icon"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="51dp"
+                android:layout_height="48dp"
                 android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="@+id/temp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/temp" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="27dp"
                 android:text="Description goes here"
                 android:textSize="20dp"
                 android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@+id/icon"
-                app:layout_constraintStart_toEndOf="@+id/icon"
-                app:layout_constraintTop_toBottomOf="@+id/temp" />
+                app:layout_constraintBottom_toBottomOf="@+id/temp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/temp"
+                app:layout_constraintTop_toTopOf="@+id/temp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

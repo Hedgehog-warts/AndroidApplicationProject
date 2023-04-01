@@ -205,34 +205,11 @@ public class RongSecond extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
         variableBinding.searchButton.setOnClickListener(click -> {
 
-//            TextView cityname = findViewById(R.id.editCity);
-//////
-//////                        Snackbar.make(cityname, getString(R.string.weather) + cityname.getText() + " ?", +  Snackbar.LENGTH_LONG)
-//////                                .setAction(getString(R.string.yes), clk -> {
-////                                    String msg = variableBinding.editCity.getText().toString();
-////                                    SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh:mm:ss a");
-////                                    String currentDateandTime = sdf.format(new Date());
-////                                    RongCityInfo rongCityInfo = new RongCityInfo(msg, currentDateandTime, true);
-////                                    messageList.add(rongCityInfo);
-////                                    // redraw the whole list , if item is 1, the position should be 0; good amination, less work to compute.
-////                                    myAdapter.notifyItemInserted(messageList.size() - 1);
-////                                    myAdapter.notifyDataSetChanged();
-////                                    // clear the previous text:
-////                                    variableBinding.editCity.setText("");
-////
-//////                                    dialog.cancel(); // some code need to add here to link database URL
-//////                                })
-//////                                .show();
-////
-//////                    })
-//                    .create().show();
            // save the data by clicking the save city button
             cityName = variableBinding.editCity.getText().toString();
             String stringURL = null;
             try {
-//                stringURL = "https://api.openweathermap.org/data/2.5/weather?q="
-//                        + URLEncoder.encode(cityName, "UTF-8")
-//                        + "&appid=7e943c97096a9784391a981c4d878b22&units=metric";
+//
                 stringURL = new StringBuilder()
                         .append("https://api.openweathermap.org/data/2.5/weather?q=")
                         .append(URLEncoder.encode(cityName, "UTF-8"))
@@ -258,12 +235,6 @@ public class RongSecond extends AppCompatActivity {
                     runOnUiThread(() -> {
                         variableBinding.temp.setText(cityName + " current temp: " + current + "°C");
                         variableBinding.temp.setVisibility(View.VISIBLE);
-//                        variableBinding.minTemp.setText("The current min temperature is " + min);
-//                        variableBinding.minTemp.setVisibility(View.VISIBLE);
-//                        variableBinding.maxTemp.setText("The current max temperature is " + max);
-//                        variableBinding.maxTemp.setVisibility(View.VISIBLE);
-//                        variableBinding.humitidy.setText("The current humidity is " + humidity + "%");
-//                        variableBinding.humitidy.setVisibility(View.VISIBLE);
                         variableBinding.icon.setImageBitmap(image);
                         variableBinding.icon.setVisibility(View.VISIBLE);
                         variableBinding.description.setText(description);
@@ -342,7 +313,6 @@ public class RongSecond extends AppCompatActivity {
                 holder.tempText.setText(rongCityInfo.getTemperature());
                 holder.despText.setText(rongCityInfo.getDescription());
                 holder.timeText.setText(rongCityInfo.getTimeSent());
-
 
             }
 
