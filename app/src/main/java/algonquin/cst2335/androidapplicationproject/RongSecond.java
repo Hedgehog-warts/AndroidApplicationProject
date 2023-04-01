@@ -159,12 +159,6 @@ public class RongSecond extends AppCompatActivity {
         Intent rongMainPage = getIntent();
         String userName = rongMainPage.getStringExtra("userName");
         variableBinding.userName.setText(getString(R.string.welcome) + " " + userName);
-//
-//        //cityname saved using SharedPreferences
-//        SharedPreferences prefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
-//        String cityName = prefs.getString("City Name", ""); //cityName =""
-//        variableBinding.editCity.setText(cityName);
-//        SharedPreferences.Editor editor = prefs.edit();
 
 
         variableBinding.saveCity.setOnClickListener(cb -> {
@@ -179,7 +173,19 @@ public class RongSecond extends AppCompatActivity {
             }
             // makeText returns a text, and show() to show this.
             Toast.makeText(this, getString(R.string.likeCity) + " " + checkedString, Toast.LENGTH_SHORT).show();
+            String city = variableBinding.editCity.getText().toString();
 
+            SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh:mm:ss a");
+            String currentDateandTime = sdf.format(new Date());
+            String temperatureText = variableBinding.temp.getText().toString();
+            String desp = variableBinding.description.getText().toString();
+            RongCityInfo rongCityInfo = new RongCityInfo(city, temperatureText, currentDateandTime, desp);
+            messageList.add(rongCityInfo);
+            // redraw the whole list , if item is 1, the position should be 0; good amination, less work to compute.
+            myAdapter.notifyItemInserted(messageList.size() - 1);
+            myAdapter.notifyDataSetChanged();
+            // clear the previous text:
+            variableBinding.editCity.setText("");
         });
 
         if (messageList == null) {
@@ -197,8 +203,9 @@ public class RongSecond extends AppCompatActivity {
                 super(itemView);
                 cityText = itemView.findViewById(R.id.cityText);
                 tempText = itemView.findViewById(R.id.tempText);
-                despText = itemView.findViewById(R.id.despText);
                 timeText = itemView.findViewById(R.id.timeText);
+                despText = itemView.findViewById(R.id.despText);
+
 
 
             }
@@ -312,8 +319,8 @@ public class RongSecond extends AppCompatActivity {
                 RongCityInfo rongCityInfo = messageList.get(position);// which String goes in this row
                 holder.cityText.setText(rongCityInfo.getCity());
                 holder.tempText.setText(rongCityInfo.getTemperature());
-                holder.despText.setText(rongCityInfo.getDescription());
                 holder.timeText.setText(rongCityInfo.getTimeSent());
+                holder.despText.setText(rongCityInfo.getDescription());
 
             }
 
