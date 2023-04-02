@@ -25,7 +25,8 @@ public class DoyoungAdapterFragment extends RecyclerView.Adapter<DoyoungAdapterF
     Context context;
     ArrayList<String> favourites;
 
-    ArrayList<DatabaseHolder> tests = new ArrayList<>();
+    ArrayList<DatabaseHolder> holders = new ArrayList<>();
+    int position;
 
     public DoyoungAdapterFragment(Context c, ArrayList<String> f) {
         context = c;
@@ -36,21 +37,20 @@ public class DoyoungAdapterFragment extends RecyclerView.Adapter<DoyoungAdapterF
     @Override
     public DatabaseHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.doyoung_database_view,parent,false);
-        DatabaseHolder test = new DatabaseHolder(v);
-        tests.add(test);
+        DatabaseHolder addedHolder = new DatabaseHolder(v);
+        holders.add(addedHolder);
         return new DatabaseHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull DatabaseHolder holder, int position) {
-        Log.w("mainact",String.valueOf(position));
         holder.database.setText(favourites.get(position));
 
         holder.background.setOnClickListener(clk-> {
-            for (DatabaseHolder test: tests) {
-                test.background.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            for (DatabaseHolder selection: holders) {
+                selection.background.setBackgroundColor(Color.parseColor("#FFFFFF"));
             }
-            holder.background.setBackgroundColor(Color.parseColor("#567845"));
+            holder.background.setBackgroundColor(Color.parseColor("#FFC8C8C8"));
         });
 
 
@@ -66,7 +66,11 @@ public class DoyoungAdapterFragment extends RecyclerView.Adapter<DoyoungAdapterF
         return 0;
     }
 
-    public static class DatabaseHolder extends RecyclerView.ViewHolder {
+    public int getPosition() {
+        return 0;
+    }
+
+    public class DatabaseHolder extends RecyclerView.ViewHolder {
         TextView database;
         ConstraintLayout background;
 

@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">최종 프로젝트 앱</string>
 
+    <string name="kdy_mainDoyoungBtn">도영</string>
     <string name="kdy_help">도움말</string>
 
     <string name="kdy_enterDate">날짜 입력</string>
@@ -17,4 +18,13 @@
     <string name="kdy_units">장</string>
     <string name="kdy_cancelled">취소</string>
     <string name="kdy_undo">되돌리기</string>
+
+    <string name="kdy_existed">사진이 이미 존재합니다</string>
+    <string name="kdy_camera">카메라: </string>
+    <string name="kdy_noData">데이터 없음</string>
+
+    <string name="kdy_saveImage">사진 저장</string>
+    <string name="kdy_savedImageTitle">저장된 사진</string>
+    <string name="kdy_delete">삭제</string>
+    <string name="kdy_view">보기</string>
 </resources>

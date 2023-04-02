@@ -2,6 +2,7 @@
     <string name="app_name">Final Project App</string>
 
     /// Doyoung's place for strings
+    <string name="kdy_mainDoyoungBtn">Doyoung</string>
     <string name="kdy_help">Help</string>
 
     <string name="kdy_enterDate">Enter a date</string>
@@ -17,6 +18,15 @@
     <string name="kdy_units">item(s)</string>
     <string name="kdy_cancelled">Cancelled</string>
     <string name="kdy_undo">Undo</string>
+
+    <string name="kdy_existed">This photo already existed</string>
+    <string name="kdy_camera">Camera: </string>
+    <string name="kdy_noData">No data</string>
+
+    <string name="kdy_saveImage">Save this image</string>
+    <string name="kdy_savedImageTitle">Saved images</string>
+    <string name="kdy_delete">Delete</string>
+    <string name="kdy_view">View</string>
 
     /// Nick's place for strings
 

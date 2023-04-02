@@ -24,10 +24,18 @@ public class DoyoungImgDetail {
     @ColumnInfo(name="ImageURL")
     String imgURL;
 
-    public DoyoungImgDetail(Bitmap img, String c, String i) {
+    @ColumnInfo(name="Date")
+    int photoDate;
+
+    @ColumnInfo(name="PhotoID")
+    int photoID;
+
+    public DoyoungImgDetail(Bitmap img, String c, String i, int pd, int pi) {
         image = img;
         cameraName = c;
         imgURL = i;
+        photoDate = pd;
+        photoID = pi;
     }
 
     public DoyoungImgDetail() {}

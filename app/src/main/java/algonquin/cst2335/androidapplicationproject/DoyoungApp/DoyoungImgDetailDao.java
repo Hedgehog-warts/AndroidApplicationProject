@@ -10,12 +10,14 @@ import java.util.List;
 public interface DoyoungImgDetailDao {
 
     @Insert
-    public long insertMessage(DoyoungImgDetail d);
+    public long insertImage(DoyoungImgDetail i);
 
     @Query("Select * from DoyoungImgDetail")
-    List<DoyoungImgDetail> getAllMessages();
+    List<DoyoungImgDetail> getAllImages();
 
     @Delete
-    public void deleteMessage(DoyoungImgDetail m);
+    public void deleteImage(DoyoungImgDetail d);
 
+    @Query("SELECT * FROM DoyoungImgDetail WHERE Date=:pd AND PhotoID=:pi")
+    public List<DoyoungImgDetail> checkDuplication(int pd, int pi);
 }

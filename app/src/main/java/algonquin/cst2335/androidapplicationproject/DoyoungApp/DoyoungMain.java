@@ -183,6 +183,9 @@ public class DoyoungMain extends AppCompatActivity {
                             JSONObject cameraJSON = photoItem.getJSONObject("camera");
                             String cameraName = cameraJSON.getString("name");
 
+                            int photoID = photoItem.getInt("id");
+                            int photoDate = photoItem.getInt("sol");
+
                             ImageRequest imageRequest = new ImageRequest(replaceURL, new Response.Listener<Bitmap>() {
                                 @Override
                                 public void onResponse(Bitmap bitmap) {
@@ -194,7 +197,7 @@ public class DoyoungMain extends AppCompatActivity {
                                         thumbnails.add(thumbnail);
                                         photoAdapter.notifyItemInserted(thumbnails.size()-1);
 
-                                        DoyoungImgDetail test = new DoyoungImgDetail(imgSr, cameraName, replaceURL);
+                                        DoyoungImgDetail test = new DoyoungImgDetail(imgSr, cameraName, replaceURL, photoDate, photoID);
                                         infoDetails.add(test);
 
                                     } catch(Exception e) {
