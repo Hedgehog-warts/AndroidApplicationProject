@@ -46,26 +46,44 @@ import algonquin.cst2335.androidapplicationproject.databinding.DoyoungDetailFrag
 import algonquin.cst2335.androidapplicationproject.databinding.DoyoungPhotoEvenBinding;
 import algonquin.cst2335.androidapplicationproject.databinding.DoyoungPhotoOddBinding;
 
+/** This is main activity to list NASA Mars rover photos
+ * @author Doyoung Kim
+ * @version 1.0
+ */
 public class DoyoungMain extends AppCompatActivity {
 
+    /** This is for all objects in the activity_doyoung_main xml*/
     ActivityDoyoungMainBinding binding;
+
+    /** ViewModel for thumbnail data and their details */
     DoyoungViewModel dataModel;
 
+    /** RecyclerView for thumbnails */
     private RecyclerView.Adapter photoAdapter;
+
+    /** Fragment for details of thumbnails */
     DoyoungPhotoFragment photoFragment;
 
+    /** Queue to handle adding images and JSON from the server */
     protected RequestQueue queue = null;
-    Bitmap imgSr;
 
+    /* Thumbnail data */
+    private Bitmap imgSr;
     private ArrayList<DoyoungThumbnail> thumbnails = new ArrayList<>();
     private ArrayList<DoyoungImgDetail> infoDetails = new ArrayList<>();
 
+    /** Apply with a given toolbar
+     * @param toolbar a reference of a toolbar
+     */
     @Override
     public void setSupportActionBar(@Nullable Toolbar toolbar) {
         super.setSupportActionBar(toolbar);
     }
 
-
+    /** Inflate doyoung_toolbar xml
+     * @param menu a reference of a Menu
+     * @return true
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -74,6 +92,10 @@ public class DoyoungMain extends AppCompatActivity {
         return true;
     }
 
+    /** Direct users to other member's app
+     * @param item a reference of a MenuItem
+     * @return true
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Intent nextPage;
@@ -114,30 +136,33 @@ public class DoyoungMain extends AppCompatActivity {
         return true;
     }
 
+    /** Get data with using NASA API
+     * @param savedInstanceState a savedInstanceState bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ImageDatabase db = Room.databaseBuilder(getApplicationContext(),
-                ImageDatabase.class, "imageDatabase").allowMainThreadQueries().build();
-        DoyoungImgDetailDao imgDAO = db.imgDAO();
 
         dataModel = new ViewModelProvider(this).get(DoyoungViewModel.class);
         binding = ActivityDoyoungMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        /* Initialize SharedPreference for date */
         SharedPreferences sharedDate = getSharedPreferences("Date",MODE_PRIVATE);
         SharedPreferences.Editor editDate = sharedDate.edit();
         binding.date.setText(sharedDate.getString("solDate","0"));
 
         binding.photoRecycler.setLayoutManager(new LinearLayoutManager(this));
         binding.date.addTextChangedListener(new TextWatcher() {
+            /* Not use */
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
+            /* Not use */
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
+            /* Keep date in SharedPreference */
             @Override
             public void afterTextChanged(Editable editable) {
                 editDate.putString("solDate",editable.toString());
@@ -164,7 +189,6 @@ public class DoyoungMain extends AppCompatActivity {
                     "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?" +
                             "sol=%s&" +
                             "api_key=%s",date, apiKey);
-//            Log.w("MainAct",url);
 
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 (response)-> {
@@ -268,12 +292,14 @@ public class DoyoungMain extends AppCompatActivity {
         });
     }
 
+    /** Remove all thumbnails data */
     public void clearData() {
         photoAdapter.notifyItemRangeRemoved(0,photoAdapter.getItemCount());
         thumbnails.clear();
         infoDetails.clear();
     }
 
+    /** RecyclerView holder class to list thumbnails */
     class photoHolder extends RecyclerView.ViewHolder {
 
         TextView itemNumber;
