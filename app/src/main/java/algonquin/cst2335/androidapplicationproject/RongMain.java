@@ -103,8 +103,6 @@ public class RongMain extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
 
 
-//        TextView tv = findViewById(R.id.textShow);
-
         binding.loginButton.setOnClickListener(clk -> {
             if (binding.typeUserName.getText().toString().equals("") || binding.password.getText().toString().equals("")) {
                 Toast.makeText(getApplicationContext(), getString(R.string.notNull), Toast.LENGTH_LONG).show();
@@ -183,19 +181,19 @@ public class RongMain extends AppCompatActivity {
         }
 
         if (!foundUpperCase) {
-//            Toast.makeText(this, "they are missing an upper case letter", Toast.LENGTH_SHORT).show();
+
             return false;
         } else if (!foundLowerCase) {
-//            Toast.makeText(this, "They are missing a lower case letter", Toast.LENGTH_SHORT).show();
+
             return false;
         } else if (!foundNumber) {
-//            Toast.makeText(this, "They are missing a a number", Toast.LENGTH_SHORT).show();
+
             return false;
         } else if (!foundSpecial) {
-//            Toast.makeText(this, "They are missing a special character", Toast.LENGTH_SHORT).show();
+
             return false;
         } else {
-//            Toast.makeText(this, "Your password meets the requirements", Toast.LENGTH_SHORT).show();
+
             return true; //only get here if they're all true
         }
     }
@@ -221,34 +219,6 @@ public class RongMain extends AppCompatActivity {
             default:
                 return false;
         }
-    }
-
-
-    @Override  // 2)   Activity is now visible
-    protected void onStart() {
-        super.onStart();
-        Log.w(TAG, "onStart() - The application is now visible on screen");
-    }
-
-    @Override //  3)  Now responds to touch input
-    protected void onResume() {
-        super.onResume();
-        Log.w(TAG, "onResume() - The application is now responding to user input");
-    }
-
-    @Override //no longer listening to touches
-    protected void onPause() {
-        super.onPause();
-
-        Log.w(TAG, "onPause()- The application no longer responds to user input");
-    }
-
-
-    @Override  // memory is garbage collected
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.w("TAG", "onDestroy() - Any memory used by the application is freed");
-
     }
 
 }

@@ -9,7 +9,7 @@
     <string name="help">帮助</string>
     <string name="editCity">输入城市</string>
     <string name="rongButton">冉_蓉</string>
-    <string name="weatherApp">欢迎使用WeatherStack App</string>
+    <string name="weatherApp">欢迎使用天气堆栈软件</string>
     <string name="userName">用户名</string>
     <string name="enterUserName">输入用户名</string>
     <string name="typeUserName">键入用户名</string>
@@ -34,6 +34,7 @@
     <string name ="welcome">欢迎回来 </string>
     <string name ="likeCity">您喜欢这个城市吗?  </string>
     <string name ="weather">您想要查看该城市</string>
+    <string name="undo">撤销</string>
     <string name="cityDetail">城市细节</string>
     <string name="timeDetail">时间细节</string>
     <string name="TemperatureDetail">温度细节</string>

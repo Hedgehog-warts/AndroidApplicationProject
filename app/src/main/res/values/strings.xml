@@ -61,6 +61,7 @@
     <string name="weatherSave">Weather info saved</string>
     <string name="notNull">Please user name and password!</string>
     <string name="deleteConfirm">You deleted the weather info of </string>
+    <string name ="undo">UNDO</string>
 
 
     /// Xingyun's place for strings
@@ -71,4 +72,5 @@
     <string name="msg_confirm_xyz">Are you sure?</string>
     <string name="msg_exit_xyz">Exiting to MainMenu</string>
     <string name="TemperatureDetail">temperature goes here</string>
+    <string name="cityDetail">city goes here</string>
 </resources>

@@ -30,6 +30,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
@@ -125,9 +126,9 @@ public class RongSecond extends AppCompatActivity {
                             });
 
                             runOnUiThread(() -> {
-                                    myAdapter.notifyItemRemoved(position);
-                                Snackbar.make(variableBinding.editCity, getString(R.string.deleteConfirm) + " " +variableBinding.editCity.getText().toString(), Snackbar.LENGTH_LONG)
-                                        .setAction("Undo", click -> {
+                                myAdapter.notifyItemRemoved(position);
+                                Snackbar.make(variableBinding.editCity, getString(R.string.deleteConfirm) + " " + variableBinding.editCity.getText().toString(), Snackbar.LENGTH_LONG)
+                                        .setAction(getString(R.string.undo), click -> {
                                             Executor thread_2 = Executors.newSingleThreadExecutor();
                                             thread_2.execute(() -> {
                                                 mDAO.insertMessage(m); //  insert back to database
@@ -139,7 +140,7 @@ public class RongSecond extends AppCompatActivity {
                                         })
                                         .show();
                             });
-                                model.selectedMessage.setValue(null);
+                            model.selectedMessage.setValue(null);
                         })
 
                         .create().show();
@@ -222,8 +223,6 @@ public class RongSecond extends AppCompatActivity {
         Intent rongMainPage = getIntent();
         String userName = rongMainPage.getStringExtra("userName");
         variableBinding.userName.setText(getString(R.string.welcome) + " " + userName);
-
-
         variableBinding.saveCity.setOnClickListener(cb -> {
 
             if (variableBinding.editCity.getText().toString().equals("")) {
@@ -231,7 +230,6 @@ public class RongSecond extends AppCompatActivity {
             } else {
 
                 String city = variableBinding.editCity.getText().toString();
-
                 SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh:mm:ss a");
                 String currentDateandTime = sdf.format(new Date());
                 String temperatureText = variableBinding.temp.getText().toString();
@@ -258,11 +256,6 @@ public class RongSecond extends AppCompatActivity {
             }
         });
 
-//        if (messageList == null) {
-//            model.messages.setValue(messageList = new ArrayList<>());
-//        }
-
-
         class MyRowHolder extends RecyclerView.ViewHolder {
             TextView cityText;
             TextView timeText;
@@ -276,12 +269,10 @@ public class RongSecond extends AppCompatActivity {
                     RongCityInfo selected = messageList.get(position);
                     model.selectedMessage.postValue(selected);
                 });
-
                 cityText = itemView.findViewById(R.id.cityText);
                 tempText = itemView.findViewById(R.id.tempText);
                 timeText = itemView.findViewById(R.id.timeText);
                 despText = itemView.findViewById(R.id.despText);
-
             }
         }
         queue = Volley.newRequestQueue(this);
@@ -294,11 +285,13 @@ public class RongSecond extends AppCompatActivity {
                 cityName = variableBinding.editCity.getText().toString();
                 String stringURL = null;
                 try {
-//
+
                     stringURL = new StringBuilder()
-                            .append("https://api.openweathermap.org/data/2.5/weather?q=")
+                            .append("http://api.weatherstack.com/current?")
+                            .append("&access_key=51ab3cbdab7489cd08c3385168931c59&query=")
                             .append(URLEncoder.encode(cityName, "UTF-8"))
-                            .append("&appid=7e943c97096a9784391a981c4d878b22&units=metric").toString();
+//                            .append("&appid=7e943c97096a9784391a981c4d878b22&units=metric")
+                            .toString();
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
@@ -306,63 +299,33 @@ public class RongSecond extends AppCompatActivity {
 //            this goes in the button click handler:
                 JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, stringURL,
                         null, (response) -> {
+
                     try {
-                        JSONObject coord = response.getJSONObject("coord");
-                        JSONArray weatherArray = response.getJSONArray("weather");
-                        JSONObject position0 = weatherArray.getJSONObject(0);
-                        String description = position0.getString("description");
-                        iconName = position0.getString("icon");
-                        JSONObject mainObject = response.getJSONObject("main");
-                        double current = mainObject.getDouble("temp");
-                        double min = mainObject.getDouble("temp_min");
-                        double max = mainObject.getDouble("temp_max");
-                        int humidity = mainObject.getInt("humidity");
+                        JSONObject request1 = response.getJSONObject("request");
+                        JSONObject locationObject = response.getJSONObject("location");
+                        JSONObject currentObject = response.getJSONObject("current");
+                        JSONArray iconsArray = currentObject.getJSONArray("weather_icons");
+                        JSONArray descriptionsArray = currentObject.getJSONArray("weather_descriptions");
+                        int current = currentObject.getInt("temperature");
+
+                        // Get the first item in the arrays as strings
+                        String iconUrl = iconsArray.getString(0);
+                        String description = descriptionsArray.getString(0);
+
+                        Glide.with(this).load(iconUrl).into(variableBinding.icon);
+                        TextView descriptionTextView = findViewById(R.id.description);
                         runOnUiThread(() -> {
-                            variableBinding.temp.setText(getString(R.string.temp) + current + "°C");
+                            variableBinding.temp.setText("Current temp is " + current + "°C");
                             variableBinding.temp.setVisibility(View.VISIBLE);
                             variableBinding.icon.setImageBitmap(image);
                             variableBinding.icon.setVisibility(View.VISIBLE);
-                            variableBinding.description.setText(description);
+                            descriptionTextView.setText(description);
                             variableBinding.description.setVisibility(View.VISIBLE);
                         });
 
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    }
-
-                    try {
-                        String pathname = getFilesDir() + "/" + iconName + ".png";
-                        Log.w("MainActivity", pathname);
-                        File file = new File(pathname);
-                        Log.w("MainActivity", file.toString());
-                        if (file.exists()) {
-                            image = BitmapFactory.decodeFile(pathname);
-
-                        } else {
-                            String imageUrl = "https://openweathermap.org/img/w/" + iconName + ".png";
-                            Log.w("MainActivity", imageUrl.toString());
-                            ImageRequest imgReq = new ImageRequest(imageUrl, new Response.Listener<Bitmap>() {
-                                @Override
-                                public void onResponse(Bitmap bitmap) {
-                                    // Do something with loaded bitmap...
-//
-                                    try {
-                                        image = bitmap;
-                                        image.compress(Bitmap.CompressFormat.PNG, 100,
-                                                RongSecond.this.openFileOutput(iconName + ".png", Activity.MODE_PRIVATE));
-                                        variableBinding.icon.setImageBitmap(image);
-
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-                                }// end of onResponse
-                            }, 1024, 1024, ImageView.ScaleType.CENTER, null, (error) -> {
-                                Toast.makeText(RongSecond.this, "" + error, Toast.LENGTH_SHORT).show();
-                            });
-                            queue.add(imgReq);
-                        }// end of else
-                    }// end of try
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 },
@@ -398,7 +361,6 @@ public class RongSecond extends AppCompatActivity {
                         parent, false);
 
                 return new MyRowHolder(binding.getRoot());
-//                }
             }
 
             @Override // what are the textView set to for row position?
@@ -409,7 +371,6 @@ public class RongSecond extends AppCompatActivity {
                 holder.tempText.setText(rongCityInfo.getTemperature());
                 holder.timeText.setText(rongCityInfo.getTimeSent());
                 holder.despText.setText(rongCityInfo.getDescription());
-
             }
 
             @Override
@@ -421,13 +382,8 @@ public class RongSecond extends AppCompatActivity {
             public int getItemViewType(int position) {
                 // you can return anything to represent a layout.
                 RongCityInfo rongCityInfo = messageList.get(position);
-//                if (rongCityInfo.isSentButton())
                 return 0;
-//                else
-//                    return 1;
-
             }
-
         });
         // this function showing the loaded city on the screen
         String loadSearchedCity = loadLastSearchedCity();
@@ -436,30 +392,9 @@ public class RongSecond extends AppCompatActivity {
         }
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        AlertDialog.Builder exitApp = new AlertDialog.Builder(RongSecond.this);
-//
-//        exitApp.setMessage(getString(R.string.leave))
-//                .setTitle(getString(R.string.thanks))
-//                .setCancelable(false)
-//                .setPositiveButton(getString(R.string.yes),
-//                        (DialogInterface.OnClickListener) (dialog, which) -> {
-//
-//                            finish();
-//                        })
-//                .setNegativeButton(getString(R.string.no),
-//                        (DialogInterface.OnClickListener) (dialog, which) -> {
-//                            dialog.cancel();
-//                        })
-//                .create()
-//                .show();
-//    }
-
     @Override
     protected void onPause() {
         super.onPause();
-
         Log.w(TAG, "onPause() second");
     }
 }

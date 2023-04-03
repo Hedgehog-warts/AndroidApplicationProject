@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/weather_fragment"
+        android:scaleType="centerCrop" />
+
+<androidx.constraintlayout.widget.ConstraintLayout
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RongMain">
@@ -15,10 +29,10 @@
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.977" />
+        app:layout_constraintVertical_bias="0.99" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/myToolbar"
@@ -43,22 +57,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myToolbar" />
 
-    <TextView
-        android:id="@+id/enterUserName"
+
+    <Button
+        android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/enterUserName"
+        android:layout_marginTop="8dp"
+        android:text="@string/loginButton"
         android:textSize="25dp"
-        app:layout_constraintEnd_toEndOf="@+id/weatherApp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weatherApp" />
-
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <EditText
         android:id="@+id/typeUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:hint="@string/typeUserName"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="@+id/enterUserName"
         app:layout_constraintStart_toStartOf="@+id/enterUserName"
@@ -68,7 +86,9 @@
         android:id="@+id/typePassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="@string/typePassword"
+        android:textColor="@color/white"
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="@+id/enterUserName"
         app:layout_constraintHorizontal_bias="0.0"
@@ -79,23 +99,26 @@
         android:id="@+id/password"
         android:layout_width="55pt"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:hint=""
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/typePassword" />
 
-
-    <Button
-        android:id="@+id/loginButton"
+    <TextView
+        android:id="@+id/enterUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/loginButton"
+        android:layout_marginTop="28dp"
+        android:text="@string/enterUserName"
+        android:textColor="@color/white"
         android:textSize="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="@+id/weatherApp"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintTop_toBottomOf="@+id/weatherApp" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -106,3 +129,5 @@
         app:srcCompat="@drawable/rong_weather"
         tools:layout_editor_absoluteX="0dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
