@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="@string/cityDetail"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView1"
         app:layout_constraintStart_toEndOf="@+id/imageView1"
@@ -21,12 +21,12 @@
         android:id="@+id/timeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:text="@string/timeDetail"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/cityText"
-        app:layout_constraintStart_toStartOf="@+id/cityText"
+        app:layout_constraintEnd_toEndOf="@+id/despText"
+        app:layout_constraintStart_toEndOf="@+id/imageView1"
         app:layout_constraintTop_toBottomOf="@+id/despText" />
 
     <TextView
@@ -35,20 +35,21 @@
         android:layout_height="32dp"
         android:layout_marginStart="10dp"
         android:text="@string/TemperatureDetail"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/cityText"
-        app:layout_constraintStart_toEndOf="@+id/cityText"
-        app:layout_constraintTop_toTopOf="@+id/cityText" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/cityText" />
 
     <TextView
         android:id="@+id/despText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/description"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/tempText"
+        app:layout_constraintBottom_toBottomOf="@+id/tempText"
         app:layout_constraintStart_toStartOf="@+id/tempText"
         app:layout_constraintTop_toBottomOf="@+id/tempText" />
 

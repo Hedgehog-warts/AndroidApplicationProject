@@ -49,7 +49,8 @@ import java.util.concurrent.Executors;
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityRongSecondBinding;
 
 import algonquin.cst2335.androidapplicationproject.databinding.RongcityinfoSearchBinding;
-import rongData.RongSecondViewModel;
+import algonquin.cst2335.androidapplicationproject.rongData.RongSecondViewModel;
+
 
 public class RongSecond extends AppCompatActivity {
 

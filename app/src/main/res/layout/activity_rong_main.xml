@@ -25,14 +25,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/rongButton"
-        android:textColor="@color/darkPurple"
+        android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.99" />
+        app:layout_constraintVertical_bias="0.977" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/myToolbar"
@@ -47,7 +47,7 @@
         android:id="@+id/weatherApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/darkPurple"
+
         android:text="@string/weatherApp"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -63,6 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:background="@color/babyBlue"
         android:text="@string/loginButton"
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,6 +78,7 @@
         android:layout_marginTop="8dp"
         android:hint="@string/typeUserName"
         android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="@+id/enterUserName"
         app:layout_constraintStart_toStartOf="@+id/enterUserName"
@@ -89,6 +91,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/typePassword"
         android:textColor="@color/white"
+        android:textColorHint="@color/white"
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="@+id/enterUserName"
         app:layout_constraintHorizontal_bias="0.0"
@@ -101,6 +104,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:hint=""
+        android:textColor="@color/white"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

@@ -56,12 +56,13 @@
     <!--    <string name = "cityDetail">city goes here</string>-->
     <string name="timeDetail">time goes here</string>
     <string name="temp">Temperature</string>
-    <string name="description">description goes here</string>
+    <string name="description">description here</string>
     <string name="cityCheck">Please search a city name first!</string>
     <string name="weatherSave">Weather info saved</string>
     <string name="notNull">Please user name and password!</string>
     <string name="deleteConfirm">You deleted the weather info of </string>
     <string name ="undo">UNDO</string>
+
 
 
     /// Xingyun's place for strings
@@ -71,6 +72,6 @@
     <string name="toast_onCreate_xyz">Finished creating the NewYorkTimes Activity.</string>
     <string name="msg_confirm_xyz">Are you sure?</string>
     <string name="msg_exit_xyz">Exiting to MainMenu</string>
-    <string name="TemperatureDetail">temperature goes here</string>
+    <string name="TemperatureDetail">temperature here</string>
     <string name="cityDetail">city goes here</string>
 </resources>
