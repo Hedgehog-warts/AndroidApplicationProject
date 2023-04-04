@@ -2,6 +2,7 @@ package algonquin.cst2335.androidapplicationproject;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,8 +16,11 @@ public class NYTRowHolder extends RecyclerView.ViewHolder {
     int num;
     TextView headlineView;
     XingyunMain xingyunMain;
+    Button btnRemoveFav;
+    XingyunArticle article;
 
-    public NYTRowHolder(@NonNull View itemView, Context context, XingyunMain xingyunMain) {
+
+    public NYTRowHolder(@NonNull View itemView, Context context, XingyunMain xingyunMain, boolean fav) {
         super(itemView);
         this.xingyunMain = xingyunMain;
 
@@ -60,6 +64,15 @@ public class NYTRowHolder extends RecyclerView.ViewHolder {
 //
 //        })
 //        .create().show();
+
+        if(fav) {
+            btnRemoveFav = itemView.findViewById(R.id.btnRemoveFav);
+            btnRemoveFav.setOnClickListener(clk -> {
+
+                xingyunMain.removeFromFav(article);
+
+            });
+        }
     }
 
     public int getNum() {
@@ -68,6 +81,10 @@ public class NYTRowHolder extends RecyclerView.ViewHolder {
 
     public void setNum(int position) {
         this.num = position;
+    }
+
+    public void setArticle(XingyunArticle article) {
+        this.article = article;
     }
 
 

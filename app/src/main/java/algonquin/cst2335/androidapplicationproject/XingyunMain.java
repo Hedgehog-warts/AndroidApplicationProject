@@ -127,6 +127,14 @@ public class XingyunMain extends AppCompatActivity {
         });
     }
 
+    public void removeFromFav(XingyunArticle articleToDelete) {
+        Executor thread = Executors.newSingleThreadExecutor();
+        thread.execute(() ->
+        {
+            xaDAO.deleteArticle(articleToDelete);
+        });
+    }
+
     public void ShowFavs() {
 
         isShowingFavs = true;
@@ -195,11 +203,11 @@ public class XingyunMain extends AppCompatActivity {
                 if(viewType == 0) {
                     View view = LayoutInflater.from(parent.getContext())
                             .inflate(R.layout.xingyun_article_fav, parent, false);
-                    return new NYTRowHolder(view, XingyunMain.this, XingyunMain.this);
+                    return new NYTRowHolder(view, XingyunMain.this, XingyunMain.this, true);
                 } else {
                     View view = LayoutInflater.from(parent.getContext())
                             .inflate(R.layout.detail_article_xyz, parent, false);
-                    return new NYTRowHolder(view, XingyunMain.this, XingyunMain.this);
+                    return new NYTRowHolder(view, XingyunMain.this, XingyunMain.this, false);
                 }
             }
 
@@ -209,6 +217,7 @@ public class XingyunMain extends AppCompatActivity {
                 System.out.println("onBindViewHolder position is " + position);
                 holder.headlineView.setText(data);
                 holder.setNum(position);
+                holder.setArticle(articles.get(position));
             }
 
             @Override
