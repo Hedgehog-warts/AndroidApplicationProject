@@ -91,10 +91,17 @@
         app:layout_constraintEnd_toStartOf="@+id/buttonSearchArticles"
         app:layout_constraintTop_toTopOf="@+id/buttonSearchArticles" />
 
+            <Button
+                android:id="@+id/btn_fav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="Fav"
+                app:layout_constraintEnd_toStartOf="@+id/btn_help"
+                app:layout_constraintTop_toTopOf="@+id/btn_help" />
 
 
-
-<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+            <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

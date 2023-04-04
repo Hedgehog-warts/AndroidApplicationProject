@@ -7,10 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -28,13 +28,11 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.snackbar.Snackbar;
 
 import android.util.Log;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -42,11 +40,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityXingyunMainBinding;
+import algonquin.cst2335.androidapplicationproject.databinding.XingyunDetailFragmentBinding;
 
 /*
 Requirement 9: This activity supports another language: French(fr) in Canada(CA)
@@ -59,6 +57,7 @@ public class XingyunMain extends AppCompatActivity {
     public int selectedArticlePosition = -1;
     ActivityXingyunMainBinding binding;
     private RecyclerView.Adapter myAdapter;
+    XingyunArticleDAO xaDAO;
 
     // Instantiate data lists
 //    List<String> headlines = new ArrayList<>();
@@ -140,19 +139,22 @@ public class XingyunMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
+        XingyunDatabase db = Room.databaseBuilder(getApplicationContext(), XingyunDatabase.class, "database-name").build();
+        xaDAO = db.xaDAO();
+
+        setupDataModelObserver();
 
         if(articles == null)
         {
-            articles = new ArrayList<>();
-//            dataModel.articles.setValue(articles = new ArrayList<>());
-//
-//            Executor thread = Executors.newSingleThreadExecutor();
-//            thread.execute(() ->
-//            {
-////                articles.addAll( mDAO.getAllMessages() ); //Once you get the data from database
-//
-//                runOnUiThread( () ->  binding.recycleView.setAdapter( myAdapter )); //You can then load the RecyclerView
-//            });
+            dataModel.articles.setValue(articles = new ArrayList<>());
+
+            Executor thread = Executors.newSingleThreadExecutor();
+            thread.execute(() ->
+            {
+                articles.addAll( xaDAO.getAllFavs() ); //Once you get the data from database
+
+                runOnUiThread( () ->  binding.recycleView.setAdapter( myAdapter )); //You can then load the RecyclerView
+            });
         }
 
 
@@ -164,7 +166,6 @@ public class XingyunMain extends AppCompatActivity {
         setup_searchBtn();
         alertDialog_helpBtn();
 
-        setupDataModelObserver();
     }
 
     void setup_recycleView() {
@@ -310,6 +311,13 @@ public class XingyunMain extends AppCompatActivity {
                             String pubDate = article.getString("pub_date");
                             System.out.println("Adding headline#" + articles.size() + ": " + headline + " url: " + url);
                             articles.add(new XingyunArticle(headline, url, pubDate));
+
+//                            // For Testing: add to database
+//                            Executor thread = Executors.newSingleThreadExecutor();
+//                            thread.execute(() ->
+//                            {
+//                                xaDAO.insertArticle((new XingyunArticle(headline, url, pubDate)));
+//                            });
 
                         }
 
