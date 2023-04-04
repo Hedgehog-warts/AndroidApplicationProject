@@ -132,6 +132,11 @@ public class XingyunMain extends AppCompatActivity {
         thread.execute(() ->
         {
             xaDAO.deleteArticle(articleToDelete);
+            // Remove the article from the list
+            articles.remove(articleToDelete);
+
+            // Update the list in the UI thread
+            runOnUiThread(() -> myAdapter.notifyDataSetChanged());
         });
     }
 
