@@ -307,8 +307,9 @@ public class XingyunMain extends AppCompatActivity {
                             JSONObject article = docs.getJSONObject(i);
                             String headline = article.getJSONObject("headline").getString("main");
                             String url = article.getString("web_url");
+                            String pubDate = article.getString("pub_date");
                             System.out.println("Adding headline#" + articles.size() + ": " + headline + " url: " + url);
-                            articles.add(new XingyunArticle(headline, url));
+                            articles.add(new XingyunArticle(headline, url, pubDate));
 
                         }
 
