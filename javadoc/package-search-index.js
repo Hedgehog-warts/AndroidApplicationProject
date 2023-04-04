@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"algonquin.cst2335.androidapplicationproject"},{"l":"algonquin.cst2335.androidapplicationproject.databinding"},{"l":"algonquin.cst2335.androidapplicationproject.rongData"},{"l":"All Packages","url":"allpackages-index.html"}]
