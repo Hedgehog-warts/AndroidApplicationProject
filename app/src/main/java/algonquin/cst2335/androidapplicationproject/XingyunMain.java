@@ -5,6 +5,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,6 +55,7 @@ public class XingyunMain extends AppCompatActivity {
     // m3
 
     public NYTRowHolder selectedArticle;
+    public XingyunViewModel dataModel;
     ActivityXingyunMainBinding binding;
     private RecyclerView.Adapter myAdapter;
 
@@ -100,6 +104,19 @@ public class XingyunMain extends AppCompatActivity {
     }
 
     public void selectArticle(NYTRowHolder articleView) {
+        dataModel.selectedArticle.observe(this, (newValue) -> {
+            FragmentManager fMgr = getSupportFragmentManager();
+            FragmentTransaction tx = fMgr.beginTransaction().addToBackStack("");
+
+            XingyunFragment articleFragment = new XingyunFragment(newValue);
+
+            tx.add(R.id.fragmentFrameLayout, articleFragment);
+            tx.commit();
+
+        });
+    }
+
+    void setupDatamodelObserver() {
 
     }
 
@@ -112,6 +129,8 @@ public class XingyunMain extends AppCompatActivity {
         toast_onCreate();
         setup_searchBtn();
         alertDialog_helpBtn();
+
+        dataModel = new ViewModelProvider(this).get(XingyunViewModel.class);
     }
 
     void setup_recycleView() {
@@ -137,6 +156,7 @@ public class XingyunMain extends AppCompatActivity {
                 String data = headlines.get(position);
                 System.out.println("onBindViewHolder position is " + position);
                 holder.headlineView.setText(data);
+                holder.setNum(position);
             }
 
             @Override
@@ -278,10 +298,6 @@ public class XingyunMain extends AppCompatActivity {
     }
 
     void showSearchResult() {
-//        System.out.println("headlines.size() = " + headlines.size());
-//        for (int i = 0; i < headlines.size(); i++) {
-//            System.out.println("This is the NO." + i + " article.");
-//        }
 
         int count = headlines.size();
         String message = String.format("Number of headlines: %d", count);

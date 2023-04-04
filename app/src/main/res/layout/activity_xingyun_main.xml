@@ -15,6 +15,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:titleTextColor="@color/white" />
 
+
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleView"
         android:layout_width="0dp"
@@ -59,6 +62,15 @@
         android:text="@string/btn_help_xyz"
         app:layout_constraintEnd_toStartOf="@+id/buttonSearchArticles"
         app:layout_constraintTop_toTopOf="@+id/buttonSearchArticles" />
+
+    <FrameLayout
+        android:id="@+id/fragmentFrameLayout"
+        android:layout_width="0dp"
+        android:layout_height="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/recycleView">
+
+    </FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

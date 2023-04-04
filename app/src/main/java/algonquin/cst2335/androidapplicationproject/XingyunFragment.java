@@ -8,20 +8,22 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityXingyunMainBinding;
+import algonquin.cst2335.androidapplicationproject.databinding.XingyunDetailFragmentBinding;
 
 public class XingyunFragment extends Fragment {
 
-//    ChatMessage selected;
+    XingyunArticle selected;
 
-    public XingyunFragment() {
-
+    public XingyunFragment(XingyunArticle selected) {
+        this.selected = selected;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        ActivityXingyunMainBinding binding = ActivityXingyunMainBinding.inflate(inflater);
+        XingyunDetailFragmentBinding binding = XingyunDetailFragmentBinding.inflate(inflater);
 
+        binding.ArticleHeadline.setText(selected.headline);
 //        binding.messageText.setText(selected.message);
 //        binding.timeText.setText(selected.timeSent);
 //        binding.databaseText.setText("Id = " + selected.id);
