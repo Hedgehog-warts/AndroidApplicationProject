@@ -108,7 +108,7 @@ public class XingyunMain extends AppCompatActivity {
         selectedArticle = articleView;
 
 
-        XingyunFragment articleFragment = new XingyunFragment(articles.get(articleView.getNum()));
+        XingyunFragment articleFragment = new XingyunFragment(articles.get(articleView.getNum()), this);
 
         FragmentManager fMgr = getSupportFragmentManager();
         FragmentTransaction tx = fMgr.beginTransaction().addToBackStack("");
@@ -116,6 +116,15 @@ public class XingyunMain extends AppCompatActivity {
 
         tx.add(R.id.fragmentFrameLayout, articleFragment);
         tx.commit();
+    }
+
+    public void AddArticleToFavs(XingyunArticle article) {
+
+        Executor thread = Executors.newSingleThreadExecutor();
+        thread.execute(() ->
+        {
+            xaDAO.insertArticle((new XingyunArticle(article.headline, article.url, article.date)));
+        });
     }
 
     void setupDataModelObserver() {
@@ -312,12 +321,6 @@ public class XingyunMain extends AppCompatActivity {
                             System.out.println("Adding headline#" + articles.size() + ": " + headline + " url: " + url);
                             articles.add(new XingyunArticle(headline, url, pubDate));
 
-//                            // For Testing: add to database
-//                            Executor thread = Executors.newSingleThreadExecutor();
-//                            thread.execute(() ->
-//                            {
-//                                xaDAO.insertArticle((new XingyunArticle(headline, url, pubDate)));
-//                            });
 
                         }
 

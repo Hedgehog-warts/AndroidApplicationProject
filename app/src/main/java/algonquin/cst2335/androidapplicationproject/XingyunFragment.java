@@ -9,15 +9,20 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityXingyunMainBinding;
 import algonquin.cst2335.androidapplicationproject.databinding.XingyunDetailFragmentBinding;
 
 public class XingyunFragment extends Fragment {
 
     XingyunArticle selected;
+    XingyunMain xingyunMain;
 
-    public XingyunFragment(XingyunArticle selected) {
+    public XingyunFragment(XingyunArticle selected, XingyunMain xingyunMain) {
         this.selected = selected;
+        this.xingyunMain = xingyunMain;
     }
 
     @Override
@@ -38,6 +43,14 @@ public class XingyunFragment extends Fragment {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(url));
                 startActivity(intent);
+            }
+        });
+
+        // add the article to favorites
+        binding.btnAddFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                xingyunMain.AddArticleToFavs(selected);
             }
         });
 
