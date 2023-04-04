@@ -70,4 +70,5 @@ public class NYTRowHolder extends RecyclerView.ViewHolder {
         this.num = position;
     }
 
+
 }

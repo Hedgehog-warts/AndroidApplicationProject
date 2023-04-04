@@ -107,16 +107,27 @@ public class XingyunMain extends AppCompatActivity {
 
     public void selectArticle(NYTRowHolder articleView) {
         selectedArticle = articleView;
+
+
+        XingyunFragment articleFragment = new XingyunFragment(articles.get(articleView.getNum()));
+
+        FragmentManager fMgr = getSupportFragmentManager();
+        FragmentTransaction tx = fMgr.beginTransaction().addToBackStack("");
+
+
+        tx.add(R.id.fragmentFrameLayout, articleFragment);
+        tx.commit();
     }
 
     void setupDataModelObserver() {
 
-//        dataModel = new ViewModelProvider(this).get(XingyunViewModel.class);
+        dataModel = new ViewModelProvider(this).get(XingyunViewModel.class);
 //        dataModel.selectedArticle.observe(this, (newValue) -> {
-//            FragmentManager fMgr = getSupportFragmentManager();
-//            FragmentTransaction tx = fMgr.beginTransaction().addToBackStack("");
 //
 //            XingyunFragment articleFragment = new XingyunFragment(newValue);
+//
+//            FragmentManager fMgr = getSupportFragmentManager();
+//            FragmentTransaction tx = fMgr.beginTransaction().addToBackStack("");
 //
 //            tx.add(R.id.fragmentFrameLayout, articleFragment);
 //            tx.commit();

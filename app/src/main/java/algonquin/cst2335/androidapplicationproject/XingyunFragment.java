@@ -23,7 +23,7 @@ public class XingyunFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         XingyunDetailFragmentBinding binding = XingyunDetailFragmentBinding.inflate(inflater);
 
-        binding.ArticleHeadline.setText(selected.headline);
+        binding.headlineText.setText(selected.headline);
 //        binding.messageText.setText(selected.message);
 //        binding.timeText.setText(selected.timeSent);
 //        binding.databaseText.setText("Id = " + selected.id);
