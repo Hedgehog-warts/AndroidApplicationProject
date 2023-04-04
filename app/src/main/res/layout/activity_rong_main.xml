@@ -38,7 +38,8 @@
         android:id="@+id/myToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/babyBlue"
+        android:background="@color/nasa_blue"
+        app:titleTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -63,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="@color/babyBlue"
+     android:backgroundTint="@color/nasa_blue"
         android:text="@string/loginButton"
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"

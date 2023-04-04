@@ -10,9 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
+        android:contentDescription="todo"
         android:scaleType="centerCrop"
-        android:src="@drawable/weather_fragment"
-        android:contentDescription="todo" />
+        android:src="@drawable/weather_fragment" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,9 +21,10 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/myToolbar2"
+            app:titleTextColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/babyBlue" />
+            android:background="@color/nasa_blue" />
 
         <FrameLayout
 
@@ -56,9 +57,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:hint="@string/editCity"
-                    android:textColorHint="@color/white"
-                    android:textColor="@color/white"
                     android:inputType="textAutoCorrect"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toStartOf="@+id/searchButton"
                     app:layout_constraintHorizontal_bias="0.568"
@@ -71,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="48dp"
                     android:text="@string/searchButton"
-                    android:background="@color/babyBlue"
+                    android:backgroundTint="@color/nasa_blue"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="@+id/editCity"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -83,6 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/saveCity"
+                    android:backgroundTint="@color/nasa_blue"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="@+id/textCheckBox"
                     app:layout_constraintEnd_toEndOf="@+id/searchButton"

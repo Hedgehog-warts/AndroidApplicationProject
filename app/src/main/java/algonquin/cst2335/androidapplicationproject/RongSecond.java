@@ -37,7 +37,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
@@ -51,25 +50,63 @@ import algonquin.cst2335.androidapplicationproject.databinding.ActivityRongSecon
 import algonquin.cst2335.androidapplicationproject.databinding.RongcityinfoSearchBinding;
 import algonquin.cst2335.androidapplicationproject.rongData.RongSecondViewModel;
 
-
+/**
+ * RongSecond class displays a list of saved weather information.
+ * This is the second activity page for the weatherStack App.
+ * This class extends AppCompatActivity,
+ * which is a base class for activities that use the support library action bar features.
+ */
 public class RongSecond extends AppCompatActivity {
-
+    /**
+     * TAG is a string that identifies the activity in the Android log.
+     */
     private static String TAG = "RongSecond";
+    /**
+     * variableBinding is an instance of the ActivityRongSecondBinding class, which is generated
+     * from the XML layout file. It contains references to all the views in the layout.
+     */
     ActivityRongSecondBinding variableBinding;
+    /**
+     * model is an instance of the RongSecondViewModel class, which stores the state of the activity.
+     */
     private RongSecondViewModel model;
+    /**
+     * messageList is an ArrayList that stores RongCityInfo objects retrieved from the API.
+     */
     ArrayList<RongCityInfo> messageList;
+    /**
+     * myAdapter is an instance of the RecyclerView.Adapter class, which manages the list view.
+     */
     private RecyclerView.Adapter myAdapter;
-
+    /**
+     * cityName is a string that stores the name of the city whose weather information is being
+     * retrieved.
+     */
     String cityName;
+    /*
+     * queue is an instance of the RequestQueue class, which handles HTTP requests to the API.
+     */
     protected RequestQueue queue = null;
+    /**
+     * image is a Bitmap object that stores the weather icon retrieved from the API.
+     */
     Bitmap image;
-
-    private String iconName;
-
+    /**
+     * mDAO is an instance of the RongCityInfoDAO interface, which provides access to the app's
+     * database.
+     */
     RongCityInfoDAO mDAO;
-
+    /**
+     * position is an integer that stores the position of the currently selected item in the list view.
+     */
     private int position = 0;
 
+    /**
+     * Inflates the menu items for this activity.
+     *
+     * @param menu The options menu in which the items are placed.
+     * @return True to display the menu, false to not display the menu.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -78,6 +115,12 @@ public class RongSecond extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * this method handle action bar item clicks.
+     *
+     * @param item The menu item clicked.
+     * @return True if action was performed successfully, false otherwise.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 //        super.onOptionsItemSelected(item);
@@ -123,7 +166,6 @@ public class RongSecond extends AppCompatActivity {
                             {
                                 mDAO.deleteMessage(m);
                                 messageList.remove(position);
-//                                myAdapter.notifyItemRemoved(position);
                             });
 
                             runOnUiThread(() -> {
@@ -170,6 +212,11 @@ public class RongSecond extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Saves the name of the last searched city to the SharedPreferences file "MyData".
+     *
+     * @param cityName the name of the city to be saved
+     */
     // This method gets the searched city from the SharedPreferences.
     private void saveLastSearchedCity(String cityName) {
         SharedPreferences sharedPreferences = getSharedPreferences("MyData", MODE_PRIVATE);
@@ -179,22 +226,26 @@ public class RongSecond extends AppCompatActivity {
     }
 
     /**
-     * This method loads the last searched city from the SharedPreferences.
+     * This method loads the last searched city name from shared preferences.
      *
-     * @return Returns the last searched city's name or an empty string if not found.
+     * @return The last searched city name as a string, or an empty string if no city has been searched before.
      */
     private String loadLastSearchedCity() {
         SharedPreferences sharedPreferences = getSharedPreferences("MyData", MODE_PRIVATE);
         return sharedPreferences.getString("city", "");
     }
 
+    /**
+     * This method is called when the activity is created.
+     * It initializes the views, retrieves data from the database, and sets up the adapter for the RecyclerView.
+     *
+     * @param savedInstanceState The saved instance state of the activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.w(TAG, "second create");
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rong_second);
-
         //ActivitySecondBinding
         model = new ViewModelProvider(this).get(RongSecondViewModel.class);
         messageList = model.messages.getValue();// empty ArrayList
@@ -205,10 +256,8 @@ public class RongSecond extends AppCompatActivity {
             model.messages.setValue(messageList = new ArrayList<>());
             Executor thread = Executors.newSingleThreadExecutor();
             thread.execute(() ->
-            {
-                // on a second thread
+            {             // on a second thread
                 messageList.addAll(mDAO.getAllMessages()); //add data list from database
-
                 runOnUiThread(() ->
                         // going back on the main thread after loading info from database;
                         variableBinding.recycleView.setAdapter(myAdapter));
@@ -257,25 +306,7 @@ public class RongSecond extends AppCompatActivity {
             }
         });
 
-        class MyRowHolder extends RecyclerView.ViewHolder {
-            TextView cityText;
-            TextView timeText;
-            TextView tempText;
-            TextView despText;
-
-            public MyRowHolder(@NonNull View itemView) { //itewView will be the root of the layout, constraintLayouyt;
-                super(itemView);
-                itemView.setOnClickListener(clk -> {
-                    int position = getAbsoluteAdapterPosition();
-                    RongCityInfo selected = messageList.get(position);
-                    model.selectedMessage.postValue(selected);
-                });
-                cityText = itemView.findViewById(R.id.cityText);
-                tempText = itemView.findViewById(R.id.tempText);
-                timeText = itemView.findViewById(R.id.timeText);
-                despText = itemView.findViewById(R.id.despText);
-            }
-        }
+        // fetch the weather info from weatherstack webiste.
         queue = Volley.newRequestQueue(this);
         variableBinding.searchButton.setOnClickListener(click -> {
             if (variableBinding.editCity.getText().toString().equals("")) {
@@ -291,12 +322,11 @@ public class RongSecond extends AppCompatActivity {
                             .append("http://api.weatherstack.com/current?")
                             .append("&access_key=51ab3cbdab7489cd08c3385168931c59&query=")
                             .append(URLEncoder.encode(cityName, "UTF-8"))
-//                            .append("&appid=7e943c97096a9784391a981c4d878b22&units=metric")
                             .toString();
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
-//
+
 //            this goes in the button click handler:
                 JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, stringURL,
                         null, (response) -> {
@@ -339,6 +369,8 @@ public class RongSecond extends AppCompatActivity {
 
         });
 
+        //This method observes the selectedMessage LiveData in the RongSecondViewModel
+        // and handles changes to its value.
         model.selectedMessage.observe(this, (newMessageValue) -> {
 
             if (newMessageValue != null) {
@@ -350,6 +382,36 @@ public class RongSecond extends AppCompatActivity {
             }
         });
 
+        /**
+         * This class represents a row holder for the RecyclerView in the RongSecondActivity.
+         * It extends the RecyclerView.ViewHolder class and contains
+         * TextViews for city, time, temperature, and description.
+         */
+        class MyRowHolder extends RecyclerView.ViewHolder {
+            TextView cityText;
+            TextView timeText;
+            TextView tempText;
+            TextView despText;
+
+            /**
+             * Constructor for the MyRowHolder class.
+             * @param itemView The root View of the layout, which is a ConstraintLayout.
+             */
+            public MyRowHolder(@NonNull View itemView) { //itewView will be the root of the layout, constraintLayouyt;
+                super(itemView);
+                itemView.setOnClickListener(clk -> {
+                    int position = getAbsoluteAdapterPosition();
+                    RongCityInfo selected = messageList.get(position);
+                    model.selectedMessage.postValue(selected);
+                });
+                cityText = itemView.findViewById(R.id.cityText);
+                tempText = itemView.findViewById(R.id.tempText);
+                timeText = itemView.findViewById(R.id.timeText);
+                despText = itemView.findViewById(R.id.despText);
+            }
+        }
+        //This method initializes the RecyclerView and sets up an adapter to handle displaying the data.
+        // It sets the layout manager
         variableBinding.recycleView.setLayoutManager(new LinearLayoutManager(this));
         variableBinding.recycleView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
 
@@ -364,6 +426,13 @@ public class RongSecond extends AppCompatActivity {
                 return new MyRowHolder(binding.getRoot());
             }
 
+            /**
+             * Binds the data for a single row in the RecyclerView.
+             * Sets the text for each TextView in the row
+             * based on the corresponding RongCityInfo object in the messageList at the given position.
+             * @param holder The MyRowHolder object representing the row being bound.
+             * @param position The position of the row in the messageList.
+             */
             @Override // what are the textView set to for row position?
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
 

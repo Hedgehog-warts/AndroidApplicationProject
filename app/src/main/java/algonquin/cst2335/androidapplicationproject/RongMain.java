@@ -19,14 +19,31 @@ import com.google.android.material.snackbar.Snackbar;
 
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityRongMainBinding;
 
+/**
+ * RongMain is the main activity of the application that handles user login,
+ * navigation and exiting the app.
+ * This class extends AppCompatActivity,
+ * which is a base class for activities that use the support library action bar features.
+ */
 // m3
 public class RongMain extends AppCompatActivity {
-
+    /**
+     *  TAG is a String constant used for debugging purposes.
+     */
     private static String TAG = "RongMain";
-    //    private String username = null;
+     /**
+     * binding is an object of the ActivityRongMainBinding class
+     * which is used to inflate the activity's layout and bind views to variables.
+     */
     private ActivityRongMainBinding binding;
 
-
+    /**
+     * Override method for creating options menu.
+     * Inflates the menu_weather_rong.xml file to display the options menu.
+     *
+     * @param menu The menu object that will hold the options menu items.
+     * @return true to display the options menu, false to not display it.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -34,9 +51,17 @@ public class RongMain extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * override onOptionsItemSelected method;
+     * This method is called when an item in the options menu is selected.
+     * It starts a new activity based on the selected item.
+     *
+     * @param item The selected menu item.
+     * @return Returns true if the item was successfully handled, false otherwise.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        super.onOptionsItemSelected(item);
+        //super.onOptionsItemSelected(item);
         Intent nextPage = null;
         Class pageClass = null;
 
@@ -84,15 +109,18 @@ public class RongMain extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * This method is called when the activity is first created.
+     * It initializes the UI components, sets up the toolbar and sets the shared preferences.
+     *
+     * @param savedInstanceState A Bundle object containing the activity's previously saved state.
+     */
     //m2
     @Override // This starts the application , is the main function in Android
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         //loads buttons /  test on screen / everything in the res folder will show on screen
         setContentView(R.layout.activity_rong_main);
-
         binding = ActivityRongMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot()); // loads XML on screen;
         setSupportActionBar(binding.myToolbar);
@@ -102,7 +130,7 @@ public class RongMain extends AppCompatActivity {
         binding.typeUserName.setText(userName);
         SharedPreferences.Editor editor = prefs.edit();
 
-
+        // to check constrain of password when call setOnClickListener
         binding.loginButton.setOnClickListener(clk -> {
             if (binding.typeUserName.getText().toString().equals("") || binding.password.getText().toString().equals("")) {
                 Toast.makeText(getApplicationContext(), getString(R.string.notNull), Toast.LENGTH_LONG).show();
@@ -133,6 +161,12 @@ public class RongMain extends AppCompatActivity {
 
     }
 
+    /**
+     * Overrides the method that is called when the user presses the back button on the device.
+     * Shows an alert dialog asking the user if they want to leave the application.
+     * If the user chooses to leave, the activity is finished and the application is closed.
+     * If the user chooses not to leave, the dialog is cancelled and the user remains on the current activity.
+     */
     @Override
     public void onBackPressed() {
         AlertDialog.Builder exitApp = new AlertDialog.Builder(RongMain.this);
