@@ -51,6 +51,7 @@ Requirement 9: This activity supports another language: French(fr) in Canada(CA)
 public class XingyunMain extends AppCompatActivity {
     // m3
 
+    public NYTRowHolder selectedArticle;
     ActivityXingyunMainBinding binding;
     private RecyclerView.Adapter myAdapter;
 
@@ -97,6 +98,11 @@ public class XingyunMain extends AppCompatActivity {
         }
         return true;
     }
+
+    public void selectArticle(NYTRowHolder articleView) {
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,7 +129,7 @@ public class XingyunMain extends AppCompatActivity {
             public NYTRowHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.detail_article_xyz, parent, false);
-                return new NYTRowHolder(view, XingyunMain.this);
+                return new NYTRowHolder(view, XingyunMain.this, XingyunMain.this);
             }
 
             @Override

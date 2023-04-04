@@ -13,16 +13,21 @@ import com.google.android.material.snackbar.Snackbar;
 public class NYTRowHolder extends RecyclerView.ViewHolder {
 
     TextView headlineView;
-    Context context;
+    XingyunMain xingyunMain;
 
-    public NYTRowHolder(@NonNull View itemView, Context context) {
+    public NYTRowHolder(@NonNull View itemView, Context context, XingyunMain xingyunMain) {
         super(itemView);
-        this.context = context;
+        this.xingyunMain = xingyunMain;
 
         headlineView = itemView.findViewById(R.id.headline);
 
         itemView.setOnClickListener(clk -> {
             // itemView Click Event Goes Here
+            xingyunMain.selectArticle(this);
+            Snackbar.make(headlineView, "Clicked Article: ", Snackbar.LENGTH_LONG)
+                .setAction("Action", click -> {
+                    // Snackbar Action Goes Here
+                }).show();
         });
 
 //        /*
