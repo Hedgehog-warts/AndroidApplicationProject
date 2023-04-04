@@ -5,6 +5,10 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 
+/**
+ * The data model class that preserve data when the application is doing some
+ * changes
+ */
 public class XingyunViewModel extends ViewModel {
     public MutableLiveData<ArrayList<XingyunArticle>> articles = new MutableLiveData<>();
     public MutableLiveData<XingyunArticle> selectedArticle = new MutableLiveData<>();

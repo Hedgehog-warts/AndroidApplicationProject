@@ -15,16 +15,33 @@ import java.util.concurrent.Executors;
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityXingyunMainBinding;
 import algonquin.cst2335.androidapplicationproject.databinding.XingyunDetailFragmentBinding;
 
+/**
+ * The fragment class that show details of the selected article
+ */
 public class XingyunFragment extends Fragment {
 
     XingyunArticle selected;
     XingyunMain xingyunMain;
 
+    /**
+     * The constructor
+     * 
+     * @param selected
+     * @param xingyunMain
+     */
     public XingyunFragment(XingyunArticle selected, XingyunMain xingyunMain) {
         this.selected = selected;
         this.xingyunMain = xingyunMain;
     }
 
+    /**
+     * Setup the fragment object
+     * 
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
@@ -34,8 +51,10 @@ public class XingyunFragment extends Fragment {
         binding.urlText.setText(selected.url);
         binding.dateText.setText(selected.date);
 
-        // This code creates an intent with the ACTION_VIEW action and a data URI containing the URL.
-        // This intent will launch the user's default web browser to display the URL when the user clicks on the urlText TextView.
+        // This code creates an intent with the ACTION_VIEW action and a data URI
+        // containing the URL.
+        // This intent will launch the user's default web browser to display the URL
+        // when the user clicks on the urlText TextView.
         binding.urlText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

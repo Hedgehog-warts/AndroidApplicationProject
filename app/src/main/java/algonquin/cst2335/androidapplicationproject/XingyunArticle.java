@@ -4,24 +4,26 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * The Entity or Data Transfer Object of articles
+ */
 @Entity
 public class XingyunArticle {
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name="id")
+    @ColumnInfo(name = "id")
     public int id;
 
-    @ColumnInfo(name="headline")
+    @ColumnInfo(name = "headline")
     protected String headline;
 
-    @ColumnInfo(name="url")
+    @ColumnInfo(name = "url")
     protected String url;
 
-    @ColumnInfo(name="date")
+    @ColumnInfo(name = "date")
     protected String date;
 
-    public XingyunArticle(String headline, String url, String date)
-    {
+    public XingyunArticle(String headline, String url, String date) {
         this.headline = headline;
         this.url = url;
         this.date = date;
@@ -31,7 +33,9 @@ public class XingyunArticle {
         return headline;
     }
 
-    public String getUrl() { return url; }
+    public String getUrl() {
+        return url;
+    }
 
     public String getDate() {
         return date;

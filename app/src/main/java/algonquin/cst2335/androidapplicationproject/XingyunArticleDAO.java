@@ -7,6 +7,9 @@ import androidx.room.Query;
 
 import java.util.List;
 
+/**
+ * The Data Access Object of articles
+ */
 @Dao
 public interface XingyunArticleDAO {
 

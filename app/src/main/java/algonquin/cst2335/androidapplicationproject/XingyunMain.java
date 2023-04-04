@@ -49,6 +49,10 @@ import algonquin.cst2335.androidapplicationproject.databinding.XingyunDetailFrag
 /*
 Requirement 9: This activity supports another language: French(fr) in Canada(CA)
 */
+
+/**
+ * The main class of Xingyun
+ */
 public class XingyunMain extends AppCompatActivity {
     // m3
 
@@ -63,12 +67,22 @@ public class XingyunMain extends AppCompatActivity {
     ArrayList<XingyunArticle> articles;
     boolean isShowingFavs = false;
 
+    /**
+     * Setup the toolbar
+     * 
+     * @param toolbar
+     */
     @Override
     public void setSupportActionBar(@Nullable Toolbar toolbar) {
         super.setSupportActionBar(toolbar);
     }
 
-
+    /**
+     * Setup the toolbar's options
+     * 
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -77,6 +91,12 @@ public class XingyunMain extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Setup the actions after the toolbar's options are selected
+     * 
+     * @param item
+     * @return
+     */
     // this onOptionsItemSelected() is copied from Doyoung's code
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -85,17 +105,17 @@ public class XingyunMain extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.nickApp:
-                pageClass= NickMain.class;
+                pageClass = NickMain.class;
                 nextPage = new Intent(this, pageClass);
                 startActivity(nextPage);
                 break;
             case R.id.rongApp:
-                pageClass= RongMain.class;
+                pageClass = RongMain.class;
                 nextPage = new Intent(this, pageClass);
                 startActivity(nextPage);
                 break;
             case R.id.doyoungApp:
-                pageClass= DoyoungMain.class;
+                pageClass = DoyoungMain.class;
                 nextPage = new Intent(this, pageClass);
                 startActivity(nextPage);
                 break;
@@ -104,33 +124,44 @@ public class XingyunMain extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * After the user clicked an article, a detailed fragment will be opened
+     * 
+     * @param articleView
+     */
     public void selectArticle(NYTRowHolder articleView) {
         selectedArticle = articleView;
-
 
         XingyunFragment articleFragment = new XingyunFragment(articles.get(articleView.getNum()), this);
 
         FragmentManager fMgr = getSupportFragmentManager();
         FragmentTransaction tx = fMgr.beginTransaction().addToBackStack("");
 
-
         tx.add(R.id.fragmentFrameLayout, articleFragment);
         tx.commit();
     }
 
+    /**
+     * Add the selected article to the favorite list
+     * 
+     * @param article
+     */
     public void AddArticleToFavs(XingyunArticle article) {
 
         Executor thread = Executors.newSingleThreadExecutor();
-        thread.execute(() ->
-        {
+        thread.execute(() -> {
             xaDAO.insertArticle((new XingyunArticle(article.headline, article.url, article.date)));
         });
     }
 
+    /**
+     * Remove the article from the favorite list
+     * 
+     * @param articleToDelete
+     */
     public void removeFromFav(XingyunArticle articleToDelete) {
         Executor thread = Executors.newSingleThreadExecutor();
-        thread.execute(() ->
-        {
+        thread.execute(() -> {
             xaDAO.deleteArticle(articleToDelete);
             // Remove the article from the list
             articles.remove(articleToDelete);
@@ -140,42 +171,50 @@ public class XingyunMain extends AppCompatActivity {
         });
     }
 
+    /**
+     * Show the favorite list for saved articles
+     * 
+     */
     public void ShowFavs() {
 
         isShowingFavs = true;
         dataModel.articles.setValue(articles = new ArrayList<>());
 
         Executor thread = Executors.newSingleThreadExecutor();
-        thread.execute(() ->
-        {
-            articles.addAll( xaDAO.getAllFavs() ); //Once you get the data from database
+        thread.execute(() -> {
+            articles.addAll(xaDAO.getAllFavs()); // Once you get the data from database
 
-            runOnUiThread( () ->  binding.recycleView.setAdapter( myAdapter )); //You can then load the RecyclerView
+            runOnUiThread(() -> binding.recycleView.setAdapter(myAdapter)); // You can then load the RecyclerView
         });
     }
 
     void setupDataModelObserver() {
 
         dataModel = new ViewModelProvider(this).get(XingyunViewModel.class);
-//        dataModel.selectedArticle.observe(this, (newValue) -> {
-//
-//            XingyunFragment articleFragment = new XingyunFragment(newValue);
-//
-//            FragmentManager fMgr = getSupportFragmentManager();
-//            FragmentTransaction tx = fMgr.beginTransaction().addToBackStack("");
-//
-//            tx.add(R.id.fragmentFrameLayout, articleFragment);
-//            tx.commit();
-//
-//        });
+        // dataModel.selectedArticle.observe(this, (newValue) -> {
+        //
+        // XingyunFragment articleFragment = new XingyunFragment(newValue);
+        //
+        // FragmentManager fMgr = getSupportFragmentManager();
+        // FragmentTransaction tx = fMgr.beginTransaction().addToBackStack("");
+        //
+        // tx.add(R.id.fragmentFrameLayout, articleFragment);
+        // tx.commit();
+        //
+        // });
     }
 
+    /**
+     * Setup the XingyunMain class
+     * 
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        XingyunDatabase db = Room.databaseBuilder(getApplicationContext(), XingyunDatabase.class, "database-name").build();
+        XingyunDatabase db = Room.databaseBuilder(getApplicationContext(), XingyunDatabase.class, "database-name")
+                .build();
         xaDAO = db.xaDAO();
 
         setupDataModelObserver();
@@ -193,10 +232,10 @@ public class XingyunMain extends AppCompatActivity {
 
     void setup_recycleView() {
 
-
         /*
-        Requirement 1: Each person’s project must have a RecyclerView somewhere to present items in a list.
-        */
+         * Requirement 1: Each person’s project must have a RecyclerView somewhere to
+         * present items in a list.
+         */
         binding = ActivityXingyunMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -205,7 +244,7 @@ public class XingyunMain extends AppCompatActivity {
 
             @Override
             public NYTRowHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                if(viewType == 0) {
+                if (viewType == 0) {
                     View view = LayoutInflater.from(parent.getContext())
                             .inflate(R.layout.xingyun_article_fav, parent, false);
                     return new NYTRowHolder(view, XingyunMain.this, XingyunMain.this, true);
@@ -233,7 +272,7 @@ public class XingyunMain extends AppCompatActivity {
             @Override
             public int getItemViewType(int position) {
 
-                if(isShowingFavs) {
+                if (isShowingFavs) {
                     return 0;
                 }
                 return 1;
@@ -241,12 +280,10 @@ public class XingyunMain extends AppCompatActivity {
         });
     }
 
-
-
     void toast_onCreate() {
         /*
-        Requirement 4 part 1/3: Each activity must have at least 1 Toast.
-        */
+         * Requirement 4 part 1/3: Each activity must have at least 1 Toast.
+         */
         Context context = getApplicationContext();
         CharSequence text = getString(R.string.toast_onCreate_xyz);
         int duration = Toast.LENGTH_SHORT;
@@ -257,7 +294,8 @@ public class XingyunMain extends AppCompatActivity {
     void setup_searchBtn() {
 
         Button btn_search = findViewById(R.id.buttonSearchArticles);
-        if (btn_search == null)  return;
+        if (btn_search == null)
+            return;
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -275,7 +313,7 @@ public class XingyunMain extends AppCompatActivity {
         String inputText = binding.editTextSearchArticles.getText().toString();
 
         // if search file is empty, prompt an error
-        if(inputText.equals("")) {
+        if (inputText.equals("")) {
             System.out.println("search file is empty");
             snackbar_SearchBtn();
         } else {
@@ -290,8 +328,8 @@ public class XingyunMain extends AppCompatActivity {
 
     void snackbar_SearchBtn() {
         /*
-        Requirement 4 part 2/3: Each activity must have at least 1 Snackbar (1/2).
-        */
+         * Requirement 4 part 2/3: Each activity must have at least 1 Snackbar (1/2).
+         */
         Button btn_search = findViewById(R.id.buttonSearchArticles);
         Snackbar.make(btn_search, "Search field is empty.", Snackbar.LENGTH_LONG).show();
 
@@ -299,12 +337,13 @@ public class XingyunMain extends AppCompatActivity {
 
     void alertDialog_helpBtn() {
         /*
-        Requirement 8: Each activity must have at least a help menu item
-        that displays an AlertDialog with instructions for how to use the interface.
-        */
+         * Requirement 8: Each activity must have at least a help menu item
+         * that displays an AlertDialog with instructions for how to use the interface.
+         */
 
         Button btn_help = findViewById(R.id.btn_help);
-        if (btn_help == null)  return;
+        if (btn_help == null)
+            return;
         btn_help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -312,7 +351,6 @@ public class XingyunMain extends AppCompatActivity {
             }
         });
     }
-
 
     void setup_favBtn() {
         Button btn_fav = findViewById(R.id.btn_fav);
@@ -328,15 +366,15 @@ public class XingyunMain extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setMessage("1.Input the article tile in the search bar. \n" +
-                        "2.Press the \'SEARCH\' button.\n\n" +
-                        "Press the \'HELP\' button to show this instruction again.")
+                "2.Press the \'SEARCH\' button.\n\n" +
+                "Press the \'HELP\' button to show this instruction again.")
                 .setTitle("Instruction")
-                .setPositiveButton("Understand", (dialog, cl) -> {})
+                .setPositiveButton("Understand", (dialog, cl) -> {
+                })
                 .create().show();
     }
 
     void useVolley(String searchInput) {
-
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -347,45 +385,46 @@ public class XingyunMain extends AppCompatActivity {
         String apiKey = "uaRvwTEu6MJlscYrLYCUu245jQAsWfip";
 
         // Construct the full URL with the parameters
-        String url = String.format("%s?q=%s&api-key=%s&page=0&sort=newest&fl=web_url,headline,pub_date,snippet", baseUrl, query, apiKey);
+        String url = String.format("%s?q=%s&api-key=%s&page=0&sort=newest&fl=web_url,headline,pub_date,snippet",
+                baseUrl, query, apiKey);
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-            new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    // Display the response string.
-                    Log.d("Volley Response", "Response is: " + response);
-                    try {
-                        JSONObject responseJson = new JSONObject(response);
-                        JSONArray docs = responseJson.getJSONObject("response").getJSONArray("docs");
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the response string.
+                        Log.d("Volley Response", "Response is: " + response);
+                        try {
+                            JSONObject responseJson = new JSONObject(response);
+                            JSONArray docs = responseJson.getJSONObject("response").getJSONArray("docs");
 
-                        for (int i = 0; i < docs.length(); i++) {
-                            JSONObject article = docs.getJSONObject(i);
-                            String headline = article.getJSONObject("headline").getString("main");
-                            String url = article.getString("web_url");
-                            String pubDate = article.getString("pub_date");
-                            System.out.println("Adding headline#" + articles.size() + ": " + headline + " url: " + url);
-                            articles.add(new XingyunArticle(headline, url, pubDate));
+                            for (int i = 0; i < docs.length(); i++) {
+                                JSONObject article = docs.getJSONObject(i);
+                                String headline = article.getJSONObject("headline").getString("main");
+                                String url = article.getString("web_url");
+                                String pubDate = article.getString("pub_date");
+                                System.out.println(
+                                        "Adding headline#" + articles.size() + ": " + headline + " url: " + url);
+                                articles.add(new XingyunArticle(headline, url, pubDate));
 
+                            }
 
+                            // Notify the adapter that data has been updated
+                            myAdapter.notifyDataSetChanged();
+                            showSearchResult();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-
-                        // Notify the adapter that data has been updated
-                        myAdapter.notifyDataSetChanged();
-                        showSearchResult();
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
-                }
-            }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // Handle error
-                Log.e("Volley Error", "That didn't work!", error);
-            }
-        });
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle error
+                        Log.e("Volley Error", "That didn't work!", error);
+                    }
+                });
 
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
@@ -400,10 +439,9 @@ public class XingyunMain extends AppCompatActivity {
         System.out.println("rowCount = " + rowCount);
     }
 
-
-    /*
-    Requirement 4 part 3/3: Each activity must have at least 1 AlertDialog (1/2).
-    */
+    /**
+     * Requirement 4 part 3/3: Each activity must have at least 1 AlertDialog (1/2).
+     */
     @Override
     public void onBackPressed() {
         AlertDialog.Builder exitApp = new AlertDialog.Builder(XingyunMain.this);
@@ -423,4 +461,3 @@ public class XingyunMain extends AppCompatActivity {
                 .show();
     }
 }
-
