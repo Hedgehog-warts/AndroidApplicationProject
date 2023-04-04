@@ -13,12 +13,28 @@ import java.util.List;
 @Dao
 public interface XingyunArticleDAO {
 
+    /**
+     * The Insert or Add query
+     * 
+     * @param article
+     * @return
+     */
     @Insert
     public long insertArticle(XingyunArticle article);
 
+    /**
+     * The Select query
+     * 
+     * @return
+     */
     @Query("Select * from XingyunArticle")
     public List<XingyunArticle> getAllFavs();
 
+    /**
+     * The Delete query
+     * 
+     * @param article
+     */
     @Delete
     void deleteArticle(XingyunArticle article);
 

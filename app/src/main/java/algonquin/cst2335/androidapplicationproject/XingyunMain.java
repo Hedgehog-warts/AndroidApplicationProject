@@ -56,10 +56,25 @@ Requirement 9: This activity supports another language: French(fr) in Canada(CA)
 public class XingyunMain extends AppCompatActivity {
     // m3
 
+    /**
+     * The row holder object of articles
+     */
     public NYTRowHolder selectedArticle;
+
+    /**
+     * The data model or Data Transfer Object(DTO)
+     */
     public XingyunViewModel dataModel;
-    public int selectedArticlePosition = -1;
+    // public int selectedArticlePosition = -1;
+
+    /**
+     * The binding for the XingyunMain and its XML file
+     */
     ActivityXingyunMainBinding binding;
+
+    /**
+     * The adapter for the recyclerView
+     */
     private RecyclerView.Adapter myAdapter;
     XingyunArticleDAO xaDAO;
 

@@ -10,7 +10,14 @@ import java.util.ArrayList;
  * changes
  */
 public class XingyunViewModel extends ViewModel {
+    /**
+     * The saved articles list
+     */
     public MutableLiveData<ArrayList<XingyunArticle>> articles = new MutableLiveData<>();
+
+    /**
+     * The saved currently selected article
+     */
     public MutableLiveData<XingyunArticle> selectedArticle = new MutableLiveData<>();
 
 }
