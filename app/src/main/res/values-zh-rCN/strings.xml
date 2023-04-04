@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">终期项目应用界面</string>
+    <string name="app_name">终期项目</string>
 
     <string name="loginButton">登录</string>
     <string name="searchButton">查询</string>
     <string name="textCheckBox">你喜欢这个城市吗?</string>
-    <string name="checkBox">复选框</string>
+    <string name="saveCity">保存城市</string>
     <string name="help">帮助</string>
     <string name="editCity">输入城市</string>
     <string name="rongButton">冉_蓉</string>
-    <string name="weatherApp">欢迎使用WeatherStack App</string>
+    <string name="weatherApp">欢迎使用天气堆栈软件</string>
     <string name="userName">用户名</string>
     <string name="enterUserName">输入用户名</string>
     <string name="typeUserName">键入用户名</string>
@@ -25,12 +25,25 @@
     <string name ="helpTitle">用户手册 </string>
     <string name ="close">关闭</string>
     <string name ="notPass">密码不对</string>
-    <string name ="leave">您要离开Weather Stack APP吗?</string>
+    <string name ="leave">您要离开天气堆栈软件吗?</string>
     <string name ="thanks">欢迎下次光临!</string>
+    <string name ="question">问题?</string>
     <string name ="yes">是</string>
     <string name ="no">否</string>
     <string name ="login">登录名:  </string>
     <string name ="welcome">欢迎回来 </string>
     <string name ="likeCity">您喜欢这个城市吗?  </string>
     <string name ="weather">您想要查看该城市</string>
+    <string name="undo">撤销</string>
+    <string name="cityDetail">城市细节</string>
+    <string name="timeDetail">时间细节</string>
+    <string name="TemperatureDetail">温度细节</string>
+    <string name="databaseText">数据编号</string>
+    <string name="delete">您想要删除此天气信息?</string>
+    <string name="cityCheck">请先输入城市名称</string>
+    <string name="weatherSave">天气信息已保存</string>
+    <string name="notNull">请输入用户名和密码!</string>
+    <string name="description">天气描述</string>
+    <string name="temp">温度</string>
+    <string name="deleteConfirm">您已删除该城市天气信息</string>
 </resources>

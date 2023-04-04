@@ -20,14 +20,31 @@ import com.google.android.material.snackbar.Snackbar;
 import algonquin.cst2335.androidapplicationproject.DoyoungApp.DoyoungMain;
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityRongMainBinding;
 
-
+/**
+ * RongMain is the main activity of the application that handles user login,
+ * navigation and exiting the app.
+ * This class extends AppCompatActivity,
+ * which is a base class for activities that use the support library action bar features.
+ */
+// m3
 public class RongMain extends AppCompatActivity {
-
+    /**
+     *  TAG is a String constant used for debugging purposes.
+     */
     private static String TAG = "RongMain";
-    //    private String username = null;
+     /**
+     * binding is an object of the ActivityRongMainBinding class
+     * which is used to inflate the activity's layout and bind views to variables.
+     */
     private ActivityRongMainBinding binding;
 
-
+    /**
+     * Override method for creating options menu.
+     * Inflates the menu_weather_rong.xml file to display the options menu.
+     *
+     * @param menu The menu object that will hold the options menu items.
+     * @return true to display the options menu, false to not display it.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -35,9 +52,17 @@ public class RongMain extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * override onOptionsItemSelected method;
+     * This method is called when an item in the options menu is selected.
+     * It starts a new activity based on the selected item.
+     *
+     * @param item The selected menu item.
+     * @return Returns true if the item was successfully handled, false otherwise.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        super.onOptionsItemSelected(item);
+        //super.onOptionsItemSelected(item);
         Intent nextPage = null;
         Class pageClass = null;
 
@@ -64,17 +89,17 @@ public class RongMain extends AppCompatActivity {
             case R.id.help:
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(RongMain.this);
-                builder.setMessage(getString(R.string.helpText1) +"\n" +
+                builder.setMessage(getString(R.string.helpText1) + "\n" +
                                 getString(R.string.helpText2) + "\n" +
-                                        getString(R.string.helpText3) + "\n"
-                                + getString(R.string.helpText4)+ "\n" +
-                                        getString(R.string.helpText5) + "\n" +
+                                getString(R.string.helpText3) + "\n"
+                                + getString(R.string.helpText4) + "\n" +
+                                getString(R.string.helpText5) + "\n" +
                                 getString(R.string.helpText6) + "\n" +
-                                        getString(R.string.helpText7) + "\n" +
-                        getString(R.string.helpText8) +"\n")
-                        .setTitle(getString(R.string.helpTitle) +"\n")
+                                getString(R.string.helpText7) + "\n" +
+                                getString(R.string.helpText8) + "\n")
+                        .setTitle(getString(R.string.helpTitle) + "\n")
 
-                        .setPositiveButton( getString(R.string.close), (dialog, cl) -> {
+                        .setPositiveButton(getString(R.string.close), (dialog, cl) -> {
                             dialog.cancel();
                         })
                         .create()
@@ -85,15 +110,18 @@ public class RongMain extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * This method is called when the activity is first created.
+     * It initializes the UI components, sets up the toolbar and sets the shared preferences.
+     *
+     * @param savedInstanceState A Bundle object containing the activity's previously saved state.
+     */
     //m2
     @Override // This starts the application , is the main function in Android
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         //loads buttons /  test on screen / everything in the res folder will show on screen
         setContentView(R.layout.activity_rong_main);
-
         binding = ActivityRongMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot()); // loads XML on screen;
         setSupportActionBar(binding.myToolbar);
@@ -103,38 +131,43 @@ public class RongMain extends AppCompatActivity {
         binding.typeUserName.setText(userName);
         SharedPreferences.Editor editor = prefs.edit();
 
-
-//        TextView tv = findViewById(R.id.textShow);
-
+        // to check constrain of password when call setOnClickListener
         binding.loginButton.setOnClickListener(clk -> {
-
-            String password = binding.password.getText().toString();
-            TextView username = findViewById(R.id.typeUserName);
-            // looking for UpperCase, LowerCase, Number and Special character,
-            if (checkPasswordComplexity(password)) {
-                Snackbar.make(username, getString(R.string.login) +" "+ username.getText() + " ?", Snackbar.LENGTH_LONG)
-                        .setAction(getString(R.string.yes), click -> {
-                            Intent nextPage = new Intent(RongMain.this, RongSecond.class);
-                            //pass some data:
-                            nextPage.putExtra("userName", binding.typeUserName.getText().toString());
-                            // actually make the transition, send the table to the secondActivity
-                            editor.putString("LoginName", binding.typeUserName.getText().toString()); //emailAddress =""
-                            editor.apply();
-                            startActivity(nextPage);
-
-                        })
-                        .show();
-
-
+            if (binding.typeUserName.getText().toString().equals("") || binding.password.getText().toString().equals("")) {
+                Toast.makeText(getApplicationContext(), getString(R.string.notNull), Toast.LENGTH_LONG).show();
             } else {
+                String password = binding.password.getText().toString();
+                TextView username = findViewById(R.id.typeUserName);
+                // looking for UpperCase, LowerCase, Number and Special character,
+                if (checkPasswordComplexity(password)) {
+                    Snackbar.make(username, getString(R.string.login) + " " + username.getText() + " ?", Snackbar.LENGTH_LONG)
+                            .setAction(getString(R.string.yes), click -> {
+                                Intent nextPage = new Intent(RongMain.this, RongSecond.class);
+                                //pass some data:
+                                nextPage.putExtra("userName", binding.typeUserName.getText().toString());
+                                // actually make the transition, send the table to the secondActivity
+                                editor.putString("LoginName", binding.typeUserName.getText().toString()); //emailAddress =""
+                                editor.apply();
+                                startActivity(nextPage);
 
-                Toast.makeText(this, getString(R.string.notPass), Toast.LENGTH_SHORT).show();
+                            })
+                            .show();
+                } else {
+
+                    Toast.makeText(this, getString(R.string.notPass), Toast.LENGTH_SHORT).show();
+                }
             }
         });
         Log.w(TAG, "In onCreate() - Loading Widgets");
 
     }
 
+    /**
+     * Overrides the method that is called when the user presses the back button on the device.
+     * Shows an alert dialog asking the user if they want to leave the application.
+     * If the user chooses to leave, the activity is finished and the application is closed.
+     * If the user chooses not to leave, the dialog is cancelled and the user remains on the current activity.
+     */
     @Override
     public void onBackPressed() {
         AlertDialog.Builder exitApp = new AlertDialog.Builder(RongMain.this);
@@ -183,19 +216,19 @@ public class RongMain extends AppCompatActivity {
         }
 
         if (!foundUpperCase) {
-//            Toast.makeText(this, "they are missing an upper case letter", Toast.LENGTH_SHORT).show();
+
             return false;
         } else if (!foundLowerCase) {
-//            Toast.makeText(this, "They are missing a lower case letter", Toast.LENGTH_SHORT).show();
+
             return false;
         } else if (!foundNumber) {
-//            Toast.makeText(this, "They are missing a a number", Toast.LENGTH_SHORT).show();
+
             return false;
         } else if (!foundSpecial) {
-//            Toast.makeText(this, "They are missing a special character", Toast.LENGTH_SHORT).show();
+
             return false;
         } else {
-//            Toast.makeText(this, "Your password meets the requirements", Toast.LENGTH_SHORT).show();
+
             return true; //only get here if they're all true
         }
     }
@@ -221,34 +254,6 @@ public class RongMain extends AppCompatActivity {
             default:
                 return false;
         }
-    }
-
-
-    @Override  // 2)   Activity is now visible
-    protected void onStart() {
-        super.onStart();
-        Log.w(TAG, "onStart() - The application is now visible on screen");
-    }
-
-    @Override //  3)  Now responds to touch input
-    protected void onResume() {
-        super.onResume();
-        Log.w(TAG, "onResume() - The application is now responding to user input");
-    }
-
-    @Override //no longer listening to touches
-    protected void onPause() {
-        super.onPause();
-
-        Log.w(TAG, "onPause()- The application no longer responds to user input");
-    }
-
-
-    @Override  // memory is garbage collected
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.w("TAG", "onDestroy() - Any memory used by the application is freed");
-
     }
 
 }

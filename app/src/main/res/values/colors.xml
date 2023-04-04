@@ -9,6 +9,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+
     /// Doyoung's place for colors
     <color name="nasa_blue">#1F59A5</color>
     <color name="nasa_blue_trans40">#661F59A5</color>
@@ -20,6 +21,8 @@
     /// Rong's place for colors
     <color name="darkPurple">#5A0671</color>
     <color name="babyBlue">#6FD7E4</color>
+    <color name="darkGreen">#07550A</color>
+    <color name ="navyBlue">#055595</color>
 
     /// Xingyun's place for colors
 

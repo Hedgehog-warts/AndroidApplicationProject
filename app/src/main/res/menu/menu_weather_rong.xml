@@ -18,6 +18,12 @@
         android:icon="@drawable/xingyun"
         app:showAsAction="always"
         android:title="xingyun" />
+
+    <item
+        android:id="@+id/deleteWeather"
+        android:icon="@drawable/delete_weather"
+        app:showAsAction="always"
+        android:title="Delete this item" />
     <item
         android:id="@+id/help"
         app:showAsAction="never"
