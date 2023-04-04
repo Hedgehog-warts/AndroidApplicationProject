@@ -60,8 +60,8 @@ public class XingyunMain extends AppCompatActivity {
     XingyunArticleDAO xaDAO;
 
     // Instantiate data lists
-//    List<String> headlines = new ArrayList<>();
     ArrayList<XingyunArticle> articles;
+    boolean isShowingFavs = false;
 
     @Override
     public void setSupportActionBar(@Nullable Toolbar toolbar) {
@@ -127,6 +127,20 @@ public class XingyunMain extends AppCompatActivity {
         });
     }
 
+    public void ShowFavs() {
+
+        isShowingFavs = true;
+        dataModel.articles.setValue(articles = new ArrayList<>());
+
+        Executor thread = Executors.newSingleThreadExecutor();
+        thread.execute(() ->
+        {
+            articles.addAll( xaDAO.getAllFavs() ); //Once you get the data from database
+
+            runOnUiThread( () ->  binding.recycleView.setAdapter( myAdapter )); //You can then load the RecyclerView
+        });
+    }
+
     void setupDataModelObserver() {
 
         dataModel = new ViewModelProvider(this).get(XingyunViewModel.class);
@@ -152,21 +166,7 @@ public class XingyunMain extends AppCompatActivity {
         xaDAO = db.xaDAO();
 
         setupDataModelObserver();
-
-        if(articles == null)
-        {
-            dataModel.articles.setValue(articles = new ArrayList<>());
-
-            Executor thread = Executors.newSingleThreadExecutor();
-            thread.execute(() ->
-            {
-                articles.addAll( xaDAO.getAllFavs() ); //Once you get the data from database
-
-                runOnUiThread( () ->  binding.recycleView.setAdapter( myAdapter )); //You can then load the RecyclerView
-            });
-        }
-
-
+        articles = new ArrayList<>();
 
         setup_recycleView();
         setContentView(binding.getRoot());
@@ -174,10 +174,12 @@ public class XingyunMain extends AppCompatActivity {
         toast_onCreate();
         setup_searchBtn();
         alertDialog_helpBtn();
+        setup_favBtn();
 
     }
 
     void setup_recycleView() {
+
 
         /*
         Requirement 1: Each person’s project must have a RecyclerView somewhere to present items in a list.
@@ -190,9 +192,15 @@ public class XingyunMain extends AppCompatActivity {
 
             @Override
             public NYTRowHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.detail_article_xyz, parent, false);
-                return new NYTRowHolder(view, XingyunMain.this, XingyunMain.this);
+                if(viewType == 0) {
+                    View view = LayoutInflater.from(parent.getContext())
+                            .inflate(R.layout.xingyun_article_fav, parent, false);
+                    return new NYTRowHolder(view, XingyunMain.this, XingyunMain.this);
+                } else {
+                    View view = LayoutInflater.from(parent.getContext())
+                            .inflate(R.layout.detail_article_xyz, parent, false);
+                    return new NYTRowHolder(view, XingyunMain.this, XingyunMain.this);
+                }
             }
 
             @Override
@@ -206,6 +214,15 @@ public class XingyunMain extends AppCompatActivity {
             @Override
             public int getItemCount() {
                 return articles.size();
+            }
+
+            @Override
+            public int getItemViewType(int position) {
+
+                if(isShowingFavs) {
+                    return 0;
+                }
+                return 1;
             }
         });
     }
@@ -240,6 +257,7 @@ public class XingyunMain extends AppCompatActivity {
 
     void click_searchBtn(View v) {
 
+        isShowingFavs = false;
         String inputText = binding.editTextSearchArticles.getText().toString();
 
         // if search file is empty, prompt an error
@@ -249,6 +267,10 @@ public class XingyunMain extends AppCompatActivity {
         } else {
             System.out.println("inputText: " + inputText);
             useVolley(inputText);
+
+            // clear the result list
+            articles.clear();
+            myAdapter.notifyDataSetChanged();
         }
     }
 
@@ -273,6 +295,17 @@ public class XingyunMain extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 show_help();
+            }
+        });
+    }
+
+
+    void setup_favBtn() {
+        Button btn_fav = findViewById(R.id.btn_fav);
+        btn_fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowFavs();
             }
         });
     }
