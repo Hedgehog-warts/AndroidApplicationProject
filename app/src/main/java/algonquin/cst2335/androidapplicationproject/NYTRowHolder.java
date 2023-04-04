@@ -24,6 +24,14 @@ public class NYTRowHolder extends RecyclerView.ViewHolder {
 
         itemView.setOnClickListener(clk -> {
             // itemView Click Event Goes Here
+
+
+//                int position = getAbsoluteAdapterPosition();
+//                XingyunArticle selected = xingyunMain.articles.get(position);
+//                xingyunMain.dataModel.selectedArticle.postValue(selected);
+//
+//                xingyunMain.selectedArticlePosition = position;
+
             xingyunMain.selectArticle(this);
             Snackbar.make(headlineView, "selectArticle: #" + num, Snackbar.LENGTH_LONG)
                 .setAction("Action", click -> {

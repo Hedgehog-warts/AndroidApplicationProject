@@ -56,11 +56,13 @@ public class XingyunMain extends AppCompatActivity {
 
     public NYTRowHolder selectedArticle;
     public XingyunViewModel dataModel;
+    public int selectedArticlePosition = -1;
     ActivityXingyunMainBinding binding;
     private RecyclerView.Adapter myAdapter;
 
     // Instantiate data lists
-    List<String> headlines = new ArrayList<>();
+//    List<String> headlines = new ArrayList<>();
+    ArrayList<XingyunArticle> articles;
 
     @Override
     public void setSupportActionBar(@Nullable Toolbar toolbar) {
@@ -104,25 +106,46 @@ public class XingyunMain extends AppCompatActivity {
     }
 
     public void selectArticle(NYTRowHolder articleView) {
-        dataModel.selectedArticle.observe(this, (newValue) -> {
-            FragmentManager fMgr = getSupportFragmentManager();
-            FragmentTransaction tx = fMgr.beginTransaction().addToBackStack("");
-
-            XingyunFragment articleFragment = new XingyunFragment(newValue);
-
-            tx.add(R.id.fragmentFrameLayout, articleFragment);
-            tx.commit();
-
-        });
+        selectedArticle = articleView;
     }
 
-    void setupDatamodelObserver() {
+    void setupDataModelObserver() {
 
+//        dataModel = new ViewModelProvider(this).get(XingyunViewModel.class);
+//        dataModel.selectedArticle.observe(this, (newValue) -> {
+//            FragmentManager fMgr = getSupportFragmentManager();
+//            FragmentTransaction tx = fMgr.beginTransaction().addToBackStack("");
+//
+//            XingyunFragment articleFragment = new XingyunFragment(newValue);
+//
+//            tx.add(R.id.fragmentFrameLayout, articleFragment);
+//            tx.commit();
+//
+//        });
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+        if(articles == null)
+        {
+            articles = new ArrayList<>();
+//            dataModel.articles.setValue(articles = new ArrayList<>());
+//
+//            Executor thread = Executors.newSingleThreadExecutor();
+//            thread.execute(() ->
+//            {
+////                articles.addAll( mDAO.getAllMessages() ); //Once you get the data from database
+//
+//                runOnUiThread( () ->  binding.recycleView.setAdapter( myAdapter )); //You can then load the RecyclerView
+//            });
+        }
+
+
+
         setup_recycleView();
         setContentView(binding.getRoot());
         setSupportActionBar(binding.myToolbar);
@@ -130,7 +153,7 @@ public class XingyunMain extends AppCompatActivity {
         setup_searchBtn();
         alertDialog_helpBtn();
 
-        dataModel = new ViewModelProvider(this).get(XingyunViewModel.class);
+        setupDataModelObserver();
     }
 
     void setup_recycleView() {
@@ -153,7 +176,7 @@ public class XingyunMain extends AppCompatActivity {
 
             @Override
             public void onBindViewHolder(NYTRowHolder holder, int position) {
-                String data = headlines.get(position);
+                String data = articles.get(position).getHeadline();
                 System.out.println("onBindViewHolder position is " + position);
                 holder.headlineView.setText(data);
                 holder.setNum(position);
@@ -161,7 +184,7 @@ public class XingyunMain extends AppCompatActivity {
 
             @Override
             public int getItemCount() {
-                return headlines.size();
+                return articles.size();
             }
         });
     }
@@ -272,8 +295,9 @@ public class XingyunMain extends AppCompatActivity {
                         for (int i = 0; i < docs.length(); i++) {
                             JSONObject article = docs.getJSONObject(i);
                             String headline = article.getJSONObject("headline").getString("main");
-                            System.out.println("Adding headline#" + headlines.size() + ": " + headline);
-                            headlines.add(headline);
+                            System.out.println("Adding headline#" + articles.size() + ": " + headline);
+//                            headlines.add(headline);
+                            articles.add(new XingyunArticle(headline));
 
                         }
 
@@ -299,7 +323,7 @@ public class XingyunMain extends AppCompatActivity {
 
     void showSearchResult() {
 
-        int count = headlines.size();
+        int count = articles.size();
         String message = String.format("Number of headlines: %d", count);
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         int rowCount = myAdapter.getItemCount();
