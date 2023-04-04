@@ -24,6 +24,7 @@ public class XingyunFragment extends Fragment {
         XingyunDetailFragmentBinding binding = XingyunDetailFragmentBinding.inflate(inflater);
 
         binding.headlineText.setText(selected.headline);
+        binding.urlText.setText(selected.url);
 //        binding.messageText.setText(selected.message);
 //        binding.timeText.setText(selected.timeSent);
 //        binding.databaseText.setText("Id = " + selected.id);
