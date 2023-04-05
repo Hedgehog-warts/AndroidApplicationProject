@@ -28,7 +28,6 @@ import algonquin.cst2335.androidapplicationproject.databinding.ActivityRongMainB
  * This class extends AppCompatActivity,
  * which is a base class for activities that use the support library action bar features.
  */
-// m3
 public class RongMain extends AppCompatActivity {
     /**
      *  TAG is a String constant used for debugging purposes.
