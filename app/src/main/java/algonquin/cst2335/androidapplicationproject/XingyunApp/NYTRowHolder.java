@@ -1,4 +1,4 @@
-package algonquin.cst2335.androidapplicationproject;
+package algonquin.cst2335.androidapplicationproject.XingyunApp;
 
 import android.content.Context;
 import android.view.View;
@@ -6,10 +6,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
+
+import algonquin.cst2335.androidapplicationproject.R;
 
 /**
  * NYTRowHolder class

@@ -40,6 +40,8 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import algonquin.cst2335.androidapplicationproject.DoyoungApp.DoyoungMain;
+import algonquin.cst2335.androidapplicationproject.NickApp.NickMain;
+import algonquin.cst2335.androidapplicationproject.XingyunApp.XingyunMain;
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityRongSecondBinding;
 import algonquin.cst2335.androidapplicationproject.databinding.RongcityinfoSearchBinding;
 import algonquin.cst2335.androidapplicationproject.rongData.RongSecondViewModel;

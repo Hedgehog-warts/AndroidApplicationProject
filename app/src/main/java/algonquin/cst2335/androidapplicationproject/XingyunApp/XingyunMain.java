@@ -1,4 +1,4 @@
-package algonquin.cst2335.androidapplicationproject;
+package algonquin.cst2335.androidapplicationproject.XingyunApp;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,13 +40,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import algonquin.cst2335.androidapplicationproject.DoyoungApp.DoyoungMain;
+import algonquin.cst2335.androidapplicationproject.NickApp.NickMain;
+import algonquin.cst2335.androidapplicationproject.R;
+import algonquin.cst2335.androidapplicationproject.RongMain;
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityXingyunMainBinding;
-import algonquin.cst2335.androidapplicationproject.databinding.XingyunDetailFragmentBinding;
 
 /*
 Requirement 9: This activity supports another language: French(fr) in Canada(CA)

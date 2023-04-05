@@ -1,4 +1,4 @@
-package algonquin.cst2335.androidapplicationproject;
+package algonquin.cst2335.androidapplicationproject.NickApp;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

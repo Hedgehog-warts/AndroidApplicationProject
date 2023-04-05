@@ -1,4 +1,4 @@
-package algonquin.cst2335.androidapplicationproject;
+package algonquin.cst2335.androidapplicationproject.XingyunApp;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

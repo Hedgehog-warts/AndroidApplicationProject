@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import algonquin.cst2335.androidapplicationproject.DoyoungApp.DoyoungMain;
+import algonquin.cst2335.androidapplicationproject.NickApp.NickMain;
+import algonquin.cst2335.androidapplicationproject.XingyunApp.XingyunMain;
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityMainBinding;
 
 /** This is main activity for 4 applications

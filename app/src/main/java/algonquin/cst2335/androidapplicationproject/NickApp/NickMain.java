@@ -1,28 +1,23 @@
-package algonquin.cst2335.androidapplicationproject;
+package algonquin.cst2335.androidapplicationproject.NickApp;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Adapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import algonquin.cst2335.androidapplicationproject.databinding.ActivityDoyoungMainBinding;
+import algonquin.cst2335.androidapplicationproject.DoyoungApp.DoyoungMain;
+import algonquin.cst2335.androidapplicationproject.R;
+import algonquin.cst2335.androidapplicationproject.RongMain;
+import algonquin.cst2335.androidapplicationproject.XingyunApp.XingyunMain;
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityNickMainBinding;
 
 // m3

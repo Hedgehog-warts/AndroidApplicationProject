@@ -1,4 +1,4 @@
-package algonquin.cst2335.androidapplicationproject;
+package algonquin.cst2335.androidapplicationproject.XingyunApp;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -9,10 +9,6 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-
-import algonquin.cst2335.androidapplicationproject.databinding.ActivityXingyunMainBinding;
 import algonquin.cst2335.androidapplicationproject.databinding.XingyunDetailFragmentBinding;
 
 /**
