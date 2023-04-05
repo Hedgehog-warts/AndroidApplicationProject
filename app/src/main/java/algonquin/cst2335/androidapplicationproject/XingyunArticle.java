@@ -38,9 +38,9 @@ public class XingyunArticle {
     /**
      * the Constructor for the XingyunArticle class
      * 
-     * @param headline
-     * @param url
-     * @param date
+     * @param headline headline
+     * @param url url
+     * @param date date
      */
     public XingyunArticle(String headline, String url, String date) {
         this.headline = headline;
@@ -51,7 +51,7 @@ public class XingyunArticle {
     /**
      * the getter for headline
      * 
-     * @return
+     * @return headline
      */
     public String getHeadline() {
         return headline;
@@ -60,7 +60,7 @@ public class XingyunArticle {
     /**
      * the getter for URL
      * 
-     * @return
+     * @return url
      */
     public String getUrl() {
         return url;
@@ -69,7 +69,7 @@ public class XingyunArticle {
     /**
      * the getter for publication date
      * 
-     * @return
+     * @return date
      */
     public String getDate() {
         return date;
