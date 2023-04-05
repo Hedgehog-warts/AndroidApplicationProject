@@ -42,7 +42,7 @@ import algonquin.cst2335.androidapplicationproject.XingyunApp.XingyunMain;
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityDoyoungMainBinding;
 import algonquin.cst2335.androidapplicationproject.databinding.DoyoungPhotoEvenBinding;
 import algonquin.cst2335.androidapplicationproject.databinding.DoyoungPhotoOddBinding;
-//final
+//
 /** This is main activity to list NASA Mars rover photos
  * @author Doyoung Kim
  * @version 1.0
