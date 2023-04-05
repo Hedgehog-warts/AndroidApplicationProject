@@ -16,8 +16,8 @@ public interface XingyunArticleDAO {
     /**
      * The Insert or Add query
      * 
-     * @param article
-     * @return
+     * @param article article
+     * @return data
      */
     @Insert
     public long insertArticle(XingyunArticle article);
@@ -25,7 +25,7 @@ public interface XingyunArticleDAO {
     /**
      * The Select query
      * 
-     * @return
+     * @return data
      */
     @Query("Select * from XingyunArticle")
     public List<XingyunArticle> getAllFavs();
@@ -33,7 +33,7 @@ public interface XingyunArticleDAO {
     /**
      * The Delete query
      * 
-     * @param article
+     * @param article data
      */
     @Delete
     void deleteArticle(XingyunArticle article);

@@ -97,8 +97,8 @@ public class XingyunMain extends AppCompatActivity {
     /**
      * Setup the toolbar's options
      * 
-     * @param menu
-     * @return
+     * @param menu menu
+     * @return data
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -111,8 +111,8 @@ public class XingyunMain extends AppCompatActivity {
     /**
      * Setup the actions after the toolbar's options are selected
      * 
-     * @param item
-     * @return
+     * @param item item
+     * @return data
      */
     // this onOptionsItemSelected() is copied from Doyoung's code
     @Override
@@ -144,7 +144,7 @@ public class XingyunMain extends AppCompatActivity {
     /**
      * After the user clicked an article, a detailed fragment will be opened
      * 
-     * @param articleView
+     * @param articleView articleView
      */
     public void selectArticle(NYTRowHolder articleView) {
         selectedArticle = articleView;
@@ -161,7 +161,7 @@ public class XingyunMain extends AppCompatActivity {
     /**
      * Add the selected article to the favorite list
      * 
-     * @param article
+     * @param article article
      */
     public void AddArticleToFavs(XingyunArticle article) {
 
@@ -174,7 +174,7 @@ public class XingyunMain extends AppCompatActivity {
     /**
      * Remove the article from the favorite list
      * 
-     * @param articleToDelete
+     * @param articleToDelete articleToDelete
      */
     public void removeFromFav(XingyunArticle articleToDelete) {
         Executor thread = Executors.newSingleThreadExecutor();
@@ -224,7 +224,7 @@ public class XingyunMain extends AppCompatActivity {
     /**
      * Setup the XingyunMain class
      * 
-     * @param savedInstanceState
+     * @param savedInstanceState savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -26,8 +26,8 @@ public class XingyunFragment extends Fragment {
     /**
      * The constructor
      * 
-     * @param selected
-     * @param xingyunMain
+     * @param selected selected
+     * @param xingyunMain xingyunMain
      */
     public XingyunFragment(XingyunArticle selected, XingyunMain xingyunMain) {
         this.selected = selected;
@@ -37,10 +37,10 @@ public class XingyunFragment extends Fragment {
     /**
      * Setup the fragment object
      * 
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * @param inflater inflater
+     * @param container container
+     * @param savedInstanceState savedInstanceState
+     * @return data
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
