@@ -1,18 +1,14 @@
 package algonquin.cst2335.androidapplicationproject;
 
-import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,8 +22,6 @@ import androidx.room.Room;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
@@ -47,7 +41,6 @@ import java.util.concurrent.Executors;
 
 import algonquin.cst2335.androidapplicationproject.DoyoungApp.DoyoungMain;
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityRongSecondBinding;
-
 import algonquin.cst2335.androidapplicationproject.databinding.RongcityinfoSearchBinding;
 import algonquin.cst2335.androidapplicationproject.rongData.RongSecondViewModel;
 
