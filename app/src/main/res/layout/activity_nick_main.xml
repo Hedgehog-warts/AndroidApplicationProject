@@ -1,71 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".NickMain">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="411dp"
-        android:layout_height="45dp"
-        android:textSize="20dp"
-        android:textAlignment="center"
-        android:text="Find a Cat Picture that suite you :)"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.091" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="399dp"
-        android:layout_height="327dp"
-        android:layout_marginTop="108dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.583"
-        app:layout_constraintStart_toStartOf="parent"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/myToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/nasa_blue"
+        app:titleTextColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextWidth"
-        android:layout_width="314dp"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:text="Enter Width"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
-        app:layout_constraintVertical_bias="0.126" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextWidth"
-        app:layout_constraintVertical_bias="0.841" />
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/editTextHeight"
-        android:layout_width="317dp"
+        <EditText
+            android:id="@+id/widthEditText"
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="@string/width"
+            android:inputType="number"
+            android:maxLines="1"
+            android:textColorHint="#757575"
+            android:textSize="18sp"
+            android:autofillHints="" />
+
+        <EditText
+            android:id="@+id/heightEditText"
+            android:layout_width="4dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/height"
+            android:inputType="number"
+            android:maxLines="1"
+            android:minHeight="48dp"
+            android:textColorHint="#757575"
+            android:textSize="18sp"
+            android:autofillHints="" />
+
+        <Button
+            android:id="@+id/searchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search"
+            tools:ignore="TouchTargetSizeCheck" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/catImageView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:contentDescription="@string/pic" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:ems="10"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
 
-        android:text="Enter Height"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextWidth" />
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/save_image" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/savedImagesListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</LinearLayout>
+
