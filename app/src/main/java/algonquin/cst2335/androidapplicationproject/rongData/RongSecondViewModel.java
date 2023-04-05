@@ -8,17 +8,24 @@ import java.util.ArrayList;
 import algonquin.cst2335.androidapplicationproject.RongCityInfo;
 
 /**
- * A ViewModel class that stores the data related to the RongSecondActivity.
- * It contains MutableLiveData objects to hold the state of a checkbox, an ArrayList of RongCityInfo objects,
- * and a single RongCityInfo object representing a selected message.
- * The isChecked MutableLiveData is used to hold the state of a checkbox.
- * The messages MutableLiveData holds an ArrayList of RongCityInfo objects that represent the messages
- * received by the user.
- * The selectedMessage MutableLiveData holds a single RongCityInfo object that represents the message
- * selected by the user from the list of messages.
+ * RongSecondViewModel class is a subclass of ViewModel
+ * that represents the data and state for the second view in weatherStackAPP
+ * It contains three MutableLiveData objects for handling boolean and city information data.
+ *
  */
 public class RongSecondViewModel extends ViewModel {
+    /**
+     * MutableLiveData isChecked object for handling boolean data representing the checked state of a checkbox.
+     */
     public MutableLiveData<Boolean> isChecked = new MutableLiveData<>();
+
+    /**
+     * MutableLiveData messages object for handling a list of city information data.
+     */
     public MutableLiveData<ArrayList<RongCityInfo>> messages = new MutableLiveData<>();
+
+    /**
+     * MutableLiveData selectedMessage object for handling a single city information data.
+     */
     public MutableLiveData<RongCityInfo> selectedMessage = new MutableLiveData<>();
 }

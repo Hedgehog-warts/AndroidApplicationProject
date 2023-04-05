@@ -12,6 +12,9 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public class DoyoungViewModel extends ViewModel {
+    /** a field to store DoyoungThumbnail objects list */
     public MutableLiveData<ArrayList<DoyoungThumbnail>> photos = new MutableLiveData<>();
+
+    /** a field to store a DoyoungImgDetail object */
     public MutableLiveData<DoyoungImgDetail> selectedThumbnail = new MutableLiveData<>();
 }
