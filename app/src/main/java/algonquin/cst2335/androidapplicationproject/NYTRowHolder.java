@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
+/**
+ * NYTRowHolder class
+ */
 public class NYTRowHolder extends RecyclerView.ViewHolder {
 
     int num;
@@ -20,6 +23,13 @@ public class NYTRowHolder extends RecyclerView.ViewHolder {
     XingyunArticle article;
 
 
+    /**
+     *
+     * @param itemView itemView
+     * @param context context
+     * @param xingyunMain xingyunMain
+     * @param fav fav
+     */
     public NYTRowHolder(@NonNull View itemView, Context context, XingyunMain xingyunMain, boolean fav) {
         super(itemView);
         this.xingyunMain = xingyunMain;

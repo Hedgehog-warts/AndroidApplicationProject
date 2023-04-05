@@ -85,7 +85,7 @@ public class XingyunMain extends AppCompatActivity {
     /**
      * Setup the toolbar
      * 
-     * @param toolbar
+     * @param toolbar toolbar
      */
     @Override
     public void setSupportActionBar(@Nullable Toolbar toolbar) {
