@@ -57,7 +57,6 @@ Requirement 9: This activity supports another language: French(fr) in Canada(CA)
  * The main class of Xingyun
  */
 public class XingyunMain extends AppCompatActivity {
-    // m3
 
     /**
      * The row holder object of articles
