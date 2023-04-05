@@ -20,7 +20,7 @@ import algonquin.cst2335.androidapplicationproject.RongMain;
 import algonquin.cst2335.androidapplicationproject.XingyunApp.XingyunMain;
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityNickMainBinding;
 
-// m3
+// final
 public class NickMain extends AppCompatActivity {
 
 
