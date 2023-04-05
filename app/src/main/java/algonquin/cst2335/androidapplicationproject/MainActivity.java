@@ -10,10 +10,18 @@ import android.view.View;
 import algonquin.cst2335.androidapplicationproject.DoyoungApp.DoyoungMain;
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityMainBinding;
 
+/** This is main activity for 4 applications
+ * @version 1.0
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    /** This is for the reference of xml objects */
     ActivityMainBinding binding;
 
+    /** Inflate a custom toolbar
+     * @param menu a reference of toolbar
+     * @return true
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -22,6 +30,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
+    /** Move to each applications
+     * @param item a reference of toolbar item
+     * @return true
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Intent nextPage;
@@ -52,6 +64,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
+    /** Set the listeners
+     * @param savedInstanceState a reference of bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +82,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding.xingyunButton.setOnClickListener(this);
     }
 
+    /** Set classes to move to another activity
+     * @param v a reference of View
+     */
     @Override
     public void onClick(View v) {
         Intent nextPage=null;
