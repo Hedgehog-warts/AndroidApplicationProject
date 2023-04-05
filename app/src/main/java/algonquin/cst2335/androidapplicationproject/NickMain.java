@@ -1,10 +1,18 @@
 package algonquin.cst2335.androidapplicationproject;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.Button;
@@ -13,50 +21,79 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import algonquin.cst2335.androidapplicationproject.databinding.ActivityDoyoungMainBinding;
+import algonquin.cst2335.androidapplicationproject.databinding.ActivityNickMainBinding;
+
 // m3
 public class NickMain extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private EditText editTextWidth;
-    private EditText editTextHeight;
-    private Button button;
-    private RecyclerView.Adapter adapter;
-    private List<String> dimensions;
+
+    ActivityNickMainBinding binding;
+    private ArrayList<String> pics = new ArrayList<>();
+
+    @Override
+    public void setSupportActionBar(@Nullable Toolbar toolbar) {
+        super.setSupportActionBar(toolbar);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.nick_toolbar, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent nextPage;
+        Class pageClass;
+
+        switch (item.getItemId()) {
+            case R.id.doyoung:
+                pageClass= DoyoungMain.class;
+                nextPage = new Intent(this, pageClass);
+                startActivity(nextPage);
+                break;
+            case R.id.rong:
+                pageClass= RongMain.class;
+                nextPage = new Intent(this, pageClass);
+                startActivity(nextPage);
+                break;
+            case R.id.xingyun:
+                pageClass= XingyunMain.class;
+                nextPage = new Intent(this, pageClass);
+                startActivity(nextPage);
+                break;
+            case R.id.help:
+                AlertDialog.Builder exitApp = new AlertDialog.Builder(NickMain.this);
+
+                exitApp.setMessage(
+                                "1. " + getString(R.string.help1) + "\n" +"2. "+ getString(R.string.help2) + "\n" +"3. "+
+                                        getString(R.string.help3) + "\n"+"4. " + getString(R.string.help4))
+                        .setTitle(getString(R.string.howto))
+                        .setCancelable(false)
+                        .setPositiveButton(getString(R.string.done),
+                                (DialogInterface.OnClickListener) (dialog, which) -> {
+                                    dialog.cancel();
+                                })
+                        .create()
+                        .show();
+                break;
+        }
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nick_main);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        editTextWidth = findViewById(R.id.editTextWidth);
-        editTextHeight = findViewById(R.id.editTextHeight);
-        button = findViewById(R.id.button);
+        Toolbar myToolbar = findViewById(R.id.myToolbar);
+        setSupportActionBar(myToolbar);
 
-        dimensions = new ArrayList<>();
-//        adapter = new Adapter(dimensions) {
-//        };
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding = ActivityNickMainBinding.inflate(getLayoutInflater());
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String widthStr = editTextWidth.getText().toString().trim();
-                String heightStr = editTextHeight.getText().toString().trim();
-                if (widthStr.isEmpty() || heightStr.isEmpty()) {
-                    Toast.makeText(NickMain.this, "Please enter width and height", Toast.LENGTH_SHORT).show();
-                } else {
-                    try {
-                        int width = Integer.parseInt(widthStr);
-                        int height = Integer.parseInt(heightStr);
-                        dimensions.add(width + " x " + height);
-                        adapter.notifyDataSetChanged();
-                    } catch (NumberFormatException e) {
-                        Toast.makeText(NickMain.this, "Please enter valid width and height", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        });
     }
 }
