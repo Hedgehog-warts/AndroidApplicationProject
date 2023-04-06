@@ -8,4 +8,5 @@ import java.util.ArrayList;
 public class NickVM extends ViewModel {
 
     public MutableLiveData<ArrayList<String>> Pictures = new MutableLiveData<>();
+
 }
