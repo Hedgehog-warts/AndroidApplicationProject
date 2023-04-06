@@ -95,7 +95,7 @@ public class RongSecond extends AppCompatActivity {
     /**
      * position is an integer that stores the position of the currently selected item in the list view.
      */
-    private int position = 0;
+    int position;
 
     /**
      * Inflates the menu items for this activity.
@@ -163,10 +163,10 @@ public class RongSecond extends AppCompatActivity {
                                 mDAO.deleteMessage(m);
                                 messageList.remove(position);
                             });
-
+                            myAdapter.notifyItemRemoved(position);
                             runOnUiThread(() -> {
-                                myAdapter.notifyItemRemoved(position);
-                                Snackbar.make(variableBinding.editCity, getString(R.string.deleteConfirm) + " " + variableBinding.editCity.getText().toString(), Snackbar.LENGTH_LONG)
+
+                                Snackbar.make(variableBinding.editCity, getString(R.string.deleteConfirm) , Snackbar.LENGTH_LONG)
                                         .setAction(getString(R.string.undo), click -> {
                                             Executor thread_2 = Executors.newSingleThreadExecutor();
                                             thread_2.execute(() -> {
@@ -179,10 +179,10 @@ public class RongSecond extends AppCompatActivity {
                                         })
                                         .show();
                             });
-                            model.selectedMessage.setValue(null);
-                        })
 
+                        })
                         .create().show();
+                model.selectedMessage.setValue(null);
                 break;
             case R.id.help:
 
@@ -396,7 +396,7 @@ public class RongSecond extends AppCompatActivity {
             public MyRowHolder(@NonNull View itemView) { //itewView will be the root of the layout, constraintLayouyt;
                 super(itemView);
                 itemView.setOnClickListener(clk -> {
-                    int position = getAbsoluteAdapterPosition();
+                    position = getAbsoluteAdapterPosition();
                     RongCityInfo selected = messageList.get(position);
                     model.selectedMessage.postValue(selected);
                 });
