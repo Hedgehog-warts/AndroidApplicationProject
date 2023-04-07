@@ -1,4 +1,4 @@
-package algonquin.cst2335.androidapplicationproject;
+package algonquin.cst2335.androidapplicationproject.RongApp;
 
 
 import android.os.Bundle;
@@ -45,7 +45,7 @@ public class MessageDetailsFragment extends Fragment {
         RongweatherDetailFragmentBinding binding = RongweatherDetailFragmentBinding.inflate(inflater);
 
         binding.editCity.setText(selected.getCity());
-        binding.timeDetail.setText(selected.timeSent);
+        binding.timeDetail.setText(selected.getTimeSent());
         binding.TemperatureDetail.setText(selected.getTemperature());
         binding.description.setText(selected.getDescription());
 

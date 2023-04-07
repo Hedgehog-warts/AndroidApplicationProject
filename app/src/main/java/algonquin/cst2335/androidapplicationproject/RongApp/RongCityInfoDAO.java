@@ -1,4 +1,4 @@
-package algonquin.cst2335.androidapplicationproject;
+package algonquin.cst2335.androidapplicationproject.RongApp;
 
 import androidx.room.Dao;
 import androidx.room.Delete;

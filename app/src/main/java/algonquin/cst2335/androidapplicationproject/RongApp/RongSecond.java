@@ -1,4 +1,4 @@
-package algonquin.cst2335.androidapplicationproject;
+package algonquin.cst2335.androidapplicationproject.RongApp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -41,10 +41,10 @@ import java.util.concurrent.Executors;
 
 import algonquin.cst2335.androidapplicationproject.DoyoungApp.DoyoungMain;
 import algonquin.cst2335.androidapplicationproject.NickApp.NickMain;
+import algonquin.cst2335.androidapplicationproject.R;
 import algonquin.cst2335.androidapplicationproject.XingyunApp.XingyunMain;
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityRongSecondBinding;
 import algonquin.cst2335.androidapplicationproject.databinding.RongcityinfoSearchBinding;
-import algonquin.cst2335.androidapplicationproject.rongData.RongSecondViewModel;
 
 /**
  * RongSecond class displays a list of saved weather information.
@@ -56,16 +56,16 @@ public class RongSecond extends AppCompatActivity {
     /**
      * TAG is a string that identifies the activity in the Android log.
      */
-    private static String TAG = "RongSecond";
+    static String TAG = "RongSecond";
     /**
      * variableBinding is an instance of the ActivityRongSecondBinding class, which is generated
      * from the XML layout file. It contains references to all the views in the layout.
      */
-    ActivityRongSecondBinding variableBinding;
+   ActivityRongSecondBinding variableBinding;
     /**
      * model is an instance of the RongSecondViewModel class, which stores the state of the activity.
      */
-    private RongSecondViewModel model;
+    RongSecondViewModel model;
     /**
      * messageList is an ArrayList that stores RongCityInfo objects retrieved from the API.
      */
@@ -73,7 +73,7 @@ public class RongSecond extends AppCompatActivity {
     /**
      * myAdapter is an instance of the RecyclerView.Adapter class, which manages the list view.
      */
-    private RecyclerView.Adapter myAdapter;
+    RecyclerView.Adapter myAdapter;
     /**
      * cityName is a string that stores the name of the city whose weather information is being
      * retrieved.
@@ -82,7 +82,7 @@ public class RongSecond extends AppCompatActivity {
     /*
      * queue is an instance of the RequestQueue class, which handles HTTP requests to the API.
      */
-    protected RequestQueue queue = null;
+    RequestQueue queue = null;
     /**
      * image is a Bitmap object that stores the weather icon retrieved from the API.
      */
@@ -96,6 +96,10 @@ public class RongSecond extends AppCompatActivity {
      * position is an integer that stores the position of the currently selected item in the list view.
      */
     int position;
+
+    SimpleDateFormat sdf;
+
+    String currentDateandTime;
 
     /**
      * Inflates the menu items for this activity.
@@ -166,7 +170,7 @@ public class RongSecond extends AppCompatActivity {
                             myAdapter.notifyItemRemoved(position);
                             runOnUiThread(() -> {
 
-                                Snackbar.make(variableBinding.editCity, getString(R.string.deleteConfirm) , Snackbar.LENGTH_LONG)
+                                Snackbar.make(variableBinding.editCity, getString(R.string.deleteConfirm), Snackbar.LENGTH_LONG)
                                         .setAction(getString(R.string.undo), click -> {
                                             Executor thread_2 = Executors.newSingleThreadExecutor();
                                             thread_2.execute(() -> {
@@ -276,8 +280,8 @@ public class RongSecond extends AppCompatActivity {
             } else {
 
                 String city = variableBinding.editCity.getText().toString();
-                SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh:mm:ss a");
-                String currentDateandTime = sdf.format(new Date());
+                sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh:mm:ss a");
+                currentDateandTime = sdf.format(new Date());
                 String temperatureText = variableBinding.temp.getText().toString();
                 String desp = variableBinding.description.getText().toString();
                 RongCityInfo rongCityInfo = new RongCityInfo(city, temperatureText, desp, currentDateandTime);

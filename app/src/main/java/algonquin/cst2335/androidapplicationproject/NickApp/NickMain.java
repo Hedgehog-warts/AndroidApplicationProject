@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 import algonquin.cst2335.androidapplicationproject.DoyoungApp.DoyoungMain;
 import algonquin.cst2335.androidapplicationproject.R;
-import algonquin.cst2335.androidapplicationproject.RongMain;
+import algonquin.cst2335.androidapplicationproject.RongApp.RongMain;
 import algonquin.cst2335.androidapplicationproject.XingyunApp.XingyunMain;
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityNickMainBinding;
 

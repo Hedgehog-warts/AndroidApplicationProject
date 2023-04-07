@@ -23,14 +23,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".RongMain"
+            android:name=".RongApp.RongMain"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".RongSecond"
+            android:name=".RongApp.RongSecond"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
