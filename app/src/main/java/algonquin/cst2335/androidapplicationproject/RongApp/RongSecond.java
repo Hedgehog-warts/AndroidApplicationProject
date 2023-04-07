@@ -61,7 +61,7 @@ public class RongSecond extends AppCompatActivity {
      * variableBinding is an instance of the ActivityRongSecondBinding class, which is generated
      * from the XML layout file. It contains references to all the views in the layout.
      */
-   ActivityRongSecondBinding variableBinding;
+    ActivityRongSecondBinding variableBinding;
     /**
      * model is an instance of the RongSecondViewModel class, which stores the state of the activity.
      */
@@ -97,9 +97,6 @@ public class RongSecond extends AppCompatActivity {
      */
     int position;
 
-    SimpleDateFormat sdf;
-
-    String currentDateandTime;
 
     /**
      * Inflates the menu items for this activity.
@@ -280,8 +277,8 @@ public class RongSecond extends AppCompatActivity {
             } else {
 
                 String city = variableBinding.editCity.getText().toString();
-                sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh:mm:ss a");
-                currentDateandTime = sdf.format(new Date());
+                SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh:mm:ss a");
+                String currentDateandTime = sdf.format(new Date());
                 String temperatureText = variableBinding.temp.getText().toString();
                 String desp = variableBinding.description.getText().toString();
                 RongCityInfo rongCityInfo = new RongCityInfo(city, temperatureText, desp, currentDateandTime);
@@ -348,7 +345,6 @@ public class RongSecond extends AppCompatActivity {
                         runOnUiThread(() -> {
                             variableBinding.temp.setText("Current temp is " + current + "°C");
                             variableBinding.temp.setVisibility(View.VISIBLE);
-                            variableBinding.icon.setImageBitmap(image);
                             variableBinding.icon.setVisibility(View.VISIBLE);
                             descriptionTextView.setText(description);
                             variableBinding.description.setVisibility(View.VISIBLE);
