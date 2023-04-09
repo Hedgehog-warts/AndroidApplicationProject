@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:hint="url"
+            android:hint="@string/URL"
             />
 
         <TextView
@@ -31,7 +31,7 @@
         android:id="@+id/delete_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete"
+        android:text="@string/Delete"
         android:padding="8dp" />
 
 </LinearLayout>
