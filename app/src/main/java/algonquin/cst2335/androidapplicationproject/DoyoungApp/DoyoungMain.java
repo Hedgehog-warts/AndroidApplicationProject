@@ -13,10 +13,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +37,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 import algonquin.cst2335.androidapplicationproject.NickApp.NickMain;
 import algonquin.cst2335.androidapplicationproject.R;
 import algonquin.cst2335.androidapplicationproject.RongMain;
@@ -144,6 +149,12 @@ public class DoyoungMain extends AppCompatActivity {
         binding = ActivityDoyoungMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        if (dataModel.thumbnails.getValue() != null) {
+            thumbnails = dataModel.thumbnails.getValue();
+            photoAdapter = dataModel.photoAdapter.getValue();
+            infoDetails = dataModel.infoDetails.getValue();
+        }
+
         /* Initialize SharedPreference for date */
         SharedPreferences sharedDate = getSharedPreferences("Date",MODE_PRIVATE);
         SharedPreferences.Editor editDate = sharedDate.edit();
@@ -211,7 +222,6 @@ public class DoyoungMain extends AppCompatActivity {
                                 @Override
                                 public void onResponse(Bitmap bitmap) {
                                     try {
-
                                         imgSr = bitmap;
                                         String imgNum = String.valueOf(photoAdapter.getItemCount()+1);
                                         DoyoungThumbnail thumbnail = new DoyoungThumbnail(imgNum,roverName,imgSr);
@@ -221,6 +231,9 @@ public class DoyoungMain extends AppCompatActivity {
                                         DoyoungImgDetail test = new DoyoungImgDetail(imgSr, cameraName, replaceURL, photoDate, photoID);
                                         infoDetails.add(test);
 
+                                        dataModel.thumbnails.postValue(thumbnails);
+                                        dataModel.photoAdapter.postValue(photoAdapter);
+                                        dataModel.infoDetails.postValue(infoDetails);
                                     } catch(Exception e) {
                                         e.printStackTrace();
                                     }

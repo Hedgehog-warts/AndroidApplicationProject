@@ -26,6 +26,7 @@
     <string name="kdy_saveImage">Save this image</string>
     <string name="kdy_savedImageTitle">Saved images</string>
     <string name="kdy_delete">Delete</string>
+    <string name="kdy_isDeleted">is deleted</string>
     <string name="kdy_view">View</string>
 
     /// Nick's place for strings

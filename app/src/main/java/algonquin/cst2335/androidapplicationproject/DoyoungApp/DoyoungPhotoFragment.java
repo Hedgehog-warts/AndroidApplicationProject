@@ -24,6 +24,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 import algonquin.cst2335.androidapplicationproject.R;
 import algonquin.cst2335.androidapplicationproject.databinding.DoyoungDetailFragmentBinding;
 
@@ -70,6 +73,7 @@ public class DoyoungPhotoFragment extends Fragment implements RecyclerView.OnIte
         ImageDatabase db = Room.databaseBuilder(getActivity(),
                 ImageDatabase.class, "imageDatabase").allowMainThreadQueries().build();
         DoyoungImgDetailDao imgDAO = db.imgDAO();
+
         savedFavourites = imgDAO.getAllImages();
         for (DoyoungImgDetail saved: savedFavourites) {
             String imageListItem =  "Date: " + saved.photoDate +
@@ -150,6 +154,10 @@ public class DoyoungPhotoFragment extends Fragment implements RecyclerView.OnIte
             DoyoungImgDetail deleteImage = savedFavourites.get(position);
             imgDAO.deleteImage(deleteImage);
             adapter.notifyItemRemoved(position);
+
+            String deletedItem =  "Date: " + selected.photoDate +
+                    ", ID: " + selected.photoID;
+            customToast(deletedItem + " " + getString(R.string.kdy_isDeleted));
         });
 
         binding.viewImage.setOnClickListener(clk -> {
