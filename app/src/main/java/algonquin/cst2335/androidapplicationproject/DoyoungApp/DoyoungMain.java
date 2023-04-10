@@ -145,6 +145,7 @@ public class DoyoungMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         dataModel = new ViewModelProvider(this).get(DoyoungViewModel.class);
         binding = ActivityDoyoungMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -182,11 +183,22 @@ public class DoyoungMain extends AppCompatActivity {
 
         super.setSupportActionBar(binding.kdyToolbar);
 
+        int currentOrientation = getResources().getConfiguration().orientation;
+        if (dataModel.orientation.getValue() == null) {
+            dataModel.orientation.setValue(currentOrientation);
+        }
+
         dataModel.selectedThumbnail.observe(this, infoDetails -> {
-            photoFragment = new DoyoungPhotoFragment(infoDetails);
-            getSupportFragmentManager().beginTransaction().addToBackStack("")
-                    .replace(R.id.doyoungFragment, photoFragment)
-                    .commit();
+            if (dataModel.orientation.getValue() == currentOrientation) {
+                photoFragment = new DoyoungPhotoFragment(infoDetails);
+                getSupportFragmentManager().beginTransaction().addToBackStack("")
+                        .add(R.id.doyoungFragment, photoFragment)
+                        .commit();
+                dataModel.fragment.setValue(photoFragment);
+            } else {
+                dataModel.orientation.setValue(currentOrientation);
+            }
+
         });
 
         binding.searchBtn.setOnClickListener(clk -> {

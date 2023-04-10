@@ -24,4 +24,10 @@ public class DoyoungViewModel extends ViewModel {
 
     /** a field to store a recyclerView object */
     public MutableLiveData<RecyclerView.Adapter> photoAdapter = new MutableLiveData<>();
+
+    /** a field to store a current orientation */
+    public MutableLiveData<Integer> orientation = new MutableLiveData<>();
+
+    /** a field to store a DoyoungPhotoFragment */
+    public MutableLiveData<DoyoungPhotoFragment> fragment = new MutableLiveData<>();
 }
