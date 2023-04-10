@@ -8,14 +8,18 @@ import androidx.room.Query;
 
 import java.util.List;
 
+/**
+ * Interface for the cats table in the cat_database. Defines methods to
+ * insert, query and delete cat data
+ */
 @Dao
 public interface CatDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert( cats catID);
 
-    @Query("SELECT * FROM cats_t")
-    List<cats> getAllCats();
+    @Query("Select * from cats_t")
+    public List<cats> getAllCats();
 
     @Delete
     void delete(cats catID);

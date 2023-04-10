@@ -26,5 +26,6 @@
     <string name="leaving">Quitter pour revenir à la page principale?</string>
     <string name="Yes">oui</string>
     <string name="No">non</string>
+    <string name="check">Veuillez entrer une largeur et une hauteur</string>
 
 </resources>

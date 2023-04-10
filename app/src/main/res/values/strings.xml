@@ -46,6 +46,7 @@
     <string name="leaving">Exit to main page?</string>
     <string name="Yes">yes</string>
     <string name="No">no</string>
+    <string name="check">Please enter a Width and Height</string>
 
     /// Rong's place for strings
     <string name="weatherApp">Welcome to use WeatherStack App</string>
