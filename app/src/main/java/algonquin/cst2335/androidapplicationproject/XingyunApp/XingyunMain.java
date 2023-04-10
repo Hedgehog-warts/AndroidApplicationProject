@@ -15,6 +15,7 @@ import androidx.room.Room;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -244,6 +245,7 @@ public class XingyunMain extends AppCompatActivity {
         setup_searchBtn();
         alertDialog_helpBtn();
         setup_favBtn();
+        load_lastSearch();
 
     }
 
@@ -340,6 +342,7 @@ public class XingyunMain extends AppCompatActivity {
             // clear the result list
             articles.clear();
             myAdapter.notifyDataSetChanged();
+            saveLastSearchedTopic(inputText);
         }
     }
 
@@ -477,4 +480,27 @@ public class XingyunMain extends AppCompatActivity {
                 .create()
                 .show();
     }
+
+    private void saveLastSearchedTopic(String topic) {
+        SharedPreferences sharedPreferences = getSharedPreferences("XingyunPreferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("lastSearchedTopic", topic);
+        editor.apply();
+    }
+
+    private String getLastSearchedTopic() {
+        SharedPreferences sharedPreferences = getSharedPreferences("XingyunPreferences", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("lastSearchedTopic", "");
+    }
+
+    private void load_lastSearch() {
+
+        String lastSearchedTopic = getLastSearchedTopic();
+        if (!lastSearchedTopic.isEmpty()) {
+            binding.editTextSearchArticles.setText(lastSearchedTopic);
+            useVolley(lastSearchedTopic);
+        }
+    }
+
+
 }
