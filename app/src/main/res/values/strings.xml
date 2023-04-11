@@ -77,7 +77,7 @@
     <string name="cityCheck">Please search a city name first!</string>
     <string name="weatherSave">Weather info saved</string>
     <string name="notNull">Please user name and password!</string>
-    <string name="deleteConfirm">You deleted this weather info? </string>
+    <string name="deleteConfirm">You deleted this weather info.</string>
     <string name ="undo">UNDO</string>
 
 
