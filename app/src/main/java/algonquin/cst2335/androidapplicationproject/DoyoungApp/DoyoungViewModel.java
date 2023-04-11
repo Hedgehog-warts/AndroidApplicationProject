@@ -1,7 +1,5 @@
 package algonquin.cst2335.androidapplicationproject.DoyoungApp;
 
-import android.graphics.Bitmap;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.RecyclerView;

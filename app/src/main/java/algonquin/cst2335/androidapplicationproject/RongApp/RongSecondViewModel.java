@@ -1,11 +1,9 @@
-package algonquin.cst2335.androidapplicationproject.rongData;
+package algonquin.cst2335.androidapplicationproject.RongApp;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
-
-import algonquin.cst2335.androidapplicationproject.RongCityInfo;
 
 /**
  * RongSecondViewModel class is a subclass of ViewModel

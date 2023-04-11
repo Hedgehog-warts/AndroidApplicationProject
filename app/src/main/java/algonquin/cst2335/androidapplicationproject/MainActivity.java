@@ -11,6 +11,7 @@ import algonquin.cst2335.androidapplicationproject.DoyoungApp.DoyoungMain;
 import algonquin.cst2335.androidapplicationproject.NickApp.NickMain;
 import algonquin.cst2335.androidapplicationproject.XingyunApp.XingyunMain;
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityMainBinding;
+import algonquin.cst2335.androidapplicationproject.RongApp.RongMain;
 
 /** This is main activity for 4 applications
  * @version 1.0

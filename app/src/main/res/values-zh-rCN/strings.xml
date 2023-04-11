@@ -27,7 +27,7 @@
     <string name ="notPass">密码不对</string>
     <string name ="leave">您要离开天气堆栈软件吗?</string>
     <string name ="thanks">欢迎下次光临!</string>
-    <string name ="question">问题?</string>
+    <string name ="question">问题:</string>
     <string name ="yes">是</string>
     <string name ="no">否</string>
     <string name ="login">登录名:  </string>

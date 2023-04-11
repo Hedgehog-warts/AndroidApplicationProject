@@ -1,4 +1,4 @@
-package algonquin.cst2335.androidapplicationproject;
+package algonquin.cst2335.androidapplicationproject.RongApp;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import algonquin.cst2335.androidapplicationproject.DoyoungApp.DoyoungMain;
 import algonquin.cst2335.androidapplicationproject.NickApp.NickMain;
+import algonquin.cst2335.androidapplicationproject.R;
 import algonquin.cst2335.androidapplicationproject.XingyunApp.XingyunMain;
 import algonquin.cst2335.androidapplicationproject.databinding.ActivityRongMainBinding;
 
@@ -33,12 +34,12 @@ public class RongMain extends AppCompatActivity {
     /**
      *  TAG is a String constant used for debugging purposes.
      */
-    private static String TAG = "RongMain";
+     static String TAG = "RongMain";
      /**
      * binding is an object of the ActivityRongMainBinding class
      * which is used to inflate the activity's layout and bind views to variables.
      */
-    private ActivityRongMainBinding binding;
+     ActivityRongMainBinding binding;
 
     /**
      * Override method for creating options menu.

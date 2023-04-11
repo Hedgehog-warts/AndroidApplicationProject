@@ -1,4 +1,4 @@
-package algonquin.cst2335.androidapplicationproject.rongData;
+package algonquin.cst2335.androidapplicationproject.RongApp;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
