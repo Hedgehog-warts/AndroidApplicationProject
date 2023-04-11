@@ -104,11 +104,6 @@
     <string name="msg_exit_xyz">Exiting to MainMenu</string>
     <string name="TemperatureDetail">temperature here</string>
     <string name="cityDetail">city goes here</string>
-    <string name="height">Height</string>
-    <string name="search">Search</string>
-    <string name="save_image">Save Image</string>
-    <string name="width">Width</string>
-    <string name="pic">pic</string>
     <string name="xyz_alert_help">1. Input the article title in the search bar.  2. Press the \'SEARCH\' button Press the \'HELP\' button to show this instruction again.</string>
     <string name="xyz_fav_btn">Favorite</string>
     <string name="xyz_removeFav_btn">Remove</string>
