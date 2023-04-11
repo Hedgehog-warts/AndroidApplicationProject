@@ -385,10 +385,8 @@ public class XingyunMain extends AppCompatActivity {
     void show_help() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        builder.setMessage("1.Input the article tile in the search bar. \n" +
-                "2.Press the \'SEARCH\' button.\n\n" +
-                "Press the \'HELP\' button to show this instruction again.")
-                .setTitle("Instruction")
+        builder.setMessage(getString(R.string.xyz_alert_help))
+                .setTitle(getString(R.string.xyz_alert_help_title))
                 .setPositiveButton("Understand", (dialog, cl) -> {
                 })
                 .create().show();
