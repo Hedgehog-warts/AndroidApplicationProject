@@ -62,7 +62,7 @@
     <string name="notPass">Incorrect password!</string>
     <string name="leave">Do you want to leave Weather Stack APP?</string>
     <string name="delete">Do you want to delete the weather info?</string>
-    <string name="question">Question?</string>
+    <string name="question">Question:</string>
     <string name="thanks">See you!</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
