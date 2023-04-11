@@ -12,4 +12,25 @@
     <string name="xyz_removeFav_btn">retirer</string>
     <string name="xyz_alert_help_title">Aider</string>
     <string name="xyz_addFav_btn">Ajouter aux favoris</string>
+
+    /// Nick's place for FR
+    <string name="help1">Entrez la hauteur et la largeur</string>
+    <string name="help2">Cliquez sur le bouton Rechercher</string>
+    <string name="help3">Profitez de l\'image</string>
+    <string name="help4">Enregistrez l\'image en favori</string>
+    <string name="howto">Comment utiliser</string>
+    <string name="done">Fermer</string>
+    <string name="height">Hauteur</string>
+    <string name="search">Rechercher</string>
+    <string name="save_image">Enregistrer l\'image</string>
+    <string name="width">Largeur</string>
+    <string name="pic">Image</string>
+    <string name="Delete">Supprimer</string>
+    <string name="URL">URL</string>
+    <string name="goodbye">Merci d\'avoir essayé cette application</string>
+    <string name="leaving">Quitter pour revenir à la page principale?</string>
+    <string name="Yes">oui</string>
+    <string name="No">non</string>
+    <string name="check">Veuillez entrer une largeur et une hauteur</string>
+
 </resources>

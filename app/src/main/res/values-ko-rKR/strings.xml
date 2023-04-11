@@ -28,4 +28,25 @@
     <string name="kdy_delete">삭제</string>
     <string name="kdy_isDeleted">삭제됨</string>
     <string name="kdy_view">보기</string>
+
+    /// Nick's
+    <string name="help1">높이와 너비를 입력하세요</string>
+    <string name="help2">검색 버튼을 누르세요</string>
+    <string name="help3">사진을 즐기세요</string>
+    <string name="help4">즐겨찾기에 이미지를 저장하세요</string>
+    <string name="howto">사용 방법</string>
+    <string name="done">닫기</string>
+    <string name="height">높이</string>
+    <string name="search">검색</string>
+    <string name="save_image">이미지 저장</string>
+    <string name="width">너비</string>
+    <string name="pic">사진</string>
+    <string name="Delete">삭제</string>
+    <string name="URL">URL</string>
+    <string name="goodbye">이 앱을 사용해주셔서 감사합니다</string>
+    <string name="leaving">메인 페이지로 돌아가시겠습니까?</string>
+    <string name="Yes">예</string>
+    <string name="No">아니오</string>
+    <string name="check">너비와 높이를 입력해주세요</string>
+
 </resources>

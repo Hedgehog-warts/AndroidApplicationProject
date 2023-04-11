@@ -36,6 +36,18 @@
     <string name="help4">save the image to fave</string>
     <string name="howto">How to use</string>
     <string name="done">Close</string>
+    <string name="height">Height</string>
+    <string name="search">Search</string>
+    <string name="save_image">Save Image</string>
+    <string name="width">Width</string>
+    <string name="pic">pic</string>
+    <string name="Delete">Delete</string>
+    <string name="URL">URL</string>
+    <string name="goodbye">Thank you for trying this app</string>
+    <string name="leaving">Exit to main page?</string>
+    <string name="Yes">yes</string>
+    <string name="No">no</string>
+    <string name="check">Please enter a Width and Height</string>
 
     /// Rong's place for strings
     <string name="weatherApp">Welcome to use WeatherStack App</string>
@@ -102,4 +114,5 @@
     <string name="xyz_removeFav_btn">Remove</string>
     <string name="xyz_alert_help_title">Instruction</string>
     <string name="xyz_addFav_btn">Add to Fav</string>
+
 </resources>

@@ -46,4 +46,25 @@
     <string name="description">天气描述</string>
     <string name="temp">温度</string>
     <string name="deleteConfirm">您已删除该城市天气信息</string>
+
+    /// Nick's
+    <string name="help1">输入高度和宽度</string>
+    <string name="help2">点击搜索按钮</string>
+    <string name="help3">欣赏图片</string>
+    <string name="help4">将图片保存到收藏夹</string>
+    <string name="howto">使用说明</string>
+    <string name="done">关闭</string>
+    <string name="height">高度</string>
+    <string name="search">搜索</string>
+    <string name="save_image">保存图片</string>
+    <string name="width">宽度</string>
+    <string name="pic">图片</string>
+    <string name="Delete">删除</string>
+    <string name="URL">网址</string>
+    <string name="goodbye">感谢您使用本应用</string>
+    <string name="leaving">退出到主页面？</string>
+    <string name="Yes">是</string>
+    <string name="No">否</string>
+    <string name="check">请输入宽度和高度</string>
+
 </resources>
