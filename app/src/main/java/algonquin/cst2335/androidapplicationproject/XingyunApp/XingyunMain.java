@@ -15,6 +15,7 @@ import androidx.room.Room;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -57,7 +58,6 @@ Requirement 9: This activity supports another language: French(fr) in Canada(CA)
  * The main class of Xingyun
  */
 public class XingyunMain extends AppCompatActivity {
-    // m3
 
     /**
      * The row holder object of articles
@@ -245,6 +245,7 @@ public class XingyunMain extends AppCompatActivity {
         setup_searchBtn();
         alertDialog_helpBtn();
         setup_favBtn();
+        load_lastSearch();
 
     }
 
@@ -341,6 +342,7 @@ public class XingyunMain extends AppCompatActivity {
             // clear the result list
             articles.clear();
             myAdapter.notifyDataSetChanged();
+            saveLastSearchedTopic(inputText);
         }
     }
 
@@ -383,10 +385,8 @@ public class XingyunMain extends AppCompatActivity {
     void show_help() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        builder.setMessage("1.Input the article tile in the search bar. \n" +
-                "2.Press the \'SEARCH\' button.\n\n" +
-                "Press the \'HELP\' button to show this instruction again.")
-                .setTitle("Instruction")
+        builder.setMessage(getString(R.string.xyz_alert_help))
+                .setTitle(getString(R.string.xyz_alert_help_title))
                 .setPositiveButton("Understand", (dialog, cl) -> {
                 })
                 .create().show();
@@ -478,4 +478,27 @@ public class XingyunMain extends AppCompatActivity {
                 .create()
                 .show();
     }
+
+    private void saveLastSearchedTopic(String topic) {
+        SharedPreferences sharedPreferences = getSharedPreferences("XingyunPreferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("lastSearchedTopic", topic);
+        editor.apply();
+    }
+
+    private String getLastSearchedTopic() {
+        SharedPreferences sharedPreferences = getSharedPreferences("XingyunPreferences", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("lastSearchedTopic", "");
+    }
+
+    private void load_lastSearch() {
+
+        String lastSearchedTopic = getLastSearchedTopic();
+        if (!lastSearchedTopic.isEmpty()) {
+            binding.editTextSearchArticles.setText(lastSearchedTopic);
+            useVolley(lastSearchedTopic);
+        }
+    }
+
+
 }

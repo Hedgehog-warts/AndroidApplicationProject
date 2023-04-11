@@ -7,4 +7,9 @@
     <string name="toast_onCreate_xyz">Création de l\'activité NewYorkTimes terminée.</string>
     <string name="msg_confirm_xyz">Es-tu sûr?</string>
     <string name="msg_exit_xyz">Sortie vers MainMenu</string>
+    <string name="xyz_alert_help">1. Saisissez le titre de l\'article dans la barre de recherche. 2. Appuyez sur le bouton \'RECHERCHE\' Appuyez sur le bouton \'AIDE\' pour afficher à nouveau cette instruction.</string>
+    <string name="xyz_fav_btn">Préférée</string>
+    <string name="xyz_removeFav_btn">retirer</string>
+    <string name="xyz_alert_help_title">Aider</string>
+    <string name="xyz_addFav_btn">Ajouter aux favoris</string>
 </resources>
