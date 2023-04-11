@@ -211,7 +211,7 @@ public class DoyoungPhotoFragment extends Fragment implements RecyclerView.OnIte
         if (selected.cameraName.isEmpty()) {
             binding.cameraName.setText(getString(R.string.kdy_noData));
         } else {
-            binding.cameraName.setText(getString(R.string.kdy_camera) + selected.cameraName);
+            binding.cameraName.setText(getString(R.string.kdy_camera) + " " + selected.cameraName);
         }
         if (selected.imgURL.isEmpty()) {
             binding.imageURL.setText(getString(R.string.kdy_noData));
