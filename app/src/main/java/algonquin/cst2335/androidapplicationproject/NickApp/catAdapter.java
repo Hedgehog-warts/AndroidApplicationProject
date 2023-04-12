@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -89,16 +91,36 @@ public class catAdapter extends RecyclerView.Adapter<catAdapter.myViewHolder> {
         holder.myTimeView.setText(time);
 
         int finalPosition = position;
+        String deletedCatUrl = favCatList.get(finalPosition);
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String catUrl = favCatList.get(finalPosition);
+                // Create a backup of the deleted item
+                String catUrlBackup = favCatList.get(finalPosition);
+
+                // Delete the item from the list
                 Executor thread = Executors.newSingleThreadExecutor();
-                thread.execute(() -> { catDAO.delete(new cats(catUrl)); });
+                thread.execute(() -> { catDAO.delete(new cats(catUrlBackup)); });
                 favCatList.remove(finalPosition);
                 notifyItemRemoved(finalPosition);
+
+                // Display a Snackbar with an undo button
+                Snackbar snackbar = Snackbar.make(v, "Item deleted", Snackbar.LENGTH_LONG);
+                snackbar.setAction("Undo", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Restore the deleted item to the list
+                        favCatList.add(finalPosition, catUrlBackup);
+                        notifyItemInserted(finalPosition);
+
+                        Executor thread = Executors.newSingleThreadExecutor();
+                        thread.execute(() -> { catDAO.insert(new cats(catUrlBackup)); });
+                    }
+                });
+                snackbar.show();
             }
         });
+
     }
 
 
