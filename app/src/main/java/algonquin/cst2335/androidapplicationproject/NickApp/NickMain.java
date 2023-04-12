@@ -272,6 +272,11 @@ public class NickMain extends AppCompatActivity {
         catAdapter myAdapter = new catAdapter(myDataList, this);
         recyclerView.setAdapter(myAdapter);
         myAdapter.notifyDataSetChanged();
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putStringSet(SHARED_PREFS_KEY, new HashSet<>(myDataList));
+        editor.apply();
+
     }
 
 
