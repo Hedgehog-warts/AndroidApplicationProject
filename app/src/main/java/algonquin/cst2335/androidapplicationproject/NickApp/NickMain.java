@@ -148,7 +148,7 @@ public class NickMain extends AppCompatActivity {
      * Handles search and save button click events and retrieves/saves user input values
      * Sends a request to fetch a cat image based on the users input values and displays it in the UI
      * Allows the user to save their favorite cat images and displays them in the UI
-     * @param savedInstanceState
+     * @param savedInstanceState the object of Bundle
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
